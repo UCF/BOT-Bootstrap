@@ -4,3 +4,12 @@ Author: UCF Web Communications
 Github Theme URI: https://github.com/UCF/Wordpress-Generic-Theme
 Version: v1.1.1
 */
+
+/* Header */
+#header {margin-top:20px;}
+
+/* Header Menu */
+#header-menu {margin-bottom:0;}
+
+/* Footer Menu */
+#footer-menu {margin-top:20px;}
