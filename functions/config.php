@@ -334,6 +334,7 @@ if ($theme_options['bootstrap_enable_responsive'] == 1) {
 
 array_push(Config::$styles,	
 	plugins_url( 'gravityforms/css/forms.css' ),
+	THEME_STATIC_URL.'/css/base.css',
 	get_bloginfo('stylesheet_url')
 );
 
