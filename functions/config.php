@@ -293,12 +293,13 @@ Config::$theme_settings = array(
 	),
 );
 
+# Header links
 Config::$links = array(
 	array('rel' => 'shortcut icon', 'href' => THEME_IMG_URL.'/favicon.ico',),
 	array('rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => get_bloginfo('rss_url'),),
 );
 
-
+# Header styles
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
 	'http://universityheader.ucf.edu/bar/css/bar.css',
@@ -331,6 +332,7 @@ if ($theme_options['bootstrap_enable_responsive'] == 1) {
 	);
 }
 
+# Scripts (output in footer)
 Config::$scripts = array(
 	array('name' => 'jquery', 'src' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js',),
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
@@ -338,9 +340,11 @@ Config::$scripts = array(
 	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.js',
 );
 
+# Header Meta
 Config::$metas = array(
 	array('charset' => 'utf-8',),
 );
+
 if ($theme_options['gw_verify']){
 	Config::$metas[] = array(
 		'name'    => 'google-site-verification',
