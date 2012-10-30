@@ -1,14 +1,14 @@
+			<?=wp_nav_menu(array(
+				'theme_location' => 'footer-menu', 
+				'container'      => 'false', 
+				'menu_class'     => 'nav nav-pills', 
+				'menu_id'        => 'footer-menu', 
+				'fallback_cb'    => false,
+				'depth'          => 1,
+				'walker'         => new Bootstrap_Walker_Nav_Menu()
+				));
+			?>
 			<div id="footer">
-				<?=wp_nav_menu(array(
-					'theme_location' => 'footer-menu', 
-					'container'      => 'false', 
-					'menu_class'     => 'nav nav-pills', 
-					'menu_id'        => 'footer-menu', 
-					'fallback_cb'    => false,
-					'depth'          => 1,
-					'walker'         => new Bootstrap_Walker_Nav_Menu()
-					));
-				?>
 				<div class="row">
 					<div class="span9">
 						<a class="ignore-external" href="http://www.ucf.edu"><img src="<?=THEME_IMG_URL?>/logo.png" alt="" title="" /></a>
