@@ -647,7 +647,8 @@ function create_html_element($tag, $attr=array(), $content=null, $self_close=Tru
  **/
 function disallow_direct_load($page){
 	if ($page == basename($_SERVER['SCRIPT_FILENAME'])){
-		die('No');
+		include(TEMPLATEPATH.'/404.php');
+		die();
 	}
 }
 
