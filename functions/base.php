@@ -685,33 +685,6 @@ function get_featured_image_url($post) {
 
 
 /**
- * Get value of Theme Option Header Menu Styles and return relevant Boostrap 
- * CSS classes.  Indended for use as wp_nav_menu()'s menu_class argument.
- * See http://codex.wordpress.org/Function_Reference/wp_nav_menu
- *
- * @author Jo Greybill
- **/
-function get_header_styles() {
-	$options = get_option(THEME_OPTIONS_NAME);
-	$id = $options['bootstrap_menu_styles'];
-	
-	switch ($id) {
-		case 'nav-tabs':
-			$header_menu_class = 'nav nav-tabs';
-			break;	
-		case 'nav-pills':
-			$header_menu_class = 'nav nav-pills';
-			break;
-		default:
-			$header_menu_class = 'horizontal';
-			break;
-	}
-	return $header_menu_class;
-	
-}
-
-
-/**
  * Return an array of choices representing all the images uploaded to the media
  * gallery.
  *

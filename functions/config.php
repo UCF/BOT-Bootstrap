@@ -296,19 +296,7 @@ Config::$theme_settings = array(
 				'Off' => 0,
 			),
 			'value'       => $theme_options['bootstrap_enable_responsive'],
-	    )),
-		new SelectField(array(
-			'name'        => 'Header Menu Styles',
-			'id'          => THEME_OPTIONS_NAME.'[bootstrap_menu_styles]',
-			'description' => 'Adjust the styles that the header menu links will use.  Non-default options Twitter Bootstrap navigation components for sub-navigation support.',
-			'default'     => 'default',
-			'choices'     => array(
-				'Default (list of links with dropdowns)'  => 'default',
-				'Tabs with dropdowns' => 'nav-tabs',
-				'Pills with dropdowns' => 'nav-pills'
-			),
-			'value'       => $theme_options['bootstrap_menu_styles'],
-	    )),
+	    ))
 	),
 );
 
