@@ -15,6 +15,8 @@ This theme relies on Twitter's Bootstrap framework. The Boostrap project (http:/
 
 ### Bootstrap
 
+If you are making significant changes to Bootstrap (i.e. updating variables.less), create a branch on our Bootstrap branch to store the changes.
+
 ### Custom Post Types
 
 Custom post type definitions are located in custom-post-types.php. Each definition should inherit (eventually) from the abstract CustomPostType class. Register or unregister custom post types by modiyfing the $Config::custom_post_types array in function/config.php ~ line 114.
