@@ -3,7 +3,7 @@
 body{color: #333;background: url("../img/gradient.png") repeat-x top left #fff;}
 
 
-/* UCF Header Styles */
+/* UCF Header Bar Styles */
 
 #UCFHBSearch_ucf fieldset #q {
 	line-height: 11px;
@@ -32,6 +32,4 @@ select#UCFHBHeaderLinks {
 	padding: 0;
 }
 
-
-/*/ Global Styles /*/
 #UCFHBHeader * {height:auto;}
