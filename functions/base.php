@@ -12,7 +12,6 @@
 class ArgumentException extends Exception{}
 class Config{
 	static
-		$body_classes      = array(), # Body classes 
 		$theme_settings    = array(), # Theme settings
 		$custom_post_types = array(), # Custom post types to register
 		$custom_taxonomies = array(), # Custom taxonomies to register
@@ -1360,18 +1359,6 @@ function header_title(){
 
 	return $doctitle;
 }
-
-
-/**
- * Returns string to use for value of class attribute on body tag
- **/
-function body_classes(){
-	$classes = Config::$body_classes;
-	return implode(' ', $classes);
-}
-
-
-
 
 /***************************************************************************
  * REGISTRATION AND INSTALLATION FUNCTIONS
