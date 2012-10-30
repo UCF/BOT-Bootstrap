@@ -323,35 +323,32 @@ Config::$links = array(
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
 	'http://universityheader.ucf.edu/bar/css/bar.css',
-	THEME_STATIC_URL.'/bootstrap/build/css/bootstrap.css',
+	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.css',
 );
 
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
 	array_push(Config::$styles, 
-		THEME_STATIC_URL.'/bootstrap/build/css/bootstrap-responsive.css'
+		THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap-responsive.css'
 	);		
 }
 
 array_push(Config::$styles,	
 	plugins_url( 'gravityforms/css/forms.css' ),
-	THEME_CSS_URL.'/webcom-base.css', 
 	get_bloginfo('stylesheet_url')
 );
 
+# Must be loaded after style.css
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
 	array_push(Config::$styles, 
 		THEME_URL.'/style-responsive.css'
-	);	
+	);
 }
 
 Config::$scripts = array(
+	array('name' => 'jquery', 'src' => '//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js',),
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
 	'http://universityheader.ucf.edu/bar/js/university-header.js',
-	//array('name' => 'jquery', 'src' => 'http://code.jquery.com/jquery-1.7.1.min.js',),
-	THEME_STATIC_URL.'/bootstrap/build/js/bootstrap.js',
-	//THEME_JS_URL.'/jquery-extras.js',
-	array('name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js',),
-	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
+	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.js',
 );
 
 Config::$metas = array(
@@ -363,13 +360,3 @@ if ($theme_options['gw_verify']){
 		'content' => htmlentities($theme_options['gw_verify']),
 	);
 }
-
-
-
-function jquery_in_header() {
-    wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery', 'http://code.jquery.com/jquery-1.7.1.min.js');
-    wp_enqueue_script( 'jquery' );
-}    
- 
-add_action('wp_enqueue_scripts', 'jquery_in_header');
