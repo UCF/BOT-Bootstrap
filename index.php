@@ -1,0 +1,1 @@
+<?php disallow_direct_load('index.php'); ?>
