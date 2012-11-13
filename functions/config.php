@@ -55,6 +55,10 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
  * object.
  **/
 Config::$custom_post_types = array(
+	'Document',
+	'Person',
+	'Committee',
+	'Meeting'
 );
 
 Config::$custom_taxonomies = array(

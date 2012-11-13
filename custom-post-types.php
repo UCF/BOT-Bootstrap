@@ -243,4 +243,480 @@ abstract class CustomPostType{
 	}
 }
 
+class Document extends CustomPostType{
+	public
+		$name           = 'document',
+		$plural_name    = 'Documents',
+		$singular_name  = 'Document',
+		$add_new_item   = 'Add New Document',
+		$edit_item      = 'Edit Document',
+		$new_item       = 'New Document',
+		$use_title      = True,
+		$use_editor     = False,
+		$use_shortcode  = True,
+		$use_metabox    = True;
+	
+	public function fields(){
+		$fields   = parent::fields();
+		$fields[] = array(
+			'name' => __('URL'),
+			'desc' => __('Associate this document with a URL.  This will take precedence over any uploaded file, so leave empty if you want to use a file instead.'),
+			'id'   => $this->options('name').'_url',
+			'type' => 'text',
+		);
+		$fields[] = array(
+			'name'    => __('File'),
+			'desc'    => __('Associate this document with an already existing file.'),
+			'id'      => $this->options('name').'_file',
+			'type'    => 'file',
+		);
+		return $fields;
+	}
+	
+	
+	static function get_document_application($form){
+		return mimetype_to_application(self::get_mimetype($form));
+	}
+	
+	
+	static function get_mimetype($form){
+		if (is_numeric($form)){
+			$form = get_post($form);
+		}
+		
+		$prefix   = post_type($form);
+		$document = get_post(get_post_meta($form->ID, $prefix.'_file', True));
+		
+		$is_url = get_post_meta($form->ID, $prefix.'_url', True);
+		
+		return ($is_url) ? "text/html" : $document->post_mime_type;
+	}
+	
+	
+	static function get_title($form){
+		if (is_numeric($form)){
+			$form = get_post($form);
+		}
+		
+		$prefix = post_type($form);
+		
+		return $form->post_title;
+	}
+	
+	static function get_url($form){
+		if (is_numeric($form)){
+			$form = get_post($form);
+		}
+		
+		$prefix = post_type($form);
+		
+		$x = get_post_meta($form->ID, $prefix.'_url', True);
+		$y = wp_get_attachment_url(get_post_meta($form->ID, $prefix.'_file', True));
+		
+		if (!$x and !$y){
+			return '#';
+		}
+		
+		return ($x) ? $x : $y;
+	}
+	
+	
+	/**
+	 * Handles output for a list of objects, can be overridden for descendants.
+	 * If you want to override how a list of objects are outputted, override
+	 * this, if you just want to override how a single object is outputted, see
+	 * the toHTML method.
+	 **/
+	public function objectsToHTML($objects, $css_classes){
+		if (count($objects) < 1){ return '';}
+		
+		$class_name = get_custom_post_type($objects[0]->post_type);
+		$class      = new $class_name;
+		
+		ob_start();
+		?>
+		<ul class="nobullet <?php if($css_classes):?><?=$css_classes?><?php else:?><?=$class->options('name')?>-list<?php endif;?>">
+			<?php foreach($objects as $o):?>
+			<li class="document <?=$class_name::get_document_application($o)?>">
+				<?=$class->toHTML($o)?>
+			</li>
+			<?php endforeach;?>
+		</ul>
+		<?php
+		$html = ob_get_clean();
+		return $html;
+	}
+	
+	
+	/**
+	 * Outputs this item in HTML.  Can be overridden for descendants.
+	 **/
+	public function toHTML($object){
+		$title = Document::get_title($object);
+		$url   = Document::get_url($object);
+		$html = "<a href='{$url}'>{$title}</a>";
+		return $html;
+	}
+}
+
+/**
+ * Describes a staff member
+ *
+ * @author Chris Conover
+ **/
+class Person extends CustomPostType
+{
+	public
+		$name           = 'person',
+		$plural_name    = 'People',
+		$singular_name  = 'Person',
+		$add_new_item   = 'Add Person',
+		$edit_item      = 'Edit Person',
+		$new_item       = 'New Person',
+		$public         = True,
+		$use_shortcode  = True,
+		$use_metabox    = True,
+		$use_thumbnails = True,
+		$use_order      = True,
+		$taxonomies     = array('org_groups', 'category');
+
+		public function fields(){
+			$fields = array(
+				array(
+					'name'    => __('Title Prefix'),
+					'desc'    => '',
+					'id'      => $this->options('name').'_title_prefix',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Title Suffix'),
+					'desc'    => __('Be sure to include leading comma or space if neccessary.'),
+					'id'      => $this->options('name').'_title_suffix',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Job Title'),
+					'desc'    => __(''),
+					'id'      => $this->options('name').'_jobtitle',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Phone'),
+					'desc'    => __('Separate multiple entries with commas.'),
+					'id'      => $this->options('name').'_phones',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Email'),
+					'desc'    => __(''),
+					'id'      => $this->options('name').'_email',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Order By Name'),
+					'desc'    => __('Name used for sorting. Leaving this field blank may lead to an unexpected sort order.'),
+					'id'      => $this->options('name').'_orderby_name',
+					'type'    => 'text',
+				),
+			);
+			return $fields;
+		}
+
+	public function get_objects($options=array()){
+		$options['order']    = 'ASC';
+		$options['orderby']  = 'person_orderby_name';
+		$options['meta_key'] = 'person_orderby_name';
+		return parent::get_objects($options);
+	}
+
+	public static function get_name($person) {
+		$prefix = get_post_meta($person->ID, 'person_title_prefix', True);
+		$suffix = get_post_meta($person->ID, 'person_title_suffix', True);
+		$name = $person->post_title;
+		return $prefix.' '.$name.' '.$suffix;
+	}
+
+	public static function get_phones($person) {
+		$phones = get_post_meta($person->ID, 'person_phones', True);
+		return ($phones != '') ? explode(',', $phones) : array();
+	}
+
+	public function objectsToHTML($people, $css_classes) {
+		ob_start();?>
+		<div class="row">
+			<div class="span12">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col" class="name">Name</th>
+							<th scope="col" class="job_title">Title</th>
+							<th scope="col" class="phones">Phone</th>
+							<th scope="col" class="email">Email</th>
+						</tr>
+					</thead>
+					<tbody>
+				<?
+				foreach($people as $person) { 
+					$email = get_post_meta($person->ID, 'person_email', True); 
+					$link = ($person->post_content == '') ? False : True; ?>
+						<tr>
+							<td class="name">
+								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
+									<?=$this->get_name($person)?>
+								<?if($link) {?></a><?}?>
+							</td>
+							<td class="job_title">
+								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
+								<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
+								<?if($link) {?></a><?}?>
+							</td> 
+							<td class="phones"><?php if(($link) && ($this->get_phones($person))) {?><a href="<?=get_permalink($person->ID)?>">
+								<?php } if($this->get_phones($person)) {?>
+									<ul class="unstyled"><?php foreach($this->get_phones($person) as $phone) { ?><li><?=$phone?></li><?php } ?></ul>
+								<?php } if(($link) && ($this->get_phones($person))) {?></a><?php }?></td>
+							<td class="email"><?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?></td>
+						</tr>
+				<? } ?>
+				</tbody>
+			</table> 
+		</div>
+	</div><?
+	return ob_get_clean();
+	}
+} // END class 
+
+class Committee extends CustomPostType{
+	public
+		$name           = 'committee',
+		$plural_name    = 'Committees',
+		$singular_name  = 'Committee',
+		$add_new_item   = 'Add Committee',
+		$edit_item      = 'Edit Committee',
+		$new_item       = 'New Committee',
+		$public         = True,
+		$use_title      = True,
+		$use_editor     = True,
+		$use_metabox    = True;
+	
+	
+	public function get_members($post, $type, $obj=False){
+		if (!is_numeric($post)){
+			$post = $post->ID;
+		}
+		$members = get_post_meta($post, $this->options('name').'_'.$type, True);
+		if ($members == ''){
+			return array();
+		}else{
+			$person = new Person();
+			$people = $person->get_objects(array(
+				'post_status' => 'publish,private',
+			));
+			$published = array_map(create_function('$t', 'return $t->ID;'), $people);
+			
+			# On some systems this sometimes comes out as a serialized string
+			# not sure why that happens.  But this fixes the issue.
+			if (gettype($members) == 'string'){$members = unserialize($members);}
+			
+			# Filter out unpublished members
+			$temp = array();
+			foreach($members as $id=>$role){
+				if (in_array($id, $published)){
+					$temp[$id] = $role;
+				}
+			}
+			$members = $temp;
+			
+			if($obj){
+				$t = array();
+				foreach($members as $member=>$role){
+					$member = get_post($member);
+					$member->position = $role;
+					$t[] = $member;
+				}
+				$members = $t;
+				usort($members, 'Committee::_sort_members');
+			}
+			return $members;
+		}
+	}
+	
+	static function _sort_members($a, $b){
+		$titles = array('chair', 'vice chair', 'ex officio');
+		if (!$a->position and !$b->position){
+			$names_a = array_pop(explode(' ', $a->post_title));
+			$names_b = array_pop(explode(' ', $b->post_title));
+			
+			if ($names_a < $names_b){
+				return -1;
+			}else{
+				return 1;
+			}
+		}
+		if (!$a->position and $b->position){
+			return 1;
+		}
+		if ($a->position and !$b->position){
+			return -1;
+		}
+		
+		$a_index = array_search(strtolower($a->position), $titles);
+		$b_index = array_search(strtolower($b->position), $titles);
+		
+		if ($a_index === $b_index){
+			return 0;
+		}
+		if ($a_index === False){
+			return 1;
+		}
+		if ($b_index === False){
+			return -1;
+		}
+		return ($a_index < $b_index) ? -1 : 1 ;
+	}
+	
+	
+	public function documents(){
+		$args = array(
+			'post_type'     => 'attachment',
+			'category_name' => 'charter',
+			'numberposts'   => -1,
+		);
+		$medias = get_posts($args);
+		$return = array();
+		foreach($medias as $media){
+			$return[$media->post_title] = $media->ID;
+		}
+		return $return;
+	}
+	
+	
+	public function fields(){
+		$person    = new Person();
+		$documents = new Document();
+		return array(
+			array(
+				'name' => __('Description'),
+				'desc' => __('Description of the committee\'s responsibilities and duties'),
+				'id'   => $this->options('name').'_description',
+				'type' => 'textarea',
+			),
+			array(
+				'name'    => __('Committee Charter'),
+				'desc'    => __('Document for this committee\'s charter'),
+				'id'      => $this->options('name').'_charter',
+				'type'    => 'select',
+				'options' => $documents->get_objects_as_options(),
+			),
+			array(
+				'name'    => __('Committee Members'),
+				'desc'    => __('People tagged as "Trustee" who belong to this committee and the positions they hold within it.'),
+				'id'      => $this->options('name').'_members',
+				'type'    => 'members',
+				'options' => $person->get_objects_as_options(array(
+					'person_label' => 'trustee',
+				)),
+			),
+			array(
+				'name'    => __('Committee Staff'),
+				'desc'    => __('People tagged as "Staff" who belong to this committee and the positions they hold within it.'),
+				'id'      => $this->options('name').'_staff',
+				'type'    => 'staff',
+				'options' => $person->get_objects_as_options(array(
+					'person_label' => 'committee-staff',
+				)),
+			),
+		);
+	}
+}
+
+abstract class CommitteeRelated extends CustomPostType{
+	public
+		$name           = 'committee_related',
+		$public         = True,
+		$use_editor     = True,
+		$use_metabox    = True,
+		$use_title      = True;
+	
+	public function fields(){
+		$committees = new Committee();
+		return array(
+			array(
+				'name'    => __('Committee'),
+				'desc'    => __('The associated committee.'),
+				'id'      => $this->options('name').'_committee',
+				'type'    => 'select',
+				'options' => $committees->get_objects_as_options(),
+			),
+		);
+	}
+}
+
+
+class Meeting extends CommitteeRelated{
+	public
+		$name           = 'meeting',
+		$plural_name    = 'Meetings',
+		$singular_name  = 'Meeting',
+		$add_new_item   = 'Add New Meeting',
+		$edit_item      = 'Edit Meeting',
+		$new_item       = 'New Meeting',
+		$public         = True,
+		$use_editor     = False,
+		$use_metabox    = True;
+	
+	static $type_choices = array(
+		'Regular'   => 0,
+		'Committee' => 1,
+	);
+	
+	public function fields(){
+		$parent_fields = parent::fields();
+		$committee     = array_shift($parent_fields);
+		$committee['desc'] = __('The associated committee, if applicable.');
+		$fields        = array(
+			$committee,
+			array(
+				'name'    => __('Agenda'),
+				'desc'    => __('Meeting agenda.'),
+				'id'      => $this->options('name').'_agenda',
+				'type'    => 'file',
+			),
+			array(
+				'name'    => __('Minutes'),
+				'desc'    => __('Meeting minutes.'),
+				'id'      => $this->options('name').'_minutes',
+				'type'    => 'file',
+			),
+			array(
+				'name'    => __('Location'),
+				'desc'    => __('Location of the meeting'),
+				'id'      => $this->options('name').'_location',
+				'type'    => 'text',
+			),
+			array(
+				'name'    => __('Date'),
+				'desc'    => __('Date of the meeting. Must be in MM/DD/YY format'),
+				'id'      => $this->options('name').'_date',
+				'type'    => 'date',
+			),
+			array(
+				'name'    => __('Time Start'),
+				'desc'    => __('Start time or TBA'),
+				'id'      => $this->options('name').'_start_time',
+				'type'    => 'time',
+			),
+			array(
+				'name'    => __('Time End'),
+				'desc'    => __('End time or TBA'),
+				'id'      => $this->options('name').'_end_time',
+				'type'    => 'time',
+			),
+		);
+		$fields = array_merge(
+			$parent_fields,
+			$fields
+		);
+		return $fields;
+	}
+}
 ?>
