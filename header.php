@@ -36,20 +36,7 @@
 	<body>
 		<div class="container">
 			<div class="row"  id="header">
-				<h1 class="span9"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
-				<div class="span3">
-					<?php $options = get_option(THEME_OPTIONS_NAME);?>
-					<?php if($options['facebook_url'] or $options['twitter_url']):?>
-						<ul class="social">
-							<?php if($options['facebook_url']):?>
-							<li><a class="ignore-external facebook" href="<?=$options['facebook_url']?>">Facebook</a></li>
-							<?php endif;?>
-							<?php if($options['twitter_url']):?>
-							<li><a class="ignore-external twitter" href="<?=$options['twitter_url']?>">Twitter</a></li>
-							<?php endif;?>
-						</ul>
-					<?php endif;?>
-				</div>
+				<h1 class="span12"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
 			</div>
 			<?=wp_nav_menu(array(
 				'theme_location' => 'header-menu', 
