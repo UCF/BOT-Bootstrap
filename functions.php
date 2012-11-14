@@ -283,4 +283,12 @@ function get_document_type($mimetype){
 	}
 	return $type;
 }
+
+function get_content($id){
+	$post    = get_post($id);
+	$content = $post->post_content;
+	$content = apply_filters('the_content', $content);
+	$content = str_replace(']]>', ']]&gt;', $content);
+	return $content;
+}
 ?>

@@ -85,4 +85,23 @@ abstract class CustomTaxonomy {
 	}
 }
 
+
+class Labels extends CustomTaxonomy
+{
+	public
+		$name               = 'person_label',
+		$general_name       = 'Labels',
+		$singular_name      = 'Label',
+		$search_items       = 'Search Labels',
+		$popular_items      = 'Popular Labels',
+		$all_times          = 'All Labels',
+		$parent_item        = 'Parent Label',
+		$parent_item_colon  = 'Parent Label:',
+		$edit_item          = 'Edit Label',
+		$update_item        = 'Update Label',
+		$add_new_item       = 'Add New Label',
+		$new_item_name      = 'New Tag Label',
+		
+		$hierarchical = True;
+} // END class 
 ?>

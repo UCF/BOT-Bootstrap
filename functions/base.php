@@ -901,7 +901,7 @@ function sc_object_list($attrs, $options = array()){
 	$translate = array(
 		'tags' => 'post_tag',
 		'categories' => 'category',
-		'org_groups' => 'org_groups'
+		'labels' => 'person_label'
 	);
 	$taxonomies = array_diff(array_keys($attrs), array_keys($default_attrs));
 	

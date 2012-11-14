@@ -442,7 +442,7 @@ class Person extends CustomPostType
 		$use_metabox    = True,
 		$use_thumbnails = True,
 		$use_order      = True,
-		$taxonomies     = array('org_groups', 'category');
+		$taxonomies     = array('person_label');
 
 		public function fields(){
 			$fields = array(
@@ -506,46 +506,41 @@ class Person extends CustomPostType
 	}
 
 	public function objectsToHTML($people, $css_classes) {
-		ob_start();?>
-		<div class="row">
-			<div class="span12">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th scope="col" class="name">Name</th>
-							<th scope="col" class="job_title">Title</th>
-							<th scope="col" class="phones">Phone</th>
-							<th scope="col" class="email">Email</th>
-						</tr>
-					</thead>
-					<tbody>
-				<?
-				foreach($people as $person) { 
-					$email = get_post_meta($person->ID, 'person_email', True); 
-					$link = ($person->post_content == '') ? False : True; ?>
-						<tr>
-							<td class="name">
-								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
-									<?=$this->get_name($person)?>
-								<?if($link) {?></a><?}?>
-							</td>
-							<td class="job_title">
-								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
-								<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
-								<?if($link) {?></a><?}?>
-							</td> 
-							<td class="phones"><?php if(($link) && ($this->get_phones($person))) {?><a href="<?=get_permalink($person->ID)?>">
-								<?php } if($this->get_phones($person)) {?>
-									<ul class="unstyled"><?php foreach($this->get_phones($person) as $phone) { ?><li><?=$phone?></li><?php } ?></ul>
-								<?php } if(($link) && ($this->get_phones($person))) {?></a><?php }?></td>
-							<td class="email"><?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?></td>
-						</tr>
-				<? } ?>
-				</tbody>
-			</table> 
+		ob_start();
+		?>
+		<ul class="person-list">
+		<?php foreach($people as $person) { ?>
+			<li>
+			<div class="person" id="person-<?=$person->ID?>"><a href="<?=get_permalink($person->ID)?>">
+					<?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($person->ID), 'full');?>
+					<div class="crop">
+						<?php if($image[0]):?>
+						<img src="<?=$image[0]?>" alt="<?=$person->post_title?>" />
+						<?php else:?>
+						<img src="<?=BOT_IMG_URL?>/no-photo.jpg" alt="no photo" />
+						<?php endif;?>
+					</div>
+					<div class="information">
+						<h1>
+							<span class="name"><?=$person->post_title?></span>
+							<span class="title">
+								<?php if($meta['person_title'][0]):?>
+								<?=$meta['person_title'][0]?>
+								<?php else:?>&nbsp;<?php endif;?>
+							</span>
+						</h1>
+						<div class="bio"><?=get_content($person->ID);?></div>
+						<div class="phone"><?=$meta['person_phone'][0]?></div>
+						<div class="email"><?=$meta['person_email'][0]?></div>
+					</div>
+				</a>
+			<div class="ie-clear"><!-- --></div>
 		</div>
-	</div><?
-	return ob_get_clean();
+		</li>
+		<? } ?>
+	</ul>
+		<?php
+		return ob_get_clean();
 	}
 } // END class 
 

@@ -72,3 +72,24 @@ Version: v0.0.0
 /* Search Form */
 .form-search label {display:none;}
 .form-search button {margin-top:10px;}
+
+/* Person */
+
+
+.person-list{list-style-type: none; padding: 0; margin: 0;}
+.person-list a{text-decoration: none;}
+.person-list li{display: inline-block; background-color: #fff4dc; padding: 10px; border: 1px solid #dfd4cc; width: 115px; margin: 10px 7px; height: 200px; vertical-align: text-top; overflow: hidden;}
+.ie7 .person-list li{display: block; float: left;}
+.person-list .person .crop{width: 115px; height: 130px; overflow: hidden; border: none;}
+.person-list .person img{display: block; margin: 0 auto; width: 115px;}
+.person-list .person h1{display: block; margin-top: 10px; text-align: center;line-height:.7em;}
+.ie7 .person-list .person h1{margin-top: 20px;}
+.ie7 h2,
+.ie7 h3,
+.ie7 h4{clear: both;}
+.person-list .person h1 .name{display: block; font-size: 18px;}
+.person-list .person h1 .title{display: block; font-size: 14px; margin-top: 5px;}
+.person-list .person .information .bio{display: none;}
+.person-list .person .information .phone{display: none;}
+.person-list .person .information .email{display: none;}
+.person-list.notitle .person .title{display: none;}
