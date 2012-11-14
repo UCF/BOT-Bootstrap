@@ -21,3 +21,18 @@ Version: v0.0.0
 #header-menu a,
 #footer-menu a {padding:0;margin:0;}
 #header-menu a:hover {background-color:inherit;}
+
+/* Highlight */
+.highlight {margin-bottom:20px;}
+.highlight h3 {margin-top:0;font-size:12px;color:#F32E07;line-height: 12px;text-transform:uppercase;}
+.highlight .content {background-color:#F3E9BA;padding:10px 20px;text-align:center;font-size:16px;}
+
+/* Home */
+#home #latest {}
+#home #sidebar {border-left:1px solid #EEE;width:199px;padding-left:20px;}
+#home #sidebar .form-search label {display:none;}
+#home #sidebar .form-search input {width:185px;font-size:13px;}
+#home #sidebar .form-search button {font-size:12px;padding:5px 10px;margin-top:10px;}
+
+/* Sidebar */
+#sidebar .committee-list {font-family:Georgia,serif;}
