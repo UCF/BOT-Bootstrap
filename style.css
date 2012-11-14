@@ -12,7 +12,7 @@ Version: v0.0.0
 /* Header Menu and Footer Menu */
 #header-menu,
 #footer-menu {list-style-type:disc;font-size:16px;}
-#footer-menu {border-top:1px dotted black;padding-top:10px;}
+#footer-menu {border-top:1px dotted black;padding-top:10px;margin-top:20px;}
 #header-menu {border-bottom: 1px dotted black;margin-bottom:20px;padding-bottom:5px;}
 #header-menu li,
 #footer-menu li {padding:0;margin-left:15px;margin-right:15px;}
@@ -21,7 +21,3 @@ Version: v0.0.0
 #header-menu a,
 #footer-menu a {padding:0;margin:0;}
 #header-menu a:hover {background-color:inherit;}
-
-
-/* Footer Menu */
-#footer-menu {margin-top:20px;}
