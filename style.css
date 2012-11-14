@@ -19,8 +19,9 @@ Version: v0.0.0
 #header-menu li:first-child,
 #footer-menu li:first-child {margin-left:0;list-style-type:none;margin-top:3px;}
 #header-menu a,
-#footer-menu a {padding:0;margin:0;}
-#header-menu a:hover {background-color:inherit;}
+#footer-menu a {padding:0;margin:0;background-color:inherit;color:#000;}
+#header-menu a:hover,
+#footer-menu a:hover {background-color:inherit;}
 
 /* Highlight */
 .highlight {margin-bottom:20px;}
@@ -36,3 +37,38 @@ Version: v0.0.0
 
 /* Sidebar */
 #sidebar .committee-list {font-family:Georgia,serif;}
+
+/* Next Meeting */
+#next-meeting .date{display: block;}
+#next-meeting .time{font-size: 14px; display: block;}
+#next-meeting .location{font-size: 14px; display: block;}
+#next-meeting .committee{font-size: 14px; display: block;}
+
+/**
+ * Mimetype icons
+ **/
+.unknown:before,
+.pdf:before,
+.word:before,
+.excel:before,
+.html:before,
+.ppt:before{
+	background: transparent url('static/img/document.png') no-repeat 0 0;
+	margin:0 5px 0 0;
+	height:18px;
+	width: 18px;
+	content:'';
+	display:inline-block;
+	position:relative;
+	top:3px;
+}
+
+.html:before{background-image: url('static/img/document-html.png');}
+.pdf:before{background-image: url('static/img/document-pdf.png');}
+.word:before{background-image: url('static/img/document-doc.png');}
+.excel:before{background-image: url('static/img/document-xls.png');}
+.ppt:before{background-image: url('static/img/document-ppt.png');}
+
+/* Search Form */
+.form-search label {display:none;}
+.form-search button {margin-top:10px;}

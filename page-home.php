@@ -7,21 +7,19 @@
 			<div class="highlight">
 				<h3>Latest Board Minutes</h3>
 				<div class="content">
-					<a href="">June 25, 2012</a>
+					<?php display_latest_minutes() ?>
 				</div>
 			</div>
 			<div class="highlight">
 				<h3>Next Board Agenda</h3>
 				<div class="content">
-					<a href="">November 15, 2012</a>
+					<?php display_latest_agenda() ?>
 				</div>
 			</div>
 			<div class="highlight">
 				<h3>Next Board Meeting</h3>
 				<div class="content">
-					November 15, 2012<br />
-					8:00 am - 5:00 pm<br />
-					Live Oak Center
+					<?php display_next_meeting() ?>
 				</div>
 			</div>
 		</div>

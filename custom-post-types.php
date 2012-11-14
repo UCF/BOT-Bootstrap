@@ -273,7 +273,61 @@ class Document extends CustomPostType{
 		return $fields;
 	}
 	
-	
+	static function get_class($post_id) {
+		global $wpdb;
+
+		$sql = "
+			SELECT post_id
+			FROM   $wpdb->postmeta meta
+			WHERE
+				meta_key = 'meeting_minutes'
+				AND meta_value = $post_id
+		";
+
+		$rows = $wpdb->get_results($sql);
+		if(count($rows) > 0) {
+			return 'Minutes';
+		} else {
+			$sql = "
+				SELECT post_id
+				FROM   $wpdb->postmeta meta
+				WHERE
+					meta_key = 'meeting_agenda'
+					AND meta_value = $post_id
+			";
+			$rows = $wpdb->get_results($sql);
+			if(count($rows) > 0) {
+				return 'Agenda';
+			} else {
+				return False;
+			}
+		}
+	}
+
+	static function get_meeting($file, $class) {
+		global $wpdb;
+
+		$meta_key = '';
+		switch($class) {
+			case 'Agenda':
+				$meta_key = 'meeting_agenda';
+				break;
+			case 'Minutes':
+				$meta_key = 'meeting_minutes';
+				break;
+		}
+		$sql = "
+			SELECT post.*
+			FROM   $wpdb->posts post
+			JOIN   $wpdb->postmeta meta
+			ON     post.ID = meta.post_id
+			WHERE
+				meta.meta_key = '$meta_key'
+				AND meta.meta_value = $file->ID";
+		$rows = $wpdb->get_results($sql);
+		return (count($rows) == 1) ? $rows[0] : False;
+ 	}
+
 	static function get_document_application($form){
 		return mimetype_to_application(self::get_mimetype($form));
 	}
@@ -283,13 +337,9 @@ class Document extends CustomPostType{
 		if (is_numeric($form)){
 			$form = get_post($form);
 		}
-		
-		$prefix   = post_type($form);
-		$document = get_post(get_post_meta($form->ID, $prefix.'_file', True));
-		
 		$is_url = get_post_meta($form->ID, $prefix.'_url', True);
 		
-		return ($is_url) ? "text/html" : $document->post_mime_type;
+		return ($is_url) ? "text/html" : $form->post_mime_type;
 	}
 	
 	
@@ -303,6 +353,20 @@ class Document extends CustomPostType{
 		return $form->post_title;
 	}
 	
+	static function get_meeting_title($document){
+		if (is_numeric($document)){
+			$document = get_post($document);
+		}
+
+		if( ($class = Document::get_class($document->ID)) !== False
+			&& ($meeting = Document::get_meeting($document, $class)) !== False
+			&& ($meeting_date = get_post_meta($meeting->ID, 'meeting_date', True)) !== False) {
+				return date('F j, Y', strtotime($meeting_date));
+		} else {
+			return 'Unknown';
+		}
+	}
+
 	static function get_url($form){
 		if (is_numeric($form)){
 			$form = get_post($form);
@@ -311,7 +375,7 @@ class Document extends CustomPostType{
 		$prefix = post_type($form);
 		
 		$x = get_post_meta($form->ID, $prefix.'_url', True);
-		$y = wp_get_attachment_url(get_post_meta($form->ID, $prefix.'_file', True));
+		$y = wp_get_attachment_url($form->ID);
 		
 		if (!$x and !$y){
 			return '#';
