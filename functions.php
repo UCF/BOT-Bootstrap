@@ -291,4 +291,23 @@ function get_content($id){
 	$content = str_replace(']]>', ']]&gt;', $content);
 	return $content;
 }
+
+function meetings_prep(&$meetings){
+	filter_meetings($meetings);
+	sort_meetings($meetings);
+}
+
+function filter_meetings(&$meetings){
+	$current_year = (int)date('Y');
+	foreach ($meetings as $key=>$meeting){
+		$date = strtotime($meeting->meta["meeting_date"][0] . " " . $meeting->meta["meeting_start_time"][0]);
+		if($date === False) {
+			$date = strtotime($meeting->meta["meeting_date"][0]);
+		}
+		$year = (int)date('Y', $date);
+		if( ($current_year - $year > 1) || ($year - $current_year > 1) || $date === False){
+			unset($meetings[$key]);
+		}
+	}
+}
 ?>

@@ -74,8 +74,6 @@ Version: v0.0.0
 .form-search button {margin-top:10px;}
 
 /* Person */
-
-
 .person-list{list-style-type: none; padding: 0; margin: 0;}
 .person-list a{text-decoration: none;}
 .person-list li{display: inline-block; background-color: #fff4dc; padding: 10px; border: 1px solid #dfd4cc; width: 115px; margin: 10px 7px; height: 200px; vertical-align: text-top; overflow: hidden;}
@@ -93,3 +91,13 @@ Version: v0.0.0
 .person-list .person .information .phone{display: none;}
 .person-list .person .information .email{display: none;}
 .person-list.notitle .person .title{display: none;}
+
+/* Meetings #FFF8DF */
+.meetings {}
+.meetings th {display:none;}
+.meetings .table-striped tbody tr:nth-child(odd) td, 
+.meetings .table-striped tbody tr:nth-child(odd) th {background-color:#FFF8DF;}
+.meetings .date{font-weight: bold; text-align: left; width: 25%;}
+.meetings .time{text-align: center; width: 25%;}
+.meetings .documents{text-align: center; word-spacing: 10px; font-size: 14px; width: 30%;}
+.meetings .location {font-size: 14px; text-align: right; width: 20%;}
