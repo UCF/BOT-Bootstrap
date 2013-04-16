@@ -41,7 +41,7 @@
 			<?=wp_nav_menu(array(
 				'theme_location' => 'header-menu', 
 				'container'      => 'false', 
-				'menu_class'     => 'nav nav-pills', 
+				'menu_class'     => 'menu horizontal', 
 				'menu_id'        => 'header-menu', 
 				'walker'         => new Bootstrap_Walker_Nav_Menu()
 				));

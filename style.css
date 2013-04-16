@@ -6,22 +6,35 @@ Version: v1.0.0
 */
 
 /* Header */
-#header {margin-top:20px;}
-#header h1 {margin-bottom:5px;}
+#header {margin-top:15px;}
+#header h1 {font-size: 32px; margin-bottom:0;}
+
+/* Footer */
+#footer { margin-bottom: 20px; }
 
 /* Header Menu and Footer Menu */
-#header-menu,
-#footer-menu {list-style-type:disc;font-size:16px;}
-#footer-menu {border-top:1px dotted black;padding-top:10px;margin-top:20px;}
-#header-menu {border-bottom: 1px dotted black;margin-bottom:20px;padding-bottom:5px;}
-#header-menu li,
-#footer-menu li {padding:0;margin-left:15px;margin-right:15px;}
-#header-menu li:first-child,
-#footer-menu li:first-child {margin-left:0;list-style-type:none;margin-top:3px;}
-#header-menu a,
-#footer-menu a {padding:0;margin:0;background-color:inherit;color:#000;}
-#header-menu a:hover,
-#footer-menu a:hover {background-color:inherit;}
+.menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
+.menu a:hover{text-decoration: underline;}
+.menu.horizontal{
+	list-style: none; 
+	margin: 0 0 15px 0; 
+	color: #6d6e71; 
+	padding: 10px 0 5px 0; 
+	clear: right; 
+	overflow: auto;
+}
+.menu.horizontal li{display: inline-block; margin: 0 9px 5px 0; padding: 0; float: left;}
+.ie .menu.horizontal li{display: block; float: left; margin-right: 6px;}
+.menu.horizontal li:after{content: "\2022"; margin-left: 4px;}
+.menu.horizontal li:last-child:after {content: none !important;}
+
+#header-menu { border-bottom: 1px dotted #000; }
+#footer-menu { margin-top: 15px; border-top: 1px dotted #000; }
+#footer-menu a { font-size: 14px; }
+
+/* Page Content */
+.row.page-content { }
+.row.page-content h2.page-title { margin-top: 0; }
 
 /* Highlight */
 .highlight {margin-bottom:20px;}
@@ -37,6 +50,7 @@ Version: v1.0.0
 
 /* Sidebar */
 #sidebar .committee-list {font-family:Georgia,serif;}
+#sidebar #latest-minutes a { text-decoration: underline; }
 
 /* Next Meeting */
 #next-meeting .date{display: block;}
@@ -80,13 +94,13 @@ Version: v1.0.0
 .ie7 .person-list li{display: block; float: left;}
 .person-list .person .crop{width: 115px; height: 130px; overflow: hidden; border: none;}
 .person-list .person img{display: block; margin: 0 auto; width: 115px;}
-.person-list .person h1{display: block; margin-top: 10px; text-align: center;line-height:.7em;}
-.ie7 .person-list .person h1{margin-top: 20px;}
+.person-list .person h3{display: block; margin-top: 10px; text-align: center;line-height:.7em; font-family: Georgia, serif; font-weight: normal;}
+.ie7 .person-list .person h3{margin-top: 20px;}
 .ie7 h2,
 .ie7 h3,
 .ie7 h4{clear: both;}
-.person-list .person h1 .name{display: block; font-size: 18px;}
-.person-list .person h1 .title{display: block; font-size: 14px; margin-top: 5px;}
+.person-list .person h3 .name{display: block; font-size: 18px; line-height: 21px;}
+.person-list .person h3 .title{display: block; font-size: 14px; line-height: 18px; margin-top: 5px;}
 .person-list .person .information .bio{display: none;}
 .person-list .person .information .phone{display: none;}
 .person-list .person .information .email{display: none;}
@@ -95,9 +109,13 @@ Version: v1.0.0
 /* Meetings #FFF8DF */
 .meetings {}
 .meetings th {display:none;}
+.meetings .table-striped tbody tr td,
+.meetings .table-striped tbody th td { border: 0; }
 .meetings .table-striped tbody tr:nth-child(odd) td, 
 .meetings .table-striped tbody tr:nth-child(odd) th {background-color:#FFF8DF;}
 .meetings .date{font-weight: bold; text-align: left; width: 25%;}
 .meetings .time{text-align: center; width: 25%;}
 .meetings .documents{text-align: center; word-spacing: 10px; font-size: 14px; width: 30%;}
+.meetings .documents a { color: #990000; text-decoration: underline; }
+.meetings .documents a:hover { color: #C30202; }
 .meetings .location {font-size: 14px; text-align: right; width: 20%;}
