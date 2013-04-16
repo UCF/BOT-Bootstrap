@@ -1437,6 +1437,32 @@ function save_file($post_id, $field){
 	}
 }
 
+function save_members($post_id, $field){
+	$new_members = $_POST[$field['id']];
+	$members     = array();
+	if (count($new_members)){
+		foreach($new_members as $id){
+			if(isset($_POST[$field['id'].'_'.$id.'_role'])){
+				$members[$id] =  $_POST[$field['id'].'_'.$id.'_role'];
+			}else{
+				$members[$id] = null;
+			}
+		}
+		update_post_meta($post_id, $field['id'], $members);
+	}
+}
+
+function save_simple_members($post_id, $field){
+	$new_members = $_POST[$field['id']];
+	$members     = array();
+	if (count($new_members)){
+		foreach($new_members as $id){
+			$members[] = $id;
+		}
+	}
+	update_post_meta($post_id, $field['id'], $members);
+}
+
 function save_default($post_id, $field){
 	$old = get_post_meta($post_id, $field['id'], true);
 	$new = $_POST[$field['id']];
@@ -1483,6 +1509,13 @@ function _save_meta_data($post_id, $meta_box){
 		switch ($field['type']){
 			case 'file':
 				save_file($post_id, $field);
+				break;
+			case 'staff':
+			case 'members':
+				save_members($post_id, $field);
+				break;
+			case 'simple-members':
+				save_simple_members($post_id, $field);
 				break;
 			default:
 				save_default($post_id, $field);
@@ -1535,6 +1568,51 @@ function _show_meta_boxes($post, $meta_box){
 			
 			<?php break; case 'checkbox':?>
 				<input type="checkbox" name="<?=$field['id']?>" id="<?=$field['id']?>"<?=($current_value) ? ' checked="checked"' : ''?> />
+			
+			<?php break; case 'members':?>
+				<?php $custom_post_type = get_custom_post_type($post, True);?>
+				<?php $current_members  = $custom_post_type->get_members($post, 'members');?>
+				<p><?=$field['desc'];?></p>
+				<table>
+					<tr>
+						<th>Member</th>
+						<th>Title/Description</th>
+					</tr>
+					<?php foreach($field['options'] as $name=>$id):?>
+					<?php $current = array_key_exists($id, $current_members);?>
+					<tr>
+						<td>
+							<input type="checkbox" name="<?=$field['id']?>[]" id="<?=$field['id'].'_'.$id?>" value="<?=$id?>"<?php if ($current):?> checked="checked"<?php endif;?> />
+							<label for="<?=$field['id'].'_'.$id?>"><?=$name?></label>
+						</td>
+						<td>
+							<input type="text" name="<?=$field['id'].'_'.$id.'_role'?>" id="<?=$field['id'].'_'.$id.'_role'?>"<?php if($current):?> value="<?=htmlentities($current_members[$id])?>"<?php endif;?> />
+						</td>
+					</tr>
+					<?php endforeach;?>
+				</table>
+			<?php break; case 'staff':?>
+				<?php $custom_post_type = get_custom_post_type($post, True);?>
+				<?php $current_staff    = $custom_post_type->get_members($post, 'staff');?>
+				<p><?=$field['desc'];?></p>
+				<table>
+					<tr>
+						<th>Staff</th>
+						<th>Title/Description</th>
+					</tr>
+					<?php foreach($field['options'] as $name=>$id):?>
+					<?php $current = array_key_exists($id, $current_staff);?>
+					<tr>
+						<td>
+							<input type="checkbox" name="<?=$field['id']?>[]" id="<?=$field['id'].'_'.$id?>" value="<?=$id?>"<?php if ($current):?> checked="checked"<?php endif;?> />
+							<label for="<?=$field['id'].'_'.$id?>"><?=$name?></label>
+						</td>
+						<td>
+							<input type="text" name="<?=$field['id'].'_'.$id.'_role'?>" id="<?=$field['id'].'_'.$id.'_role'?>"<?php if($current):?> value="<?=htmlentities($current_staff[$id])?>"<?php endif;?> />
+						</td>
+					</tr>
+					<?php endforeach;?>
+				</table>
 			
 			<?php break; case 'file':?>
 				<?php

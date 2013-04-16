@@ -447,27 +447,15 @@ class Person extends CustomPostType
 		public function fields(){
 			$fields = array(
 				array(
-					'name'    => __('Title Prefix'),
-					'desc'    => '',
-					'id'      => $this->options('name').'_title_prefix',
-					'type'    => 'text',
-				),
-				array(
-					'name'    => __('Title Suffix'),
-					'desc'    => __('Be sure to include leading comma or space if neccessary.'),
-					'id'      => $this->options('name').'_title_suffix',
-					'type'    => 'text',
-				),
-				array(
 					'name'    => __('Job Title'),
 					'desc'    => __(''),
-					'id'      => $this->options('name').'_jobtitle',
+					'id'      => $this->options('name').'_title',
 					'type'    => 'text',
 				),
 				array(
 					'name'    => __('Phone'),
 					'desc'    => __('Separate multiple entries with commas.'),
-					'id'      => $this->options('name').'_phones',
+					'id'      => $this->options('name').'_phone',
 					'type'    => 'text',
 				),
 				array(
@@ -517,21 +505,19 @@ class Person extends CustomPostType
 						<?php if($image[0]):?>
 						<img src="<?=$image[0]?>" alt="<?=$person->post_title?>" />
 						<?php else:?>
-						<img src="<?=BOT_IMG_URL?>/no-photo.jpg" alt="no photo" />
+						<img src="<?=THEME_IMG_URL?>/no-photo.jpg" alt="no photo" />
 						<?php endif;?>
 					</div>
 					<div class="information">
-						<h1>
+						<h3>
+							<?php
+								$title = get_post_meta($person->ID, 'person_title', true) ? get_post_meta($person->ID, 'person_title', true) : '&nbsp;';
+								$phone = get_post_meta($person->ID, 'person_phone', true) ? get_post_meta($person->ID, 'person_phone', true) : '&nbsp;';
+								$email = get_post_meta($person->ID, 'person_email', true) ? get_post_meta($person->ID, 'person_email', true) : '&nbsp;';
+							?>
 							<span class="name"><?=$person->post_title?></span>
-							<span class="title">
-								<?php if($meta['person_title'][0]):?>
-								<?=$meta['person_title'][0]?>
-								<?php else:?>&nbsp;<?php endif;?>
-							</span>
-						</h1>
-						<div class="bio"><?=get_content($person->ID);?></div>
-						<div class="phone"><?=$meta['person_phone'][0]?></div>
-						<div class="email"><?=$meta['person_email'][0]?></div>
+							<span class="title"><?=$title?></span>
+						</h3>
 					</div>
 				</a>
 			<div class="ie-clear"><!-- --></div>
