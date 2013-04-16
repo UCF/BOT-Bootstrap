@@ -653,47 +653,47 @@ function disallow_direct_load($page){
 
 
 /**
-* Returns the name of the custom post type defined by $obj
-*
-* @return string
-* @author Jared Lang
-**/
+ * Returns the name of the custom post type defined by $obj
+ *
+ * @return string
+ * @author Jared Lang
+ **/
 function get_custom_post_type($obj, $instance=False){
-if ($obj == null){return null;}
-
-$installed = installed_custom_post_types();
-
-if (is_string($obj)){
-foreach($installed as $custom_post_type){
-if (
-($obj == get_class($custom_post_type)) or
-($obj == $custom_post_type->options('name'))
-){
-if ($instance){
-return $custom_post_type;
-}
-else{
-return $custom_post_type->options('name');
-}
-}
-}
-return null;
-}
-
-if (get_class($obj) == 'stdClass'){
-foreach($installed as $custom_post_type){
-if ($obj->post_type == $custom_post_type->options('name')){
-if ($instance){
-return $custom_post_type;
-}else{
-return $custom_post_type->options('name');
-}
-}
-}
-return null;
-}
-
-return null;
+	if ($obj == null){return null;}
+	
+	$installed = installed_custom_post_types();
+	
+	if (is_string($obj)){
+		foreach($installed as $custom_post_type){
+			if (
+					($obj == get_class($custom_post_type)) or
+					($obj == $custom_post_type->options('name'))
+				){
+				if ($instance){
+					return $custom_post_type;
+				}
+				else{
+					return $custom_post_type->options('name');
+				}
+			}
+		}
+		return null;
+	}
+	
+	if (get_class($obj) == 'stdClass'){
+		foreach($installed as $custom_post_type){
+			if ($obj->post_type == $custom_post_type->options('name')){
+				if ($instance){
+					return $custom_post_type;
+				}else{
+					return $custom_post_type->options('name');
+				}
+			}
+		}
+		return null;
+	}
+	
+	return null;
 }
 
 
@@ -1598,44 +1598,44 @@ function _show_meta_boxes($post, $meta_box){
 			
 			<?php break; case 'members':?>
 				<?php $custom_post_type = get_custom_post_type($post, True);?>
-				<?php $current_members  = $custom_post_type->get_members($post, 'members');?>
+				<?php $current_members  = $custom_post_type->get_members($post, 'members'); ?>
 				<table>
 					<tr>
 						<th>Member</th>
 						<th>Title/Description</th>
 					</tr>
 					<?php foreach($field['options'] as $name=>$id):?>
-					<?php $current = array_key_exists($id, $current_members);?>
-					<tr>
-						<td>
-							<input type="checkbox" name="<?=$field['id']?>[]" id="<?=$field['id'].'_'.$id?>" value="<?=$id?>"<?php if ($current):?> checked="checked"<?php endif;?> />
-							<label for="<?=$field['id'].'_'.$id?>"><?=$name?></label>
-						</td>
-						<td>
-							<input type="text" name="<?=$field['id'].'_'.$id.'_role'?>" id="<?=$field['id'].'_'.$id.'_role'?>"<?php if($current):?> value="<?=htmlentities($current_members[$id])?>"<?php endif;?> />
-						</td>
-					</tr>
+						<?php $current = array_key_exists($id, $current_members);?>
+						<tr>
+							<td>
+								<input type="checkbox" name="<?=$field['id']?>[]" id="<?=$field['id'].'_'.$id?>" value="<?=$id?>"<?php if ($current):?> checked="checked"<?php endif;?> />
+								<label for="<?=$field['id'].'_'.$id?>"><?=$name?></label>
+							</td>
+							<td>
+								<input type="text" name="<?=$field['id'].'_'.$id.'_role'?>" id="<?=$field['id'].'_'.$id.'_role'?>"<?php if($current):?> value="<?=htmlentities($current_members[$id])?>"<?php endif;?> />
+							</td>
+						</tr>
 					<?php endforeach;?>
 				</table>
 			<?php break; case 'staff':?>
 				<?php $custom_post_type = get_custom_post_type($post, True);?>
 				<?php $current_staff    = $custom_post_type->get_members($post, 'staff');?>
-				<table>
-					<tr>
-						<th>Staff</th>
-						<th>Title/Description</th>
-					</tr>
-					<?php foreach($field['options'] as $name=>$id):?>
-					<?php $current = array_key_exists($id, $current_staff);?>
-					<tr>
-						<td>
-							<input type="checkbox" name="<?=$field['id']?>[]" id="<?=$field['id'].'_'.$id?>" value="<?=$id?>"<?php if ($current):?> checked="checked"<?php endif;?> />
-							<label for="<?=$field['id'].'_'.$id?>"><?=$name?></label>
-						</td>
-						<td>
-							<input type="text" name="<?=$field['id'].'_'.$id.'_role'?>" id="<?=$field['id'].'_'.$id.'_role'?>"<?php if($current):?> value="<?=htmlentities($current_staff[$id])?>"<?php endif;?> />
-						</td>
-					</tr>
+					<table>
+						<tr>
+							<th>Staff</th>
+							<th>Title/Description</th>
+						</tr>
+						<?php foreach($field['options'] as $name=>$id):?>
+						<?php $current = array_key_exists($id, $current_staff);?>
+						<tr>
+							<td>
+								<input type="checkbox" name="<?=$field['id']?>[]" id="<?=$field['id'].'_'.$id?>" value="<?=$id?>"<?php if ($current):?> checked="checked"<?php endif;?> />
+								<label for="<?=$field['id'].'_'.$id?>"><?=$name?></label>
+							</td>
+							<td>
+								<input type="text" name="<?=$field['id'].'_'.$id.'_role'?>" id="<?=$field['id'].'_'.$id.'_role'?>"<?php if($current):?> value="<?=htmlentities($current_staff[$id])?>"<?php endif;?> />
+							</td>
+						</tr>
 					<?php endforeach;?>
 				</table>
 			

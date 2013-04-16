@@ -54,6 +54,9 @@ abstract class CustomPostType{
 	 **/
 	public function get_objects_as_options($options=array()){
 		$objects = $this->get_objects($options);
+		
+		if (!$objects) { return array('no objects returned'); }
+		
 		$opt     = array();
 		foreach($objects as $o){
 			switch(True){
@@ -480,6 +483,29 @@ class Person extends CustomPostType
 		$options['meta_key'] = 'person_orderby_name';
 		return parent::get_objects($options);
 	}
+	
+	/** 
+	 * Get a list of posts, check them against the person_label provided,
+	 * and return an array of field options
+	 **/
+	public function get_committee_options($person_label=''){
+		$args = array(
+			'numberposts' 	=> -1,
+			'post_type' 	=> 'person',
+			'orderby'       => 'title',
+			'order'         => 'ASC',
+		);
+		$objects = get_posts($args);
+		$opt = array();
+		foreach($objects as $o){
+			// We check here instead of doing a tax_query within the get_posts args
+			// because it fails to obey the taxonomy term for whatever reason
+			if (in_array($person_label, wp_get_post_terms($o->ID, 'person_label', array('fields' => 'slugs')))) {
+				$opt[$o->post_title] = $o->ID;
+			}
+		}
+		return $opt;
+	}
 
 	public static function get_name($person) {
 		$prefix = get_post_meta($person->ID, 'person_title_prefix', True);
@@ -554,22 +580,13 @@ class Committee extends CustomPostType{
 		}else{
 			$person = new Person();
 			$people = $person->get_objects(array(
-				'post_status' => 'publish,private',
+				'post_status' => 'publish',
 			));
 			$published = array_map(create_function('$t', 'return $t->ID;'), $people);
 			
 			# On some systems this sometimes comes out as a serialized string
 			# not sure why that happens.  But this fixes the issue.
 			if (gettype($members) == 'string'){$members = unserialize($members);}
-			
-			# Filter out unpublished members
-			$temp = array();
-			foreach($members as $id=>$role){
-				if (in_array($id, $published)){
-					$temp[$id] = $role;
-				}
-			}
-			$members = $temp;
 			
 			if($obj){
 				$t = array();
@@ -636,7 +653,6 @@ class Committee extends CustomPostType{
 	
 	
 	public function fields(){
-		$person    = new Person();
 		$documents = new Document();
 		return array(
 			array(
@@ -657,18 +673,14 @@ class Committee extends CustomPostType{
 				'desc'    => __('People tagged as "Trustee" who belong to this committee and the positions they hold within it.'),
 				'id'      => $this->options('name').'_members',
 				'type'    => 'members',
-				'options' => $person->get_objects_as_options(array(
-					'person_label' => 'trustee',
-				)),
+				'options' => Person::get_committee_options('trustee'),
 			),
 			array(
 				'name'    => __('Committee Staff'),
 				'desc'    => __('People tagged as "Staff" who belong to this committee and the positions they hold within it.'),
 				'id'      => $this->options('name').'_staff',
 				'type'    => 'staff',
-				'options' => $person->get_objects_as_options(array(
-					'person_label' => 'committee-staff',
-				)),
+				'options' => Person::get_committee_options('committee-staff'),
 			),
 		);
 	}
