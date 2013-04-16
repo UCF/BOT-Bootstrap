@@ -653,20 +653,47 @@ function disallow_direct_load($page){
 
 
 /**
- * Given a name will return the custom post type's class name, or null if not
- * found
- * 
- * @return string
- * @author Jared Lang
- **/
-function get_custom_post_type($name){
-	$installed = installed_custom_post_types();
-	foreach($installed as $object){
-		if ($object->options('name') == $name){
-			return get_class($object);
-		}
-	}
-	return null;
+* Returns the name of the custom post type defined by $obj
+*
+* @return string
+* @author Jared Lang
+**/
+function get_custom_post_type($obj, $instance=False){
+if ($obj == null){return null;}
+
+$installed = installed_custom_post_types();
+
+if (is_string($obj)){
+foreach($installed as $custom_post_type){
+if (
+($obj == get_class($custom_post_type)) or
+($obj == $custom_post_type->options('name'))
+){
+if ($instance){
+return $custom_post_type;
+}
+else{
+return $custom_post_type->options('name');
+}
+}
+}
+return null;
+}
+
+if (get_class($obj) == 'stdClass'){
+foreach($installed as $custom_post_type){
+if ($obj->post_type == $custom_post_type->options('name')){
+if ($instance){
+return $custom_post_type;
+}else{
+return $custom_post_type->options('name');
+}
+}
+}
+return null;
+}
+
+return null;
 }
 
 
@@ -1572,7 +1599,6 @@ function _show_meta_boxes($post, $meta_box){
 			<?php break; case 'members':?>
 				<?php $custom_post_type = get_custom_post_type($post, True);?>
 				<?php $current_members  = $custom_post_type->get_members($post, 'members');?>
-				<p><?=$field['desc'];?></p>
 				<table>
 					<tr>
 						<th>Member</th>
@@ -1594,7 +1620,6 @@ function _show_meta_boxes($post, $meta_box){
 			<?php break; case 'staff':?>
 				<?php $custom_post_type = get_custom_post_type($post, True);?>
 				<?php $current_staff    = $custom_post_type->get_members($post, 'staff');?>
-				<p><?=$field['desc'];?></p>
 				<table>
 					<tr>
 						<th>Staff</th>
