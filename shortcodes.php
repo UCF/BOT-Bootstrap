@@ -261,3 +261,121 @@ function sc_committee_members($attr){
 	return sc_committee_people('members', $class);
 }
 add_shortcode('committee-members', 'sc_committee_members');
+
+
+/**
+ *
+ * When used on committee page, this will output the staff for that committee.
+ *
+ * Examples:
+ *   [committee-staff]
+ *
+ **/
+function sc_committee_staff($attr){
+	$class = (isset($attr['class'])) ? $attr['class'] : 'inline-person-list';
+	$class = str_replace('inline-person-list', 'person-list notitle', $class);
+	return sc_committee_people('staff', $class);
+}
+add_shortcode('committee-staff', 'sc_committee_staff');
+
+function sc_committee_people($type, $class){
+	ob_start();
+	$committees = get_custom_post_type('Committee', True);
+	global $post;
+	if(get_custom_post_type($post) == $committees->options('name')){
+		$people = $committees->get_members($post->ID, $type, True);
+		
+		if (count($people)):?>
+		<ul class="<?=$class?>">
+			<?php foreach($people as $person):?>
+			<li>
+				<div class="person" id="person-<?=$person->ID?>"><a href="<?=get_permalink($person->ID)?>">
+					<?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($person->ID), 'full');?>
+					<div class="crop">
+						<?php if($image[0]):?>
+						<img src="<?=$image[0]?>" alt="<?=$person->post_title?>" />
+						<?php else:?>
+						<img src="<?=BOT_IMG_URL?>/no-photo.jpg" alt="no photo" />
+						<?php endif;?>
+					</div>
+					<div class="information">
+						<h1>
+							<span class="name"><?=$person->post_title?></span>
+							<?php if($person->position):?>
+							<span class="title">
+								<?=$person->position?>
+							</span>
+							<?php endif;?>
+						</h1>
+						<div class="bio"><?=get_content($person->ID);?></div>
+						<div class="phone"><?=$meta['person_phone'][0]?></div>
+						<div class="email"><?=$meta['person_email'][0]?></div>
+					</div>
+				</a></div>
+			</li>
+			<?php endforeach;?>
+		</ul>
+		<?php else:?>
+			<p>There are no members for this committee.</p>
+		<?php endif;?>
+	<?php
+	}
+	return ob_get_clean();
+}
+
+
+/**
+ * 
+ * Displays the minutes and agendas for a particular committee,
+ * defined by the committee page this shortcode is called on. An archive
+ * list will be included.
+ * 
+ * Examples:
+ *   [latest-minutes-and-agenda]
+ **/
+function sc_minutes_and_agendas($attrs){
+	global $post;
+	
+	$today = getdate();
+	$year  = isset($_GET['y']) ? $_GET['y'] : $today['year'];
+	
+	$agenda_archive_years  = get_agenda_archive_years($post);
+	$minutes_archive_years = get_minutes_archive_years($post);
+
+	$archive_years = ($agenda_archive_years > $minutes_archive_years) ? $agenda_archive_years : $minutes_archive_years;
+
+	ob_start();
+	?>
+	<div class="span-16 last category-list">
+		<div class="span-12 append-1">
+			<h3>Agenda <? if($year != $today['year']): ?> (<?=$year?>)<? endif ?></h3>
+	<?
+		$files = get_agendas($post, $year);
+		$class = 'Agenda';
+		include('includes/file-listing.php');
+	?>
+			<h3>Minutes <? if($year != $today['year']): ?> (<?=$year?>)<? endif ?></h3>
+	<?
+		$files = get_minutes($post, $year);
+		$class = 'Minutes';
+		include('includes/file-listing.php');
+	?>
+		</div>
+		<div class="span-3 last">
+			<?php ?>
+			<?php if (count($archive_years)):?>
+			<h3>Archives</h3>
+			<ul class="archives">
+				<?php foreach($archive_years as $archive_year):?>
+				<li><a href="?y=<?=$archive_year?>"<? if($archive_year == $year): ?> class="active"> &#9656; <? else: ?>><? endif ?><?=$archive_year?></a></li>
+				<?php endforeach;?>
+			</ul>
+			<? else: ?>
+			<p>There are no archives.</p>
+			<?php endif;?>
+		</div>
+	</div>
+	<?
+	return ob_get_clean();
+}
+add_shortcode('minutes-and-agendas', 'sc_minutes_and_agendas');
