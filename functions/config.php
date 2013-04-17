@@ -307,6 +307,7 @@ Config::$links = array(
 # Header styles
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
+	array('admin' => True, 'src' => THEME_CSS_URL.'/ui-lightness/jquery-ui-1.10.2.custom.min.css',),
 	'http://universityheader.ucf.edu/bar/css/bar.css',
 	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.css',
 );
@@ -340,6 +341,8 @@ if ($theme_options['bootstrap_enable_responsive'] == 1) {
 # Scripts (output in footer)
 Config::$scripts = array(
 	array('name' => 'jquery', 'src' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js',),
+	array('admin' => True, 'name' => 'jquery-admin', 'src' => 'http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js',),
+	array('admin' => True, 'src' => THEME_JS_URL.'/jquery-ui-1.10.2.custom.min.js',),
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
 	'http://universityheader.ucf.edu/bar/js/university-header.js',
 	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.js',

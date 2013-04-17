@@ -165,8 +165,16 @@ WebcomAdmin.themeOptions = function($){
 };
 
 
-(function($){
-	WebcomAdmin.__init__($);
-	WebcomAdmin.themeOptions($);
-	WebcomAdmin.shortcodeTool($);
-})(jQuery);
+var initDatePicker = function($) {
+	$('.dateField').datepicker({ dateFormat: "mm/dd/y" });
+};
+
+
+if (typeof jQuery != 'undefined'){
+	jQuery(document).ready(function($) {
+		WebcomAdmin.__init__($);
+		WebcomAdmin.themeOptions($);
+		WebcomAdmin.shortcodeTool($);
+		initDatePicker($);
+	});
+}else{console.log('jQuery dependancy failed to load');}
