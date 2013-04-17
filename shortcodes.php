@@ -295,18 +295,18 @@ function sc_committee_people($type, $class){
 						<?php if($image[0]):?>
 						<img src="<?=$image[0]?>" alt="<?=$person->post_title?>" />
 						<?php else:?>
-						<img src="<?=BOT_IMG_URL?>/no-photo.jpg" alt="no photo" />
+						<img src="<?=THEME_IMG_URL?>/no-photo.jpg" alt="no photo" />
 						<?php endif;?>
 					</div>
 					<div class="information">
-						<h1>
+						<h3>
 							<span class="name"><?=$person->post_title?></span>
 							<?php if($person->position):?>
 							<span class="title">
 								<?=$person->position?>
 							</span>
 							<?php endif;?>
-						</h1>
+						</h3>
 						<div class="bio"><?=get_content($person->ID);?></div>
 						<div class="phone"><?=$meta['person_phone'][0]?></div>
 						<div class="email"><?=$meta['person_email'][0]?></div>
@@ -347,7 +347,7 @@ function sc_minutes_and_agendas($attrs){
 	ob_start();
 	?>
 	<div class="row category-list">
-		<div class="span7">
+		<div class="span5">
 			<h3>Agenda <? if($year != $today['year']): ?> (<?=$year?>)<? endif ?></h3>
 	<?
 		$files = get_agendas($post, $year);
@@ -361,7 +361,7 @@ function sc_minutes_and_agendas($attrs){
 		include('includes/file-listing.php');
 	?>
 		</div>
-		<div class="span2">
+		<div class="span2 offset1">
 			<?php ?>
 			<?php if (count($archive_years)):?>
 			<h3>Archives</h3>

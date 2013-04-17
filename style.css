@@ -83,6 +83,10 @@ Version: v1.0.0
 .excel:before{background-image: url('static/img/document-xls.png');}
 .ppt:before{background-image: url('static/img/document-ppt.png');}
 
+.nobullet { list-style-type: none; }
+.documents a, a.document { color: #990000; text-decoration: underline; }
+.documents a:hover, a.document:hover { color: #C30202; }
+
 /* Search Form */
 .form-search label {display:none;}
 .form-search button {margin-top:10px;}
@@ -116,8 +120,6 @@ Version: v1.0.0
 .meetings .date{font-weight: bold; text-align: left; width: 25%;}
 .meetings .time{text-align: center; width: 25%;}
 .meetings .documents{text-align: center; word-spacing: 10px; font-size: 14px; width: 30%;}
-.meetings .documents a { color: #990000; text-decoration: underline; }
-.meetings .documents a:hover { color: #C30202; }
 .meetings .location {font-size: 14px; text-align: right; width: 20%;}
 
 /* Committees */
@@ -131,10 +133,31 @@ Version: v1.0.0
 #committees .committee .description { color: #333333; font-family: "Georgia",serif; font-size: 14px; }
 
 /* Minutes/Agenda Document Lists */
-.document-table { }
+.category-list {}
+.category-list ul { list-style-type: none; margin: 0; padding: 0; }
+.category-list ul li { margin: 0 0 1em; }
+.category-list .excerpt { font-size: 14px; line-height: 1.5em; }
+.category-list h3 {}
+.category-list h3 a {
+    color: #C00202;
+    font-family: "Helvetica Neue","Helvetica","Arial",sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.category-list h3 a span { color: #000000; font-weight: normal; }
+.category-list .archives a {
+    color: #000000;
+    font-family: "Helvetica Neue","Helvetica","Arial",sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+}
+.category-list .archives a.active { left: -14px; position: relative; }
+.document-table { width: 100%; }
 .document-table thead { display: none; }
 .document-table .document, .document-table .actions { background-color: transparent; padding: 10px; }
 .document-table .odd .document, .document-table .odd .actions { background-color: #FFF8DF; }
 .document-table .document { font-size: 12px; font-weight: bold; }
 .document-table .actions { font-size: 14px; text-align: right; }
 .document-table .actions a { color: #990000; text-decoration: underline; }
+.document-table .actions a:hover { color: #C30202; }
