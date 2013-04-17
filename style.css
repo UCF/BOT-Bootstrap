@@ -61,6 +61,7 @@ Version: v1.0.0
 /**
  * Mimetype icons
  **/
+.document:before,
 .unknown:before,
 .pdf:before,
 .word:before,
@@ -90,6 +91,22 @@ Version: v1.0.0
 /* Search Form */
 .form-search label {display:none;}
 .form-search button {margin-top:10px;}
+
+/* Search Results */
+#search-results { }
+#search-results .span8 .form-search { margin-bottom: 35px; }
+#search-results .span8 .form-search input#s { width: 450px; }
+#search-results .span8 .form-search br { display: none; }
+#search-results .span8 .form-search button { margin-top: 0; }
+#search-results .result-list { margin-left: 0; }
+#search-results .result-list li { list-style-type: none; word-wrap: break-word; }
+#search-results .result-list .item { margin: 0 0 2em; }
+#search-results .result-list .item h3 { margin: 0 0 5px; font-size: 20px; line-height: 26px; }
+#search-results .result-list .item a { text-decoration: none; }
+#search-results .result-list .item a:hover { color: #000000; text-decoration: underline; }
+#search-results .result-list .item .title { color: #333333; display: block; font-size: 18px; }
+#search-results .result-list .item .url { color: #666666; display: block; margin: 0 0 5px; }
+
 
 /* Person Lists */
 .person-list{list-style-type: none; padding: 0; margin: 0;}

@@ -8,11 +8,12 @@
 ?>
 <?php get_header(); ?>
 	<div class="row page-content" id="search-results">
-		<div class="span9">
+		<div class="span8">
 			<article>
-				<h1>Search Results</h1>
+				<h2 class="page-title">Search Results</h2>
+				<?php get_template_part('searchform'); ?>
 				<?php if(count($results['items'])):?>
-				<ul class="result-list">
+				<ul class="nobullet result-list">
 					<?php foreach($results['items'] as $result):?>
 					<li class="item">
 						<h3>
@@ -24,7 +25,7 @@
 								<?php endif;?>
 							</a>
 						</h3>
-						<a href="<?=$result['url']?>" class="ignore-external url sans"><?=$result['url']?></a>
+						<a href="<?=$result['url']?>" class="url"><?=$result['url']?></a>
 						<div class="snippet">
 							<?=str_replace('<br>', '', $result['snippet'])?>
 						</div>
@@ -44,25 +45,23 @@
 			</article>
 		</div>
 		
-		<div id="sidebar" class="span3">
-			<?=get_sidebar();?>
-		</div>
+		<?=get_sidebar();?>
 	</div>
-	<?php get_template_part('includes/below-the-fold'); ?>
 <?php get_footer();?>
 
 <?php else:?>
 <?php get_header(); the_post();?>
 	<div class="row page-content" id="search-results">
-		<div class="span9">
+		<div class="span8">
 			<article>
-				<h1>Search Results</h1>
+				<h2 class="page-title">Search Results</h2>
+				<?php get_template_part('searchform'); ?>
 				<?php if(have_posts()):?>
-					<ul class="result-list">
+					<ul class="nobullet result-list">
 					<?php while(have_posts()): the_post();?>
 						<li class="item">
 							<h3><a href="<?php the_permalink();?>"><?php the_title();?></a></h3>
-							<a href="<?php the_permalink();?>"><?php the_permalink();?></a>
+							<a class="url" href="<?php the_permalink();?>"><?php the_permalink();?></a>
 							<div class="snippet">
 								<?php the_excerpt();?>
 							</div>
@@ -75,10 +74,7 @@
 			</article>
 		</div>
 		
-		<div id="sidebar" class="span3">
-			<?=get_sidebar();?>
-		</div>
+		<?=get_sidebar();?>
 	</div>
-	<?php get_template_part('includes/below-the-fold'); ?>
 <?php get_footer();?>
 <?php endif;?>
