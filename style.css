@@ -91,7 +91,7 @@ Version: v1.0.0
 .form-search label {display:none;}
 .form-search button {margin-top:10px;}
 
-/* Person */
+/* Person Lists */
 .person-list{list-style-type: none; padding: 0; margin: 0;}
 .person-list a{text-decoration: none;}
 .person-list li{display: inline-block; background-color: #fff4dc; padding: 10px; border: 1px solid #dfd4cc; width: 115px; margin: 10px 7px; height: 200px; vertical-align: text-top; overflow: hidden;}
@@ -109,6 +109,11 @@ Version: v1.0.0
 .person-list .person .information .phone{display: none;}
 .person-list .person .information .email{display: none;}
 .person-list.notitle .person .title{display: none;}
+
+/* Single Person */
+.person-profile { }
+.person-profile h2 { margin-bottom: 8px; }
+.person-profile .page-subtitle { font-weight: 300; margin-top: 0; font-size: 20px; line-height: 24px; margin-bottom: 20px; }
 
 /* Meetings #FFF8DF */
 .meetings {}

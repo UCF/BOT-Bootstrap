@@ -22,7 +22,7 @@
 			<a class="email" href="mailto:<?=$email?>"><?=$email?></a>
 			<? } ?>
 			</div>
-			<div class="span7">
+			<div class="span6">
 				<h2><?=$post->post_title?></h2>
 				<?php if ($title) { ?><h3 class="page-subtitle"><?=$title?></h3><? } ?>
 				<?=$content = str_replace(']]>', ']]>', apply_filters('the_content', $post->post_content))?>
