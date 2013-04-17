@@ -39,7 +39,7 @@
 	}
 ?>
 <div class="row page-content" id="<?=$post->post_name?>">
-	<div class="span9">
+	<div class="span8">
 		<h2 class="page-title"><?php the_title(); ?></h2>
 		<?php the_content();?>
 		<div class="row">

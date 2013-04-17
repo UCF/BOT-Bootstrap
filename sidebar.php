@@ -1,6 +1,6 @@
 <?php disallow_direct_load('sidebar.php');?>
 
-<div class="span3" id="sidebar">
+<div class="span3 offset1" id="sidebar">
 	<div class="highlight">
 		<h3>Latest Board Minutes</h3>
 		<div class="content">

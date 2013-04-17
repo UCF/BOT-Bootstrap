@@ -1,6 +1,6 @@
 <?php get_header(); the_post();?>
 	<div class="row page-content" id="<?=$post->post_name?>">
-		<div class="span9">
+		<div class="span8">
 			<h2 class="page-title"><?php the_title(); ?></h2>
 			<div class="description">
 				<?=get_post_meta($post->ID, 'committee_description', True)?>
