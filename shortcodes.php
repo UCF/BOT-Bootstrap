@@ -346,8 +346,8 @@ function sc_minutes_and_agendas($attrs){
 
 	ob_start();
 	?>
-	<div class="span-16 last category-list">
-		<div class="span-12 append-1">
+	<div class="row category-list">
+		<div class="span7">
 			<h3>Agenda <? if($year != $today['year']): ?> (<?=$year?>)<? endif ?></h3>
 	<?
 		$files = get_agendas($post, $year);
@@ -361,7 +361,7 @@ function sc_minutes_and_agendas($attrs){
 		include('includes/file-listing.php');
 	?>
 		</div>
-		<div class="span-3 last">
+		<div class="span2">
 			<?php ?>
 			<?php if (count($archive_years)):?>
 			<h3>Archives</h3>

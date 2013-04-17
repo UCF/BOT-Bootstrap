@@ -129,3 +129,12 @@ Version: v1.0.0
 #committees .committee a { text-decoration: none; }
 #committees .committee .name { font-size: 16px; line-height: 22px; margin-top: 0; margin-bottom: 5px; }
 #committees .committee .description { color: #333333; font-family: "Georgia",serif; font-size: 14px; }
+
+/* Minutes/Agenda Document Lists */
+.document-table { }
+.document-table thead { display: none; }
+.document-table .document, .document-table .actions { background-color: transparent; padding: 10px; }
+.document-table .odd .document, .document-table .odd .actions { background-color: #FFF8DF; }
+.document-table .document { font-size: 12px; font-weight: bold; }
+.document-table .actions { font-size: 14px; text-align: right; }
+.document-table .actions a { color: #990000; text-decoration: underline; }
