@@ -1609,9 +1609,6 @@ function _save_meta_data($post_id, $meta_box){
 			case 'members':
 				save_members($post_id, $field);
 				break;
-			case 'simple-members':
-				save_simple_members($post_id, $field);
-				break;
 			default:
 				save_default($post_id, $field);
 				break;
@@ -1706,6 +1703,12 @@ function _show_meta_boxes($post, $meta_box){
 						</tr>
 					<?php endforeach;?>
 				</table>
+				
+			<?php break; case 'date':?>
+				<input class="dateField" type="text" name="<?=$field['id']?>" id="<?=$field['id']?>" value="<?=($current_value) ? htmlentities($current_value) : ''?>" size="30" />
+						
+			<?php break; case 'time':?>
+				<input class="timeField" type="text" name="<?=$field['id']?>" id="<?=$field['id']?>" value="<?=($current_value) ? htmlentities($current_value) : ''?>" size="30" />
 			
 			<?php break; case 'file':?>
 				<?php
