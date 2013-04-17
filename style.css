@@ -119,3 +119,13 @@ Version: v1.0.0
 .meetings .documents a { color: #990000; text-decoration: underline; }
 .meetings .documents a:hover { color: #C30202; }
 .meetings .location {font-size: 14px; text-align: right; width: 20%;}
+
+/* Committees */
+#committees {}
+#committees .left-col { padding-right: 30px; }
+#committees .right-col {}
+#committees .span9 ul { list-style-type: none; margin: 0; padding: 0; }
+#committees .box { background-color: #FFF4DC; border: 1px solid #DFD4CC; margin-bottom: 15px; padding: 10px 15px; }
+#committees .committee a { text-decoration: none; }
+#committees .committee .name { font-size: 16px; line-height: 22px; margin-top: 0; margin-bottom: 5px; }
+#committees .committee .description { color: #333333; font-family: "Georgia",serif; font-size: 14px; }

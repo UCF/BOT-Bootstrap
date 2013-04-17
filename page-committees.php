@@ -38,23 +38,20 @@
 		<?php
 	}
 ?>
-<div class="page-content" id="<?=$post->post_name?>">
-	<div class="span-17 append-1">
-		<h2><?php the_title(); ?></h2>
-	
-		<div class="article">
-			<?php the_content();?>
-		</div>
-	
-		<div class="span-8 left-col">
-			<?php display_column($left_col)?>
-		</div>
-	
-		<div class="span-8 last right-col">
-			<?php display_column($right_col)?>
+<div class="row page-content" id="<?=$post->post_name?>">
+	<div class="span9">
+		<h2 class="page-title"><?php the_title(); ?></h2>
+		<?php the_content();?>
+		<div class="row">
+			<div class="span4 left-col">
+				<?php display_column($left_col)?>
+			</div>
+			<div class="span4 last right-col">
+				<?php display_column($right_col)?>
+			</div>
 		</div>
 		
-		<div style="clear:both;padding-top:8px;"><hr></div>
+		<hr/>
 		
 		<ul>
 		<?php foreach($orgs as $org):?>
@@ -68,7 +65,6 @@
 		</ul>
 		
 	</div>
-	
 	<?=get_sidebar()?>
 </div>
 
