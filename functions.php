@@ -107,6 +107,49 @@ function display_latest_agenda() {
 	echo ob_get_clean();
 }
 
+function display_agenda_minutes_pages($page, $agendas, $minutes) {
+	$today = getdate();
+	$year  = (isset($_GET['y'])) ? $_GET['y'] : $today['year'];
+	ob_start();
+	?>
+	<div class="span8 category-list">
+		<div class="row">
+			<div class="span5">
+				<h2><?=$page->post_title?><? if($year != $today['year']){ ?> (<?=$year?>)<? } ?></h2>
+				<?php 
+					the_content();
+			
+					# Files for the board meetings
+					$files = ($agendas) ? get_agendas(null, $year) : get_minutes(null, $year);
+					include('includes/file-listing.php');
+					?> <h3>Committees</h3><hr style="margin:0" /><?
+					# Files for the individual committees
+					$c  = new Committee();
+					foreach($c->get_objects() as $committee) {
+						?> <h4><?=$committee->post_title?></h4> <?
+						$files = ($agendas) ? get_agendas($committee, $year) : get_minutes($committee, $year);
+						include('includes/file-listing.php');
+					}
+				 ?>
+			</div>
+			<div class="span2 offset1">
+				<?php $archive_years = $agendas ? get_agenda_archive_years() : get_minutes_archive_years(); ?>
+				<?php if (count($archive_years)):?>
+				<h3>Archives</h3>
+				<ul class="archives">
+					<?php foreach($archive_years as $archive_year):?>
+					<li><a href="?y=<?=$archive_year?>"<? if($archive_year == $year): ?> class="active"> &#9656; <? else: ?>><? endif ?><?=$archive_year?></a></li>
+					<?php endforeach;?>
+				</ul>
+				<?php endif;?>
+			</div>
+		</div>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+
+
 
 
 /* Utility - Meetings */
