@@ -26,7 +26,8 @@ Version: v1.0.0
 .menu.horizontal li{display: inline-block; margin: 0 9px 5px 0; padding: 0; float: left;}
 .ie .menu.horizontal li{display: block; float: left; margin-right: 6px;}
 .menu.horizontal li:after{content: "\2022"; margin-left: 4px;}
-.menu.horizontal li:last-child:after {content: none !important;}
+.menu.horizontal li.last:after {content: "" !important;} /* IE8 needs this first */
+.menu.horizontal li:last-child:after { content: "" !important; }
 
 #header-menu { border-bottom: 1px dotted #000; }
 #footer-menu { margin-top: 15px; border-top: 1px dotted #000; }
@@ -92,6 +93,8 @@ Version: v1.0.0
 /* Search Form */
 .form-search label {display:none;}
 .form-search button {margin-top:10px;}
+*:first-child+html .form-search br {display:none;} /* IE7 */
+
 
 /* Search Results */
 #search-results { }
@@ -140,6 +143,8 @@ Version: v1.0.0
 .meetings .table-striped tbody th td { border: 0; }
 .meetings .table-striped tbody tr:nth-child(odd) td, 
 .meetings .table-striped tbody tr:nth-child(odd) th {background-color:#FFF8DF;}
+.meetings .table-striped tbody tr.odd td, 
+.meetings .table-striped tbody tr.odd th {background-color:#FFF8DF;}
 .meetings .date{font-weight: bold; text-align: left; width: 25%;}
 .meetings .time{text-align: center; width: 25%;}
 .meetings .documents{text-align: center; word-spacing: 10px; font-size: 14px; width: 30%;}
@@ -160,6 +165,7 @@ Version: v1.0.0
 
 /* Minutes/Agenda Document Lists */
 .category-list {}
+.category-list .span1.offset1 { margin-left: 55px; }
 .category-list ul { list-style-type: none; margin: 0; padding: 0; }
 .category-list ul li { margin: 0 0 1em; }
 .category-list .excerpt { font-size: 14px; line-height: 1.5em; }
@@ -187,3 +193,4 @@ Version: v1.0.0
 .document-table .actions { font-size: 14px; text-align: right; }
 .document-table .actions a { color: #990000; text-decoration: underline; }
 .document-table .actions a:hover { color: #C30202; }
+.document-table + h3 { margin-top: 30px; }
