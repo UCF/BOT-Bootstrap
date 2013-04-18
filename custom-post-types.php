@@ -276,7 +276,7 @@ class Document extends CustomPostType{
 		return $fields;
 	}
 	
-	static function get_class($post_id) {
+	static function get_meeting_doc_type($post_id) {
 		global $wpdb;
 
 		$sql = "
@@ -307,11 +307,9 @@ class Document extends CustomPostType{
 		}
 	}
 
-	static function get_meeting($file, $class) {
-		global $wpdb;
-
+	static function get_meeting($file, $doc_type) {
 		$meta_key = '';
-		switch($class) {
+		switch($doc_type) {
 			case 'Agenda':
 				$meta_key = 'meeting_agenda';
 				break;
@@ -319,16 +317,14 @@ class Document extends CustomPostType{
 				$meta_key = 'meeting_minutes';
 				break;
 		}
-		$sql = "
-			SELECT post.*
-			FROM   $wpdb->posts post
-			JOIN   $wpdb->postmeta meta
-			ON     post.ID = meta.post_id
-			WHERE
-				meta.meta_key = '$meta_key'
-				AND meta.meta_value = $file->ID";
-		$rows = $wpdb->get_results($sql);
-		return (count($rows) == 1) ? $rows[0] : False;
+		$args = array(
+			'post_type' => 'meeting',
+			'numberposts' => 1,
+			'meta_key'	=> $meta_key,
+			'meta_value' => $file->ID,
+		);
+		$posts = get_posts($args);
+		return ($posts) ? $posts[0] : False;
  	}
 
 	static function get_document_application($form){
@@ -361,8 +357,8 @@ class Document extends CustomPostType{
 			$document = get_post($document);
 		}
 
-		if( ($class = Document::get_class($document->ID)) !== False
-			&& ($meeting = Document::get_meeting($document, $class)) !== False
+		if( ($doc_type = Document::get_meeting_doc_type($document->ID)) !== False
+			&& ($meeting = Document::get_meeting($document, $doc_type)) !== False
 			&& ($meeting_date = get_post_meta($meeting->ID, 'meeting_date', True)) !== False) {
 				return date('F j, Y', strtotime($meeting_date));
 		} else {
