@@ -85,8 +85,8 @@ Version: v1.0.0
 .ppt:before{background-image: url('static/img/document-ppt.png');}
 
 .nobullet { list-style-type: none; }
-.documents a, a.document { color: #990000; text-decoration: underline; }
-.documents a:hover, a.document:hover { color: #C30202; }
+.documents a, a.document, .document a { color: #990000; text-decoration: underline; }
+.documents a:hover, a.document:hover, .document a:hover { color: #C30202; }
 
 /* Search Form */
 .form-search label {display:none;}
@@ -143,6 +143,8 @@ Version: v1.0.0
 .meetings .time{text-align: center; width: 25%;}
 .meetings .documents{text-align: center; word-spacing: 10px; font-size: 14px; width: 30%;}
 .meetings .location {font-size: 14px; text-align: right; width: 20%;}
+.meetings h4 a { text-decoration: underline; color: #990000; }
+.meetings h4 a:hover { color: #C30202; }
 
 /* Committees */
 #committees {}
