@@ -128,6 +128,7 @@ function display_agenda_minutes_pages($page, $agendas, $minutes) {
 					foreach($c->get_objects() as $committee) {
 						?> <h4><?=$committee->post_title?></h4> <?
 						$files = ($agendas) ? get_agendas($committee, $year) : get_minutes($committee, $year);
+						var_dump($files);
 						include('includes/file-listing.php');
 					}
 				 ?>
@@ -154,9 +155,22 @@ function display_agenda_minutes_pages($page, $agendas, $minutes) {
 
 /* Utility - Meetings */
 function get_meetings($committee=null, $year=null){
+	//$committee = is_null($committee) ? '' : $committee;
+	
+	// Get meetings that do not specify a Committee
+	/*$post_args = array(
+		'post_type'		=> 'meeting',
+		'post_status'	=> 'publish',
+		'meta_key'		=> 'meeting_committee',
+		'meta_value'	=> $committee,
+		'meta_compare' 	=> '=',
+		'numberposts'	=> -1
+	);*/
+	
+	
 	global $wpdb;
 	
-	if(is_null($committee)) {
+	if (is_null($committee)) {
 		$sql = "
 			SELECT post.*
 			FROM   $wpdb->posts post
@@ -172,6 +186,8 @@ function get_meetings($committee=null, $year=null){
 			             FROM   $wpdb->postmeta
 			             WHERE  meta_key = 'meeting_committee')";
 	} else {
+		// Get meetings by the specified Committee
+		
 		$sql = "
 			SELECT post.*
 			FROM   $wpdb->posts post
@@ -189,8 +205,10 @@ function get_meetings($committee=null, $year=null){
 					)
 			WHERE  post.post_type = 'meeting'
 			       AND post.post_status = 'publish'";
+				      
 	}
 	
+	// Filter meeting results by the specified year
 	if( !is_null($year) && 
 		(int)$year != 0 && 
 		($start_time = strtotime($year.'-01-01 00:00:00')) !== False && 
@@ -206,9 +224,22 @@ function get_meetings($committee=null, $year=null){
 				)
 
 		';
+		
+		// Create a new filtering function that will add our where clause to the query
+		//$get_meetings_where = create_function($where='', '$where .= " AND meta_key >= \'" . date(\'m/d/y\', $start_time) . "\'" . " AND meta_key <= \'" . date(\'m/d/y\', $end_time) . "\'"; return $where;');
+			
+		/*function get_meetings_where( $where = '' ) {
+			$where .= " AND meeting_date >= '" . date('m/d/y', $start_time) . "'" . " AND meeting_date <= '" . date('m/d/y', $end_time) . "'";
+			return $where;
+		}*/
+		
+		//add_filter( 'posts_where', $get_meetings_where );
+		//$posts = get_posts($post_args);
+		//remove_filter( 'posts_where', $get_meetings_where );
 	}
 
 	return $wpdb->get_results($sql);
+	//return get_posts($post_args);
 }
 
 function sort_meetings(&$meetings){
@@ -222,17 +253,27 @@ function sort_meetings(&$meetings){
 }
 
 function filter_meetings(&$meetings){
+	$new = array();
 	$current_year = (int)date('Y');
-	foreach ($meetings as $key=>$meeting){
-		$date = strtotime($meeting->meta["meeting_date"][0] . " " . $meeting->meta["meeting_start_time"][0]);
-		if($date === False) {
-			$date = strtotime($meeting->meta["meeting_date"][0]);
+	// get_meetings can return duplicate posts, so we assign each
+	// post id as the key of a new array to help us easily filter
+	// out repeated objects.
+	foreach ($meetings as $key=>$meeting) {
+		if (!array_key_exists($meeting->ID, $new)) {
+			$new[$meeting->ID] = $meeting;
 		}
+		$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true). ' ' .get_post_meta($meeting->ID, 'meeting_start_time', true));
+		if($date === False) {
+			$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true));
+		}		
+		// Make sure the post's meeting date is within the current year
 		$year = (int)date('Y', $date);
 		if( ($current_year - $year > 1) || ($year - $current_year > 1) || $date === False){
-			unset($meetings[$key]);
+			unset($new[$meeting->ID]);
 		}
 	}
+	
+	$meetings = $new;
 }
 
 function get_next_meeting($committee=null) {
@@ -266,7 +307,7 @@ function meetings_prep(&$meetings){
 function get_agendas($committee=null, $year=null){
 	$today    = getdate();
 	$meetings = get_meetings($committee, (is_null($year) ? $today['year'] : $year));
-	sort_meetings($meetings);
+	meetings_prep($meetings);
 	$agendas  = array();
 
 	foreach($meetings as $meeting){
@@ -489,15 +530,20 @@ function get_agenda_archive_years($committee=null) {
 function get_minutes($committee=null, $year=null){
 	$today    = getdate();
 	$meetings = get_meetings($committee, (is_null($year) ? $today['year'] : $year));
-	sort_meetings($meetings);
+	
+	//sort_meetings($meetings);
+	
+	meetings_prep($meetings);
+	
 	$minutes  = array();
-
-	foreach($meetings as $meeting){
-		$id    = get_post_meta($meeting->ID, 'meeting_minutes', True);
-		if(is_numeric($id)) {
-			$file  = get_post($id);
-			if($file){
-				$minutes[] = $file;
+	if ($meetings) {
+		foreach($meetings as $meeting){			
+			$id    = get_post_meta($meeting->ID, 'meeting_minutes', True);
+			if(is_numeric($id)) {
+				$file  = get_post($id);
+				if($file){
+					$minutes[] = $file;
+				}
 			}
 		}
 	}
