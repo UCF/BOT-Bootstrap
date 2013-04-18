@@ -50,12 +50,16 @@ function sc_meetings(){
 								<?php
 									$start = get_post_meta($meeting->ID, 'meeting_start_time', True);
 									$end   = get_post_meta($meeting->ID, 'meeting_end_time', True);
+									$special_title = get_post_meta($meeting->ID, 'meeting_special_meeting', True); 
 								?>
 								<?php if($start and $end):?>
 									<?=$start?> &ndash; <?=$end?>
 								<?php elseif($start and !$end):?>
 									<?=$start?>
 								<?php endif;?>
+								<?php if ($special_title) { ?>
+									<p class="special-meeting"><?=$special_title?></p>
+								<?php } ?> 
 							</td>
 							<td class="documents">
 								<?php
@@ -172,12 +176,16 @@ function sc_committee_meetings($attrs = array()) {
 							<?php
 								$start = get_post_meta($meeting->ID, 'meeting_start_time', True);
 								$end   = get_post_meta($meeting->ID, 'meeting_end_time', True);
+								$special_title = get_post_meta($meeting->ID, 'meeting_special_meeting', True); 
 							?>
 							<?php if($start and $end):?>
 								<?=$start?> &ndash; <?=$end?>
 							<?php elseif($start and !$end):?>
 								<?=$start?>
 							<?php endif;?>
+							<?php if ($special_title) { ?>
+								<p class="special-meeting"><?=$special_title?></p>
+							<?php } ?> 
 						</td>
 						<td class="documents">
 							<?php

@@ -143,6 +143,7 @@ Version: v1.0.0
 .meetings .time{text-align: center; width: 25%;}
 .meetings .documents{text-align: center; word-spacing: 10px; font-size: 14px; width: 30%;}
 .meetings .location {font-size: 14px; text-align: right; width: 20%;}
+.meetings .special-meeting { font-style: italic; font-size: 11px; line-height: 16px; margin-top: 5px; } 
 .meetings h4 a { text-decoration: underline; color: #990000; }
 .meetings h4 a:hover { color: #C30202; }
 

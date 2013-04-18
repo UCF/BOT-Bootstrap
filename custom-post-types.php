@@ -768,6 +768,12 @@ class Meeting extends CommitteeRelated{
 				'id'      => $this->options('name').'_end_time',
 				'type'    => 'time',
 			),
+			array(
+				'name'    => __('Special Meeting Name'),
+				'desc'    => __('(Optional) Add a special name for the meeting.'),
+				'id'      => $this->options('name').'_special_meeting',
+				'type'    => 'text',
+			), 
 		);
 		$fields = array_merge(
 			$parent_fields,
