@@ -17,17 +17,17 @@ Version: v1.0.1
 .menu a:hover{text-decoration: underline;}
 .menu.horizontal{
 	list-style: none; 
-	margin: 0 0 15px 0; 
+	margin: 0 0 20px 0; 
 	color: #6d6e71; 
-	padding: 10px 0 5px 0; 
-	clear: right; 
+	padding: 10px 0 0 0; 
+	clear: right;
 	overflow: auto;
 }
-.menu.horizontal li{display: inline-block; margin: 0 9px 5px 0; padding: 0; float: left;}
+.menu.horizontal li{display: inline-block; margin: 0 6px 16px 0; padding: 0; float: left;}
 .ie .menu.horizontal li{display: block; float: left; margin-right: 6px;}
-.menu.horizontal li:after{content: "\2022"; margin-left: 4px;}
-.menu.horizontal li.last:after {content: "" !important;} /* IE8 needs this first */
-.menu.horizontal li:last-child:after { content: "" !important; }
+.menu.horizontal li:after{content: "\2022"; margin-left: 1px;}
+.menu.horizontal .last:after {content: none !important;}
+
 
 #header-menu { border-bottom: 1px dotted #000; }
 #footer-menu { margin-top: 15px; border-top: 1px dotted #000; }
