@@ -40,6 +40,7 @@ Version: v1.0.0
 .highlight {margin-bottom:20px;}
 .highlight h3 {margin-top:0;font-size:12px;color:#F32E07;line-height: 12px;text-transform:uppercase;}
 .highlight .content {background-color:#F3E9BA;padding:10px 20px;text-align:center;font-size:16px;}
+.highlight .content .latest-minutes a { color: #000; }
 
 /* Home */
 #home #latest {}
@@ -50,13 +51,13 @@ Version: v1.0.0
 
 /* Sidebar */
 #sidebar .committee-list {font-family:Georgia,serif;}
-#sidebar #latest-minutes a { text-decoration: underline; }
+#sidebar .latest-minutes a { text-decoration: underline; }
 
 /* Next Meeting */
-#next-meeting .date{display: block;}
-#next-meeting .time{font-size: 14px; display: block;}
-#next-meeting .location{font-size: 14px; display: block;}
-#next-meeting .committee{font-size: 14px; display: block;}
+.next-meeting .date{display: block;}
+.next-meeting .time{font-size: 14px; display: block;}
+.next-meeting .location{font-size: 14px; display: block;}
+.next-meeting .committee{font-size: 14px; display: block;}
 
 /**
  * Mimetype icons

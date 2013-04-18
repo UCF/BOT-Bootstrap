@@ -40,7 +40,7 @@ function display_committee_list() {
 function display_next_meeting() {
 	ob_start();
 	?>
-	<div id="next-meeting">
+	<div class="next-meeting">
 		<?php if( !is_null($meeting = get_next_meeting()) ):
 			$meta  = get_post_custom($meeting->ID);
 			$date  = strtotime($meta['meeting_date'][0]);
@@ -72,7 +72,7 @@ function display_next_meeting() {
 function display_latest_minutes() {
 	ob_start();
 	?>
-	<div id="latest-minutes">
+	<div class="latest-minutes">
 		<?php
 		if ( ($document_id = get_latest_minutes()) !== False){
 			$url   = wp_get_attachment_url($document_id);
@@ -91,7 +91,7 @@ function display_latest_minutes() {
 function display_latest_agenda() {
 	ob_start();
 	?>
-	<div id="latest-minutes">
+	<div class="latest-minutes">
 		<?php
 		if ( ($document_id = get_latest_agenda()) !== False){
 			$url   = wp_get_attachment_url($document_id);
