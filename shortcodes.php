@@ -44,52 +44,54 @@ function sc_meetings(){
 			</thead>
 			<tbody>
 				<?php meetings_prep($board_meetings); foreach($board_meetings as $i=>$meeting):?>
-				<tr class="<?=($i % 2) ? 'even' : 'odd';?>">
-					<td class="date"><?=date("F j, Y", strtotime($meeting->meta['meeting_date'][0]))?></td>
-					<td class="time">
-						<?php
-							$start = get_post_meta($meeting->ID, 'meeting_start_time', True);
-							$end   = get_post_meta($meeting->ID, 'meeting_end_time', True);
-						?>
-						<?php if($start and $end):?>
-							<?=$start?> &ndash; <?=$end?>
-						<?php elseif($start and !$end):?>
-							<?=$start?>
-						<?php endif;?>
-					</td>
-					<td class="documents">
-						<?php
-							$agenda_id = get_post_meta($meeting->ID, 'meeting_agenda', True);
-							if ($agenda_id){
-								$agenda = get_post($agenda_id);
-								$url    = Document::get_url($agenda);
-								$title  = Document::get_title($agenda);
-								$mime   = Document::get_mimetype($agenda);
-							}else{
-								$agenda = null;
-							}
-						?>
-						<?php if ($agenda):?>
-						<a class="document <?=get_document_type($mime)?>" href="<?=$url?>">Agenda</a>
-						<?php endif;?>
-						<?php
-							$minutes_id = get_post_meta($meeting->ID, 'meeting_minutes', True);
-							if ($minutes_id){
-								$minutes = get_post($minutes_id);
-								
-								$url     = Document::get_url($minutes);
-								$title   = Document::get_title($minutes);
-								$mime    = Document::get_mimetype($minutes);
-							}else{
-								$minutes = null;
-							}
-						?>
-						<?php if ($minutes):?>
-						<a class="document <?=get_document_type($mime)?>" href="<?=$url?>">Minutes</a>
-						<?php endif;?>
-					</td>
-					<td class="location"><?=get_post_meta($meeting->ID, 'meeting_location', True)?></td>
-				</tr>
+					<?php if (get_post_meta($meeting->ID, 'meeting_date', true)) { ?>
+						<tr class="<?=($i % 2) ? 'even' : 'odd';?>">
+							<td class="date"><?=date("F j, Y", strtotime($meeting->meta['meeting_date'][0]))?></td>
+							<td class="time">
+								<?php
+									$start = get_post_meta($meeting->ID, 'meeting_start_time', True);
+									$end   = get_post_meta($meeting->ID, 'meeting_end_time', True);
+								?>
+								<?php if($start and $end):?>
+									<?=$start?> &ndash; <?=$end?>
+								<?php elseif($start and !$end):?>
+									<?=$start?>
+								<?php endif;?>
+							</td>
+							<td class="documents">
+								<?php
+									$agenda_id = get_post_meta($meeting->ID, 'meeting_agenda', True);
+									if ($agenda_id){
+										$agenda = get_post($agenda_id);
+										$url    = Document::get_url($agenda);
+										$title  = Document::get_title($agenda);
+										$mime   = Document::get_mimetype($agenda);
+									}else{
+										$agenda = null;
+									}
+								?>
+								<?php if ($agenda):?>
+								<a class="document <?=get_document_type($mime)?>" href="<?=$url?>">Agenda</a>
+								<?php endif;?>
+								<?php
+									$minutes_id = get_post_meta($meeting->ID, 'meeting_minutes', True);
+									if ($minutes_id){
+										$minutes = get_post($minutes_id);
+										
+										$url     = Document::get_url($minutes);
+										$title   = Document::get_title($minutes);
+										$mime    = Document::get_mimetype($minutes);
+									}else{
+										$minutes = null;
+									}
+								?>
+								<?php if ($minutes):?>
+								<a class="document <?=get_document_type($mime)?>" href="<?=$url?>">Minutes</a>
+								<?php endif;?>
+							</td>
+							<td class="location"><?=get_post_meta($meeting->ID, 'meeting_location', True)?></td>
+						</tr>
+					<?php } ?>
 				<?php endforeach;?>
 			</tbody>
 		</table>
