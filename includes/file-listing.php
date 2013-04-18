@@ -10,7 +10,8 @@
 	<tbody>
 		<?php $i = 0; foreach($files as $file): ?>
 		<?php
-			$title   = Document::get_meeting_title($file);
+			$class 	 = Document::get_meeting_doc_type($file->ID);
+			$title   = Document::get_meeting_title($file, $class);
 			$url     = Document::get_url($file);
 			$mime    = Document::get_mimetype($file);
 		?>
@@ -25,5 +26,5 @@
 	</tbody>
 </table>
 <?php else:?>
-<p>No <?=($class == 'Minutes') ? 'minutes' : 'agendas' ?> have been published for <?=$year?>, check back later or view the archives.</p>
+<p>No <?=($minutes) ? 'minutes' : 'agendas' ?> have been published for <?=$year?>, check back later or view the archives.</p>
 <?php endif;?>

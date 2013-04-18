@@ -1,7 +1,7 @@
 <?php get_header(); the_post();?>
 	<?php
-		$agendas = ($class == 'Agenda') ? True : False;
-		$minutes = ($class == 'Minutes') ? True : False;
+		$agendas = true;
+		$minutes = false;
 	?>
 	<div class="row page-content" id="<?=$post->post_name?>">
 		<?=display_agenda_minutes_pages($post, $agendas, $minutes);?>
