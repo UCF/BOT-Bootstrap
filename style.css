@@ -24,7 +24,6 @@ Version: v1.0.1
 	overflow: auto;
 }
 .menu.horizontal li{display: inline-block; margin: 0 6px 16px 0; padding: 0; float: left;}
-.ie .menu.horizontal li{display: block; float: left; margin-right: 6px;}
 .menu.horizontal li:after{content: "\2022"; margin-left: 1px;}
 .menu.horizontal .last:after {content: none !important;}
 
