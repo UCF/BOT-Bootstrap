@@ -128,7 +128,6 @@ function display_agenda_minutes_pages($page, $agendas, $minutes) {
 					foreach($c->get_objects() as $committee) {
 						?> <h4><?=$committee->post_title?></h4> <?
 						$files = ($agendas) ? get_agendas($committee, $year) : get_minutes($committee, $year);
-						var_dump($files);
 						include('includes/file-listing.php');
 					}
 				 ?>
@@ -262,13 +261,14 @@ function filter_meetings(&$meetings){
 		if (!array_key_exists($meeting->ID, $new)) {
 			$new[$meeting->ID] = $meeting;
 		}
-		$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true). ' ' .get_post_meta($meeting->ID, 'meeting_start_time', true));
+		
+		// Make sure the post's meeting date is within the current year
+		$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true).' '.get_post_meta($meeting->ID, 'meeting_start_time', true));
 		if($date === False) {
 			$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true));
 		}		
-		// Make sure the post's meeting date is within the current year
 		$year = (int)date('Y', $date);
-		if( ($current_year - $year > 1) || ($year - $current_year > 1) || $date === False){
+		if($date === False){
 			unset($new[$meeting->ID]);
 		}
 	}
@@ -530,18 +530,15 @@ function get_agenda_archive_years($committee=null) {
 function get_minutes($committee=null, $year=null){
 	$today    = getdate();
 	$meetings = get_meetings($committee, (is_null($year) ? $today['year'] : $year));
-	
-	//sort_meetings($meetings);
-	
 	meetings_prep($meetings);
-	
 	$minutes  = array();
+	
 	if ($meetings) {
-		foreach($meetings as $meeting){			
-			$id    = get_post_meta($meeting->ID, 'meeting_minutes', True);
-			if(is_numeric($id)) {
-				$file  = get_post($id);
-				if($file){
+		foreach($meetings as $meeting){
+			$id = get_post_meta($meeting->ID, 'meeting_minutes', True);
+			if (is_numeric($id)){
+				$file = get_post($id);
+				if ($file){
 					$minutes[] = $file;
 				}
 			}
