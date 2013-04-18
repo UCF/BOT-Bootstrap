@@ -257,19 +257,21 @@ function filter_meetings(&$meetings){
 	// get_meetings can return duplicate posts, so we assign each
 	// post id as the key of a new array to help us easily filter
 	// out repeated objects.
-	foreach ($meetings as $key=>$meeting) {
-		if (!array_key_exists($meeting->ID, $new)) {
-			$new[$meeting->ID] = $meeting;
-		}
-		
-		// Make sure the post's meeting date is within the current year
-		$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true).' '.get_post_meta($meeting->ID, 'meeting_start_time', true));
-		if($date === False) {
-			$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true));
-		}		
-		$year = (int)date('Y', $date);
-		if($date === False){
-			unset($new[$meeting->ID]);
+	if ($meetings) {
+		foreach ($meetings as $key=>$meeting) {
+			if (!array_key_exists($meeting->ID, $new)) {
+				$new[$meeting->ID] = $meeting;
+			}
+			
+			// Make sure the post's meeting date is within the current year
+			$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true).' '.get_post_meta($meeting->ID, 'meeting_start_time', true));
+			if($date === False) {
+				$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true));
+			}		
+			$year = (int)date('Y', $date);
+			if($date === False){
+				unset($new[$meeting->ID]);
+			}
 		}
 	}
 	
