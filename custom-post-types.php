@@ -336,9 +336,13 @@ class Document extends CustomPostType{
 		if (is_numeric($form)){
 			$form = get_post($form);
 		}
+		
+		$prefix = post_type($form);
+		$document = get_post(get_post_meta($form->ID, $prefix.'_file', True));
+		
 		$is_url = get_post_meta($form->ID, $prefix.'_url', True);
 		
-		return ($is_url) ? "text/html" : $form->post_mime_type;
+		return ($is_url) ? "text/html" : $document->post_mime_type;
 	}
 	
 	
@@ -371,10 +375,10 @@ class Document extends CustomPostType{
 			$form = get_post($form);
 		}
 		
-		$prefix = post_type($form);
+		$prefix = get_post_type($form);
 		
 		$x = get_post_meta($form->ID, $prefix.'_url', True);
-		$y = wp_get_attachment_url($form->ID);
+		$y = wp_get_attachment_url(get_post_meta($form->ID, $prefix.'_file', True));
 		
 		if (!$x and !$y){
 			return '#';
