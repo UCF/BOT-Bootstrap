@@ -239,7 +239,7 @@ function sc_committee_charter($attr){
 		ob_start();?>
 		<?php if($document):?>
 		<ul class="nobullet">
-			<li><a class="document <?=get_document_type(Document::get_mimetype($document))?>" href="<?=Document::get_url($document)?>"><?=Document::get_title($document)?></a></li>
+			<li><a class="document <?=Document::get_document_application($document)?>" href="<?=Document::get_url($document)?>"><?=Document::get_title($document)?></a></li>
 		</ul>
 		<?php else:?>
 		<p>No charter for this committee.</p>
