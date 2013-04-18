@@ -74,12 +74,12 @@ function display_latest_minutes() {
 	?>
 	<div id="latest-minutes">
 		<?php
-		if ( ($document = get_latest_minutes()) !== False){
-			$url   = Document::get_url($document);
-			$title = Document::get_meeting_title($document);
-			$mime  = Document::get_mimetype(get_post($document));
+		if ( ($document_id = get_latest_minutes()) !== False){
+			$url   = wp_get_attachment_url($document_id);
+			$title = Document::get_meeting_title($document_id);
+			$mime  = get_document_type(get_post_mime_type($document_id));
 			?>
-			<a class="document <?php echo get_document_type($mime) ?>" href="<?php echo $url ?>"><?php echo $title ?></a>
+			<a class="document <?php echo $mime ?>" href="<?php echo $url ?>"><?php echo $title ?></a>
 			<?php
 		}
 		?>
@@ -93,12 +93,12 @@ function display_latest_agenda() {
 	?>
 	<div id="latest-minutes">
 		<?php
-		if ( ($document = get_latest_agenda()) !== False){
-			$url   = Document::get_url($document);
-			$title = Document::get_meeting_title($document);
-			$mime  = Document::get_mimetype(get_post($document));
+		if ( ($document_id = get_latest_agenda()) !== False){
+			$url   = wp_get_attachment_url($document_id);
+			$title = Document::get_meeting_title($document_id);
+			$mime  = get_document_type(get_post_mime_type($document_id));
 			?>
-			<a class="document <?php echo get_document_type($mime) ?>" href="<?php echo $url ?>"><?php echo $title ?></a>
+			<a class="document <?php echo $mime ?>" href="<?php echo $url ?>"><?php echo $title ?></a>
 			<?php
 		}
 		?>
@@ -154,19 +154,6 @@ function display_agenda_minutes_pages($page, $agendas, $minutes) {
 
 /* Utility - Meetings */
 function get_meetings($committee=null, $year=null){
-	//$committee = is_null($committee) ? '' : $committee;
-	
-	// Get meetings that do not specify a Committee
-	/*$post_args = array(
-		'post_type'		=> 'meeting',
-		'post_status'	=> 'publish',
-		'meta_key'		=> 'meeting_committee',
-		'meta_value'	=> $committee,
-		'meta_compare' 	=> '=',
-		'numberposts'	=> -1
-	);*/
-	
-	
 	global $wpdb;
 	
 	if (is_null($committee)) {
@@ -223,22 +210,9 @@ function get_meetings($committee=null, $year=null){
 				)
 
 		';
-		
-		// Create a new filtering function that will add our where clause to the query
-		//$get_meetings_where = create_function($where='', '$where .= " AND meta_key >= \'" . date(\'m/d/y\', $start_time) . "\'" . " AND meta_key <= \'" . date(\'m/d/y\', $end_time) . "\'"; return $where;');
-			
-		/*function get_meetings_where( $where = '' ) {
-			$where .= " AND meeting_date >= '" . date('m/d/y', $start_time) . "'" . " AND meeting_date <= '" . date('m/d/y', $end_time) . "'";
-			return $where;
-		}*/
-		
-		//add_filter( 'posts_where', $get_meetings_where );
-		//$posts = get_posts($post_args);
-		//remove_filter( 'posts_where', $get_meetings_where );
 	}
 
 	return $wpdb->get_results($sql);
-	//return get_posts($post_args);
 }
 
 function sort_meetings(&$meetings){
@@ -268,7 +242,6 @@ function filter_meetings(&$meetings){
 			if($date === False) {
 				$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true));
 			}		
-			$year = (int)date('Y', $date);
 			if($date === False){
 				unset($new[$meeting->ID]);
 			}

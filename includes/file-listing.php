@@ -12,11 +12,11 @@
 		<?php
 			$class 	 = Document::get_meeting_doc_type($file->ID);
 			$title   = Document::get_meeting_title($file, $class);
-			$url     = Document::get_url($file);
-			$mime    = Document::get_mimetype($file);
+			$url     = wp_get_attachment_url($file->ID);
+			$mime    = get_document_type(get_post_mime_type($file->ID));
 		?>
 		<tr class="<?=($i % 2) ? 'even' : 'odd';?>">
-			<td class="document <?=get_document_type($mime)?>"><?=$title?></td>
+			<td class="document <?=$mime?>"><?=$title?></td>
 			<td class="actions"><a href="<?=$url?>">view document</a></td>
 		</tr>
 		<?php 
