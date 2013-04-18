@@ -114,7 +114,7 @@ function display_agenda_minutes_pages($page, $agendas, $minutes) {
 	?>
 	<div class="span8 category-list">
 		<div class="row">
-			<div class="span5">
+			<div class="span6">
 				<h2><?=$page->post_title?><? if($year != $today['year']){ ?> (<?=$year?>)<? } ?></h2>
 				<?php 
 					the_content();
@@ -132,7 +132,7 @@ function display_agenda_minutes_pages($page, $agendas, $minutes) {
 					}
 				 ?>
 			</div>
-			<div class="span2 offset1">
+			<div class="span1 offset1">
 				<?php $archive_years = $agendas ? get_agenda_archive_years() : get_minutes_archive_years(); ?>
 				<?php if (count($archive_years)):?>
 				<h3>Archives</h3>
