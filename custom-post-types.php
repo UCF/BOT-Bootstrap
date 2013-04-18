@@ -457,7 +457,7 @@ class Person extends CustomPostType
 				),
 				array(
 					'name'    => __('Phone'),
-					'desc'    => __('Separate multiple entries with commas.'),
+					'desc'    => __(''),
 					'id'      => $this->options('name').'_phone',
 					'type'    => 'text',
 				),
@@ -465,12 +465,6 @@ class Person extends CustomPostType
 					'name'    => __('Email'),
 					'desc'    => __(''),
 					'id'      => $this->options('name').'_email',
-					'type'    => 'text',
-				),
-				array(
-					'name'    => __('Order By Name'),
-					'desc'    => __('Name used for sorting. Leaving this field blank may lead to an unexpected sort order.'),
-					'id'      => $this->options('name').'_orderby_name',
 					'type'    => 'text',
 				),
 			);
