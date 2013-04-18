@@ -522,7 +522,7 @@ class Person extends CustomPostType
 	public function objectsToHTML($people, $css_classes) {
 		ob_start();
 		?>
-		<ul class="person-list">
+		<ul class="person-list <?php if($css_classes):?><?=$css_classes?><?php endif; ?>">
 		<?php foreach($people as $person) { ?>
 			<li>
 			<div class="person" id="person-<?=$person->ID?>"><a href="<?=get_permalink($person->ID)?>">
