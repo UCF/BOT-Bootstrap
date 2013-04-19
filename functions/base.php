@@ -667,26 +667,26 @@ function get_custom_post_type($obj, $instance=False){
 		foreach($installed as $custom_post_type){
 			if (
 					($obj == get_class($custom_post_type)) or
-					($obj == $custom_post_type->options('name'))
+					($obj == $custom_post_type->name)
 				){
 				if ($instance){
 					return $custom_post_type;
 				}
 				else{
-					return $custom_post_type->options('name');
+					return $custom_post_type->name;
 				}
 			}
 		}
 		return null;
 	}
 	
-	if (get_class($obj) == 'stdClass'){
+	if (get_class($obj) == 'stdClass' || get_class($obj) == 'WP_Post'){
 		foreach($installed as $custom_post_type){
-			if ($obj->post_type == $custom_post_type->options('name')){
+			if ($obj->post_type == $custom_post_type->name){
 				if ($instance){
 					return $custom_post_type;
 				}else{
-					return $custom_post_type->options('name');
+					return $custom_post_type->name;
 				}
 			}
 		}
