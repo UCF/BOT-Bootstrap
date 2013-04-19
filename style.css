@@ -2,7 +2,7 @@
 Theme Name: Board of Trustees - Bootstrap
 Author: UCF Web Communications
 Github Theme URI: https://github.com/UCF/BOT-Bootstrap
-Version: v1.0.2
+Version: v1.0.3
 */
 
 /* Header */
@@ -28,13 +28,17 @@ Version: v1.0.2
 .menu.horizontal .last:after {content: none !important;}
 
 
-#header-menu { border-bottom: 1px dotted #000; }
+#header-menu { border-bottom: 1px dotted #000; font-family: Georgia, serif; }
 #footer-menu { margin-top: 15px; border-top: 1px dotted #000; }
 #footer-menu a { font-size: 14px; }
 
 /* Page Content */
 .row.page-content { }
 .row.page-content h2.page-title { margin-top: 0; }
+.row.page-content h2 { font-size: 24px; }
+.row.page-content h3 { font-size: 18px; letter-spacing: 0.5px; }
+.row.page-content h3 + hr { margin-bottom: -5px !important; }
+.row.page-content h4 { font-size: 15px; letter-spacing: 0.4px; margin-top: 20px; }
 
 /* Highlight */
 .highlight {margin-bottom:20px;}
@@ -50,6 +54,7 @@ Version: v1.0.2
 #home #sidebar .form-search button {font-size:12px;padding:5px 10px;margin-top:10px;}
 
 /* Sidebar */
+#sidebar h3, .row.page-content .highlight h3 { font-size: 12px; }
 #sidebar .committee-list {font-family:Georgia,serif;}
 #sidebar .latest-minutes a { text-decoration: underline; }
 
