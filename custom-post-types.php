@@ -568,7 +568,7 @@ class Committee extends CustomPostType{
 		if (!is_numeric($post)){
 			$post = $post->ID;
 		}
-		$members = get_post_meta($post, $this->options('name').'_'.$type, True);
+		$members = get_post_meta($post, 'committee_'.$type, True);
 		if ($members == ''){
 			return array();
 		}else{

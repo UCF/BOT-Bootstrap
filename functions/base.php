@@ -1662,8 +1662,7 @@ function _show_meta_boxes($post, $meta_box){
 				<input type="checkbox" name="<?=$field['id']?>" id="<?=$field['id']?>"<?=($current_value) ? ' checked="checked"' : ''?> />
 			
 			<?php break; case 'members':?>
-				<?php $custom_post_type = get_custom_post_type($post, True);?>
-				<?php $current_members  = $custom_post_type->get_members($post, 'members'); ?>
+				<?php $current_members = Committee::get_members($post, 'members'); ?>
 				<table>
 					<tr>
 						<th>Member</th>
@@ -1683,8 +1682,7 @@ function _show_meta_boxes($post, $meta_box){
 					<?php endforeach;?>
 				</table>
 			<?php break; case 'staff':?>
-				<?php $custom_post_type = get_custom_post_type($post, True);?>
-				<?php $current_staff    = $custom_post_type->get_members($post, 'staff');?>
+				<?php $current_staff = Committee::get_members($post, 'staff');?>
 					<table>
 						<tr>
 							<th>Staff</th>
