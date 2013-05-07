@@ -26,7 +26,7 @@ function sc_meetings(){
 	}
 	
 	ksort($map);
-	$board_meetings = array_pop($map);
+	$board_meetings = array_shift($map);
 	ob_start();
 	?>
 	
