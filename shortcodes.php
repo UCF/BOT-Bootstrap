@@ -42,9 +42,14 @@ function sc_meetings(){
 				</tr>
 			</thead>
 			<tbody>
-				<?php meetings_prep($board_meetings); foreach($board_meetings as $i=>$meeting):?>
-					<?php if (get_post_meta($meeting->ID, 'meeting_date', true)) { ?>
-						<tr class="<?=($i % 2) ? 'even' : 'odd';?>">
+				<?php meetings_prep($board_meetings); $row_cnt = -1; foreach($board_meetings as $i=>$meeting):?>
+					<?php if (get_post_meta($meeting->ID, 'meeting_date', true)) {
+						$today = getdate();
+						$year  = (isset($_GET['y'])) ? $_GET['y'] : $today['year']; 
+						$meeting_year = date("Y", strtotime($meeting->meta['meeting_date'][0])); 
+						if ($meeting_year >= $year) {
+					?>
+						<tr class="<?=(++$row_cnt % 2) ? 'even' : 'odd';?>">
 							<td class="date"><?=date("F j, Y", strtotime($meeting->meta['meeting_date'][0]))?></td>
 							<td class="time">
 								<?php
@@ -91,6 +96,7 @@ function sc_meetings(){
 							</td>
 							<td class="location"><?=get_post_meta($meeting->ID, 'meeting_location', True)?></td>
 						</tr>
+						<?php } ?>
 					<?php } ?>
 				<?php endforeach;?>
 			</tbody>
