@@ -158,7 +158,6 @@ Config::$links = array(
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
 	array('admin' => True, 'src' => THEME_CSS_URL.'/ui-lightness/jquery-ui-1.10.2.custom.min.css',),
-	'http://universityheader.ucf.edu/bar/css/bar.css',
 	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.css',
 );
 
