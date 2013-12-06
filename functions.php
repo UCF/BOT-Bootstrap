@@ -26,7 +26,7 @@ function display_committee_list() {
 		<?php else: $orgs[] = $committee; endif; ?>
 	<?php endforeach;?>
 	</ul>
-	
+
 	<hr />
 	<ul class="unstyled committee-list">
 	<?php foreach($orgs as $org):?>
@@ -44,7 +44,7 @@ function display_next_meeting() {
 		<?php if( !is_null($meeting = get_next_meeting()) ):
 			$meta  = get_post_custom($meeting->ID);
 			$date  = strtotime($meta['meeting_date'][0]);
-			
+
 			$date      = date('F j, Y', $date);
 			$start     = $meta['meeting_start_time'][0];
 			$end       = $meta['meeting_end_time'][0];
@@ -116,9 +116,9 @@ function display_agenda_minutes_pages($page, $agendas, $minutes) {
 		<div class="row">
 			<div class="span6">
 				<h2><?=$page->post_title?><? if($year != $today['year']){ ?> (<?=$year?>)<? } ?></h2>
-				<?php 
+				<?php
 					the_content();
-			
+
 					# Files for the board meetings
 					$files = ($agendas) ? get_agendas(null, $year) : get_minutes(null, $year);
 					include('includes/file-listing.php');
@@ -155,7 +155,7 @@ function display_agenda_minutes_pages($page, $agendas, $minutes) {
 /* Utility - Meetings */
 function get_meetings($committee=null, $year=null){
 	global $wpdb;
-	
+
 	if (is_null($committee)) {
 		$sql = "
 			SELECT post.*
@@ -173,7 +173,7 @@ function get_meetings($committee=null, $year=null){
 			             WHERE  meta_key = 'meeting_committee')";
 	} else {
 		// Get meetings by the specified Committee
-		
+
 		$sql = "
 			SELECT post.*
 			FROM   $wpdb->posts post
@@ -191,21 +191,21 @@ function get_meetings($committee=null, $year=null){
 					)
 			WHERE  post.post_type = 'meeting'
 			       AND post.post_status = 'publish'";
-				      
+
 	}
-	
+
 	// Filter meeting results by the specified year
-	if( !is_null($year) && 
-		(int)$year != 0 && 
-		($start_time = strtotime($year.'-01-01 00:00:00')) !== False && 
+	if( !is_null($year) &&
+		(int)$year != 0 &&
+		($start_time = strtotime($year.'-01-01 00:00:00')) !== False &&
 		($end_time   = strtotime($year.'-12-31 00:00:00')) !== False) {
-		
+
 		$start_date = date('Y-m-d', $start_time);
 		$end_date   = date('Y-m-d', $end_time);
-		
-		$sql .= ' 
+
+		$sql .= '
 			AND (
-				STR_TO_DATE('.(is_null($committee) ? '' : 'meta_1.').'meta_value, "%m/%e/%Y") >= STR_TO_DATE("'.$start_date.'", "%Y-%m-%d") 
+				STR_TO_DATE('.(is_null($committee) ? '' : 'meta_1.').'meta_value, "%m/%e/%Y") >= STR_TO_DATE("'.$start_date.'", "%Y-%m-%d")
 				AND STR_TO_DATE('.(is_null($committee) ? '' : 'meta_1.').'meta_value, "%m/%e/%Y") <= STR_TO_DATE("'.$end_date.'", "%Y-%m-%d")
 				)
 
@@ -236,18 +236,18 @@ function filter_meetings(&$meetings){
 			if (!array_key_exists($meeting->ID, $new)) {
 				$new[$meeting->ID] = $meeting;
 			}
-			
+
 			// Make sure the post's meeting date is within the current year
 			$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true).' '.get_post_meta($meeting->ID, 'meeting_start_time', true));
 			if($date === False) {
 				$date = strtotime(get_post_meta($meeting->ID, 'meeting_date', true));
-			}		
+			}
 			if($date === False){
 				unset($new[$meeting->ID]);
 			}
 		}
 	}
-	
+
 	$meetings = $new;
 }
 
@@ -322,7 +322,7 @@ function get_latest_document($meta_key = NULL) {
 			SELECT meta.meta_value AS document_id
 			FROM  $wpdb->posts AS post
 			JOIN  $wpdb->postmeta AS meta
-			ON    
+			ON
 				(
 					post.ID = meta.post_id
 					AND meta.meta_key = '$meta_key'
@@ -333,11 +333,11 @@ function get_latest_document($meta_key = NULL) {
 					post.ID = meta_1.post_id
 					AND meta_1.meta_key = 'meeting_date'
 				)
-			WHERE 
+			WHERE
 				post.post_type = 'meeting'
 				AND post.post_status = 'publish'
 				AND post.ID NOT IN (
-					SELECT post_id 
+					SELECT post_id
 					FROM   $wpdb->postmeta
 					WHERE  meta_key = 'meeting_committee'
 				)
@@ -388,7 +388,7 @@ function get_document_type($mimetype){
 /* Utility - Archives */
 
 /**
- * Given a category id, slug, or object, will return the distinct years that 
+ * Given a category id, slug, or object, will return the distinct years that
  * posts from that category cover.
  *
  * @return array
@@ -401,7 +401,7 @@ function get_archive_years($type, $committee=null)
 	$cachey_key  = is_null($committee) ? md5($type) : md5($type.$committee->ID);
 	$cache_value = wp_cache_get($type, $cache_group);
 	if ($cache_value !== False){ return $cache_value;}
-	
+
 
 	$meta_key = '';
 	switch($type) {
@@ -421,8 +421,8 @@ function get_archive_years($type, $committee=null)
 			FROM $wpdb->posts post
 			JOIN $wpdb->postmeta meta_1
 			ON   (
-			     post.ID = meta_1.post_id 
-			     AND meta_1.meta_key = 'meeting_committee' 
+			     post.ID = meta_1.post_id
+			     AND meta_1.meta_key = 'meeting_committee'
 			     AND meta_1.meta_value = '$committee->ID'
 			     )
 			JOIN $wpdb->postmeta meta_2
@@ -447,7 +447,7 @@ function get_archive_years($type, $committee=null)
 			JOIN $wpdb->postmeta meta_1
 			ON   (
 					post.ID = meta_1.post_id
-					AND meta_1.meta_key = '$meta_key' 
+					AND meta_1.meta_key = '$meta_key'
 					AND meta_1.meta_value != ''
 				)
 			JOIN $wpdb->postmeta meta_2
@@ -461,7 +461,7 @@ function get_archive_years($type, $committee=null)
 				AND meta_1.meta_value IN (SELECT ID from $wpdb->posts)";
 	}
 	$rows = $wpdb->get_results($sql);
-	
+
 	#Find unique years and return
 	$years = array();
 	foreach ($rows as $row){
@@ -507,7 +507,7 @@ function get_minutes($committee=null, $year=null){
 	$meetings = get_meetings($committee, (is_null($year) ? $today['year'] : $year));
 	meetings_prep($meetings);
 	$minutes  = array();
-	
+
 	if ($meetings) {
 		foreach($meetings as $meeting){
 			$id = get_post_meta($meeting->ID, 'meeting_minutes', True);
@@ -535,4 +535,12 @@ function get_content($id){
 	$content = str_replace(']]>', ']]&gt;', $content);
 	return $content;
 }
+
+function protocol_relative_attachment_url($url, $id) {
+    if (is_ssl()) {
+        $url = str_replace('http://', 'https://', $url);
+    }
+    return $url;
+}
+add_filter('wp_get_attachment_url', 'protocol_relative_attachment_url');
 ?>

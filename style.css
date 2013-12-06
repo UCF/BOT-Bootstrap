@@ -1,8 +1,8 @@
-/*   
+/*
 Theme Name: Board of Trustees - Bootstrap
 Author: UCF Web Communications
 Github Theme URI: https://github.com/UCF/BOT-Bootstrap
-Version: v1.0.7
+Version: v1.0.8
 */
 
 /* Header */
@@ -16,10 +16,10 @@ Version: v1.0.7
 .menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
 .menu a:hover{text-decoration: underline;}
 .menu.horizontal{
-	list-style: none; 
-	margin: 0 0 20px 0; 
-	color: #6d6e71; 
-	padding: 10px 0 0 0; 
+	list-style: none;
+	margin: 0 0 20px 0;
+	color: #6d6e71;
+	padding: 10px 0 0 0;
 	clear: right;
 	overflow: auto;
 }
@@ -145,15 +145,15 @@ Version: v1.0.7
 .meetings th {display:none;}
 .meetings .table-striped tbody tr td,
 .meetings .table-striped tbody th td { border: 0; }
-.meetings .table-striped tbody tr:nth-child(odd) td, 
+.meetings .table-striped tbody tr:nth-child(odd) td,
 .meetings .table-striped tbody tr:nth-child(odd) th {background-color:#FFF8DF;}
-.meetings .table-striped tbody tr.odd td, 
+.meetings .table-striped tbody tr.odd td,
 .meetings .table-striped tbody tr.odd th {background-color:#FFF8DF;}
 .meetings .date{font-weight: bold; text-align: left; width: 25%;}
 .meetings .time{text-align: center; width: 25%;}
 .meetings .documents{text-align: center; word-spacing: 10px; font-size: 14px; width: 30%;}
 .meetings .location {font-size: 14px; text-align: right; width: 20%;}
-.meetings .special-meeting { font-style: italic; font-size: 11px; line-height: 16px; margin-top: 5px; } 
+.meetings .special-meeting { font-style: italic; font-size: 11px; line-height: 16px; margin-top: 5px; }
 .meetings h4 a { text-decoration: underline; color: #990000; }
 .meetings h4 a:hover { color: #C30202; }
 
