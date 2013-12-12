@@ -536,7 +536,7 @@ function get_content($id){
 	return $content;
 }
 
-function protocol_relative_attachment_url($url, $id) {
+function protocol_relative_attachment_url($url) {
     if (is_ssl()) {
         $url = str_replace('http://', 'https://', $url);
     }
