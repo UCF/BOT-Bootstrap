@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Abstract class for defining custom post types.  
- * 
+ * Abstract class for defining custom post types.
+ *
  **/
 abstract class CustomPostType{
-	public 
+	public
 		$name           = 'custom_post_type',
 		$plural_name    = 'Custom Posts',
 		$singular_name  = 'Custom Post',
@@ -27,8 +27,8 @@ abstract class CustomPostType{
 		# Optional default ordering for generic shortcode if not specified by user.
 		$default_orderby = null,
 		$default_order   = null;
-	
-	
+
+
 	/**
 	 * Wrapper for get_posts function, that predefines post_type for this
 	 * custom post type.  Any options valid in get_posts can be passed as an
@@ -46,17 +46,17 @@ abstract class CustomPostType{
 		$objects = get_posts($options);
 		return $objects;
 	}
-	
-	
+
+
 	/**
 	 * Similar to get_objects, but returns array of key values mapping post
 	 * title to id if available, otherwise it defaults to id=>id.
 	 **/
 	public function get_objects_as_options($options=array()){
 		$objects = $this->get_objects($options);
-		
+
 		if (!$objects) { return array('no objects returned'); }
-		
+
 		$opt     = array();
 		foreach($objects as $o){
 			switch(True){
@@ -70,8 +70,8 @@ abstract class CustomPostType{
 		}
 		return $opt;
 	}
-	
-	
+
+
 	/**
 	 * Return the instances values defined by $key.
 	 **/
@@ -79,8 +79,8 @@ abstract class CustomPostType{
 		$vars = get_object_vars($this);
 		return $vars[$key];
 	}
-	
-	
+
+
 	/**
 	 * Additional fields on a custom post type may be defined by overriding this
 	 * method on an descendant object.
@@ -88,8 +88,8 @@ abstract class CustomPostType{
 	public function fields(){
 		return array();
 	}
-	
-	
+
+
 	/**
 	 * Using instance variables defined, returns an array defining what this
 	 * custom post type supports.
@@ -114,8 +114,8 @@ abstract class CustomPostType{
 		}
 		return $supports;
 	}
-	
-	
+
+
 	/**
 	 * Creates labels array, defining names for admin panel.
 	 **/
@@ -128,8 +128,8 @@ abstract class CustomPostType{
 			'new_item'      => __($this->options('new_item')),
 		);
 	}
-	
-	
+
+
 	/**
 	 * Creates metabox array for custom post type. Override method in
 	 * descendants to add or modify metaboxes.
@@ -147,8 +147,8 @@ abstract class CustomPostType{
 		}
 		return null;
 	}
-	
-	
+
+
 	/**
 	 * Registers metaboxes defined for custom post type.
 	 **/
@@ -165,8 +165,8 @@ abstract class CustomPostType{
 			);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Registers the custom post type and any other ancillary actions that are
 	 * required for the post to function properly.
@@ -179,19 +179,19 @@ abstract class CustomPostType{
 			'taxonomies' => $this->options('taxonomies'),
 			'_builtin'   => $this->options('built_in')
 		);
-		
+
 		if ($this->options('use_order')){
 			$registration = array_merge($registration, array('hierarchical' => True,));
 		}
-		
+
 		register_post_type($this->options('name'), $registration);
-		
+
 		if ($this->options('use_shortcode')){
 			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
 		}
 	}
-	
-	
+
+
 	/**
 	 * Shortcode for this custom post type.  Can be overridden for descendants.
 	 * Defaults to just outputting a list of objects outputted as defined by
@@ -208,8 +208,8 @@ abstract class CustomPostType{
 		}
 		return sc_object_list($attr);
 	}
-	
-	
+
+
 	/**
 	 * Handles output for a list of objects, can be overridden for descendants.
 	 * If you want to override how a list of objects are outputted, override
@@ -218,10 +218,10 @@ abstract class CustomPostType{
 	 **/
 	public function objectsToHTML($objects, $css_classes){
 		if (count($objects) < 1){ return '';}
-		
+
 		$class = get_custom_post_type($objects[0]->post_type);
 		$class = new $class;
-		
+
 		ob_start();
 		?>
 		<ul class="<?php if($css_classes):?><?=$css_classes?><?php else:?><?=$class->options('name')?>-list<?php endif;?>">
@@ -235,8 +235,8 @@ abstract class CustomPostType{
 		$html = ob_get_clean();
 		return $html;
 	}
-	
-	
+
+
 	/**
 	 * Outputs this item in HTML.  Can be overridden for descendants.
 	 **/
@@ -257,8 +257,9 @@ class Document extends CustomPostType{
 		$use_title      = True,
 		$use_editor     = False,
 		$use_shortcode  = True,
-		$use_metabox    = True;
-	
+		$use_metabox    = True,
+		$taxonomies     = array('category', 'post_tag');
+
 	public function fields(){
 		$fields   = parent::fields();
 		$fields[] = array(
@@ -275,7 +276,7 @@ class Document extends CustomPostType{
 		);
 		return $fields;
 	}
-	
+
 	static function get_meeting_doc_type($post_id) {
 		global $wpdb;
 
@@ -330,32 +331,32 @@ class Document extends CustomPostType{
 	static function get_document_application($form){
 		return mimetype_to_application(self::get_mimetype($form));
 	}
-	
-	
+
+
 	static function get_mimetype($form){
 		if (is_numeric($form)){
 			$form = get_post($form);
 		}
-		
+
 		$prefix = post_type($form);
 		$document = get_post(get_post_meta($form->ID, $prefix.'_file', True));
-		
+
 		$is_url = get_post_meta($form->ID, $prefix.'_url', True);
-		
+
 		return ($is_url) ? "text/html" : $document->post_mime_type;
 	}
-	
-	
+
+
 	static function get_title($form){
 		if (is_numeric($form)){
 			$form = get_post($form);
 		}
-		
+
 		$prefix = post_type($form);
-		
+
 		return $form->post_title;
 	}
-	
+
 	static function get_meeting_title($document){
 		if (is_numeric($document)){
 			$document = get_post($document);
@@ -374,20 +375,20 @@ class Document extends CustomPostType{
 		if (is_numeric($form)){
 			$form = get_post($form);
 		}
-		
+
 		$prefix = get_post_type($form);
-		
+
 		$x = get_post_meta($form->ID, $prefix.'_url', True);
 		$y = wp_get_attachment_url(get_post_meta($form->ID, $prefix.'_file', True));
-		
+
 		if (!$x and !$y){
 			return '#';
 		}
-		
+
 		return ($x) ? $x : $y;
 	}
-	
-	
+
+
 	/**
 	 * Handles output for a list of objects, can be overridden for descendants.
 	 * If you want to override how a list of objects are outputted, override
@@ -396,10 +397,10 @@ class Document extends CustomPostType{
 	 **/
 	public function objectsToHTML($objects, $css_classes){
 		if (count($objects) < 1){ return '';}
-		
+
 		$class_name = get_custom_post_type($objects[0]->post_type);
 		$class      = new $class_name;
-		
+
 		ob_start();
 		?>
 		<ul class="nobullet <?php if($css_classes):?><?=$css_classes?><?php else:?><?=$class->options('name')?>-list<?php endif;?>">
@@ -413,8 +414,8 @@ class Document extends CustomPostType{
 		$html = ob_get_clean();
 		return $html;
 	}
-	
-	
+
+
 	/**
 	 * Outputs this item in HTML.  Can be overridden for descendants.
 	 **/
@@ -477,8 +478,8 @@ class Person extends CustomPostType
 		$options['meta_key'] = 'person_orderby_name';
 		return parent::get_objects($options);
 	}
-	
-	/** 
+
+	/**
 	 * Get a list of posts, check them against the person_label provided,
 	 * and return an array of field options
 	 **/
@@ -548,7 +549,7 @@ class Person extends CustomPostType
 		<?php
 		return ob_get_clean();
 	}
-} // END class 
+} // END class
 
 class Committee extends CustomPostType{
 	public
@@ -562,8 +563,8 @@ class Committee extends CustomPostType{
 		$use_title      = True,
 		$use_editor     = True,
 		$use_metabox    = True;
-	
-	
+
+
 	public function get_members($post, $type, $obj=False){
 		if (!is_numeric($post)){
 			$post = $post->ID;
@@ -577,11 +578,11 @@ class Committee extends CustomPostType{
 				'post_status' => 'publish',
 			));
 			$published = array_map(create_function('$t', 'return $t->ID;'), $people);
-			
+
 			# On some systems this sometimes comes out as a serialized string
 			# not sure why that happens.  But this fixes the issue.
 			if (gettype($members) == 'string'){$members = unserialize($members);}
-			
+
 			if($obj){
 				$t = array();
 				foreach($members as $member=>$role){
@@ -595,13 +596,13 @@ class Committee extends CustomPostType{
 			return $members;
 		}
 	}
-	
+
 	static function _sort_members($a, $b){
 		$titles = array('chair', 'vice chair', 'ex officio');
 		if (!$a->position and !$b->position){
 			$names_a = array_pop(explode(' ', $a->post_title));
 			$names_b = array_pop(explode(' ', $b->post_title));
-			
+
 			if ($names_a < $names_b){
 				return -1;
 			}else{
@@ -614,10 +615,10 @@ class Committee extends CustomPostType{
 		if ($a->position and !$b->position){
 			return -1;
 		}
-		
+
 		$a_index = array_search(strtolower($a->position), $titles);
 		$b_index = array_search(strtolower($b->position), $titles);
-		
+
 		if ($a_index === $b_index){
 			return 0;
 		}
@@ -629,8 +630,8 @@ class Committee extends CustomPostType{
 		}
 		return ($a_index < $b_index) ? -1 : 1 ;
 	}
-	
-	
+
+
 	public function documents(){
 		$args = array(
 			'post_type'     => 'attachment',
@@ -644,8 +645,8 @@ class Committee extends CustomPostType{
 		}
 		return $return;
 	}
-	
-	
+
+
 	public function fields(){
 		$documents = new Document();
 		return array(
@@ -687,7 +688,7 @@ abstract class CommitteeRelated extends CustomPostType{
 		$use_editor     = True,
 		$use_metabox    = True,
 		$use_title      = True;
-	
+
 	public function fields(){
 		$committees = new Committee();
 		return array(
@@ -714,12 +715,12 @@ class Meeting extends CommitteeRelated{
 		$public         = True,
 		$use_editor     = False,
 		$use_metabox    = True;
-	
+
 	static $type_choices = array(
 		'Regular'   => 0,
 		'Committee' => 1,
 	);
-	
+
 	public function fields(){
 		$parent_fields = parent::fields();
 		$committee     = array_shift($parent_fields);
@@ -767,7 +768,7 @@ class Meeting extends CommitteeRelated{
 				'desc'    => __('(Optional) Add a special name for the meeting.'),
 				'id'      => $this->options('name').'_special_meeting',
 				'type'    => 'text',
-			), 
+			),
 		);
 		$fields = array_merge(
 			$parent_fields,
