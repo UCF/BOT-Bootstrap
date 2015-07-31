@@ -5,12 +5,6 @@
 		</div>
 		<div class="span3">
 			<div class="highlight">
-				<h3>Latest Board Minutes</h3>
-				<div class="content">
-					<?php display_latest_minutes() ?>
-				</div>
-			</div>
-			<div class="highlight">
 				<h3>Next Board Agenda</h3>
 				<div class="content">
 					<?php display_latest_agenda() ?>
