@@ -4,6 +4,7 @@
 			<?php the_content();?>
 		</div>
 		<div class="span3">
+			<div class="highlight">			
 				<h3>Latest Board Minutes</h3>
 				<div class="content">
 					<?php display_latest_minutes() ?>
