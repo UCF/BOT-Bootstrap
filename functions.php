@@ -93,7 +93,7 @@ function display_next_agenda() {
 	$document_id = get_next_agenda();
 	ob_start();
 
-	if ( $document_id !== False ) {
+	if ( !is_null( $document_id ) ) {
 		$url   = wp_get_attachment_url( $document_id );
 		$title = Document::get_meeting_title( $document_id );
 		$mime  = get_document_type( get_post_mime_type( $document_id ) );

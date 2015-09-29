@@ -8,7 +8,7 @@
 		</div>
 	</div>
 
-	<?php if ( get_next_agenda() !== false ): ?>
+	<?php if ( !is_null( get_next_agenda() ) ): ?>
 	<div class="highlight">
 		<h3>Next Board Agenda</h3>
 		<div class="content">
