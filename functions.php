@@ -296,10 +296,10 @@ function get_agendas($committee=null, $year=null){
 	return $agendas;
 }
 
-function get_next_agenda($committee = null) {
-	if( !is_null($meeting = get_next_meeting($committee))
-		&& ($file_id = get_post_meta($meeting->ID, 'meeting_agenda', True)) !== ""
-		&& ($file = get_post($file_id)) !== False) {
+function get_next_agenda( $committee = null ) {
+	if( !is_null( $meeting = get_next_meeting( $committee ) )
+		&& ( $file_id = get_post_meta( $meeting->ID, 'meeting_agenda', True ) ) !== ""
+		&& ( $file = wp_get_attachment_url( $file_id ) ) !== False ) {
 		return $file_id;
 	} else {
 		return null;
