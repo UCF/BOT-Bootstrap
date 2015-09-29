@@ -88,22 +88,21 @@ function display_latest_minutes() {
 	echo ob_get_clean();
 }
 
-function display_latest_agenda() {
+
+function display_next_agenda() {
+	$document_id = get_next_agenda();
 	ob_start();
+
+	if ( $document_id !== False ) {
+		$url   = wp_get_attachment_url( $document_id );
+		$title = Document::get_meeting_title( $document_id );
+		$mime  = get_document_type( get_post_mime_type( $document_id ) );
 	?>
-	<div class="latest-minutes">
-		<?php
-		if ( ($document_id = get_latest_agenda()) !== False){
-			$url   = wp_get_attachment_url($document_id);
-			$title = Document::get_meeting_title($document_id);
-			$mime  = get_document_type(get_post_mime_type($document_id));
-			?>
-			<a class="document <?php echo $mime ?>" href="<?php echo $url ?>"><?php echo $title ?></a>
-			<?php
-		}
-		?>
-	</div>
-	<?
+		<div class="latest-minutes">
+			<a class="document <?php echo $mime; ?>" href="<?php echo $url; ?>"><?php echo $title; ?></a>
+		</div>
+	<?php
+	}
 	echo ob_get_clean();
 }
 
@@ -301,14 +300,10 @@ function get_next_agenda($committee = null) {
 	if( !is_null($meeting = get_next_meeting($committee))
 		&& ($file_id = get_post_meta($meeting->ID, 'meeting_agenda', True)) !== ""
 		&& ($file = get_post($file_id)) !== False) {
-		return $file;
+		return $file_id;
 	} else {
 		return null;
 	}
-}
-
-function get_latest_agenda() {
-	return get_latest_document('meeting_agenda');
 }
 
 

@@ -7,12 +7,16 @@
 			<?php display_latest_minutes() ?>
 		</div>
 	</div>
+
+	<?php if ( get_next_agenda() !== false ): ?>
 	<div class="highlight">
 		<h3>Next Board Agenda</h3>
 		<div class="content">
-			<?php display_latest_agenda() ?>
+			<?php display_next_agenda(); ?>
 		</div>
 	</div>
+	<?php endif; ?>
+
 	<div class="highlight">
 		<h3>Next Board Meeting</h3>
 		<div class="content">
