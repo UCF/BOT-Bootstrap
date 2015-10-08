@@ -22,6 +22,12 @@
 					<?php display_next_meeting() ?>
 				</div>
 			</div>
+			<div class="highlight">
+				<h3>Special Meeting</h3>
+				<div class="content">
+					<?php display_special_meeting() ?>
+				</div>
+			</div>
 		</div>
 		<div class="span3" id="sidebar">
 			<div class="highlight">

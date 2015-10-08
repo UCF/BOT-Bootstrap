@@ -69,6 +69,45 @@ function display_next_meeting() {
 	echo ob_get_clean();
 }
 
+function display_special_meeting() {
+	ob_start();
+	?>
+	<div class="next-meeting">
+		<?php if( !is_null($meeting = get_next_meeting(null, true)) ):
+
+			$meta  = get_post_custom($meeting->ID);
+			$today_time = time();
+			$date_time  = strtotime($meta['meeting_date'][0]);
+
+			$date      = date('F j, Y', $date_time);
+
+			$start                = $meta['meeting_start_time'][0];
+			$end                  = $meta['meeting_end_time'][0];
+			$location             = $meta['meeting_location'][0];
+			$special_meeting_name = $meta['meeting_special_meeting'][0];
+			$committee            = ($meta['meeting_committee'][0]) ? get_post($meta['meeting_committee'][0]) : null;
+		?>
+		<?php if($special_meeting_name):?>
+		<span class="special-meeting-name"><?=$special_meeting_name?></span>
+		<?php endif;?>
+		<span class="date"><?=$date?></span>
+		<?php if($start and $end):?>
+		<span class="time"><?=$start?> - <?=$end?></span>
+		<?php endif;?>
+		<?php if($location):?>
+		<span class="location"><?=$location?></span>
+		<?php endif;?>
+		<?php if($committee):?>
+		<span class="committee"><?=$committee->post_title?></span>
+		<?php endif;?>
+		<?php else:?>
+		No upcoming meetings scheduled.
+		<?php endif;?>
+	</div>
+	<?
+	echo ob_get_clean();
+}
+
 function display_latest_minutes() {
 	ob_start();
 	?>
@@ -153,10 +192,31 @@ function display_agenda_minutes_pages($page, $agendas, $minutes) {
 
 
 /* Utility - Meetings */
-function get_meetings($committee=null, $year=null){
+function get_meetings($committee=null, $year=null, $is_special_meeting=null){
 	global $wpdb;
 
-	if (is_null($committee)) {
+	if (is_null($committee) && $is_special_meeting === true) {
+		$sql .= "
+			SELECT post.*
+			FROM   $wpdb->posts post
+			JOIN   $wpdb->postmeta meta
+			ON     (
+						post.ID = meta.post_id
+						AND meta.meta_key = 'meeting_date'
+					)
+			JOIN   $wpdb->postmeta meta_1
+			ON     (
+						post.ID = meta_1.post_id
+						AND meta_1.meta_key = 'meeting_special_meeting_on'
+						AND meta_1.meta_value = 'on'
+					)
+			WHERE  post.post_type = 'meeting'
+			       AND post.post_status = 'publish'
+			       AND post.ID NOT IN (
+			             SELECT post_id
+			             FROM   $wpdb->postmeta
+			             WHERE  meta_key = 'meeting_committee')";
+	} else if (is_null($committee) && $is_special_meeting !== true) {
 		$sql = "
 			SELECT post.*
 			FROM   $wpdb->posts post
@@ -170,10 +230,14 @@ function get_meetings($committee=null, $year=null){
 			       AND post.ID NOT IN (
 			             SELECT post_id
 			             FROM   $wpdb->postmeta
-			             WHERE  meta_key = 'meeting_committee')";
+			             WHERE  meta_key = 'meeting_committee')
+			       AND post.ID NOT IN (
+			             SELECT post_id
+			             FROM   $wpdb->postmeta
+			             WHERE  meta_key = 'meeting_special_meeting_on'
+			             AND    meta_value = 'on')";
 	} else {
 		// Get meetings by the specified Committee
-
 		$sql = "
 			SELECT post.*
 			FROM   $wpdb->posts post
@@ -250,9 +314,8 @@ function filter_meetings(&$meetings){
 
 	$meetings = $new;
 }
-
-function get_next_meeting($committee=null) {
-	$meetings = get_meetings($committee);
+function get_next_meeting($committee=null, $is_special_meeting=false) {
+	$meetings = get_meetings($committee, null, $is_special_meeting);
 
 	// If the meeting is today, it should still be considered
 	// `the next meeting` for the entire day
@@ -340,6 +403,12 @@ function get_latest_document($meta_key = NULL) {
 					SELECT post_id
 					FROM   $wpdb->postmeta
 					WHERE  meta_key = 'meeting_committee'
+				)
+				AND post.ID NOT IN (
+					SELECT post_id
+					FROM   $wpdb->postmeta
+					WHERE  meta_key = 'meeting_special_meeting_on'
+					AND    meta_value = 'on'
 				)
 				AND meta.meta_value IN (
 					SELECT ID
