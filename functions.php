@@ -88,6 +88,9 @@ function display_special_meeting() {
 		<h3>Special Meeting</h3>
 		<div class="content">
 			<div class="next-meeting">
+				<?php if($special_meeting_name):?>
+				<span class="special-meeting-name"><?=$special_meeting_name?></span>
+				<?php endif;?>
 				<span class="date"><?=$date?></span>
 				<?php if($start and $end):?>
 				<span class="time"><?=$start?> - <?=$end?></span>
