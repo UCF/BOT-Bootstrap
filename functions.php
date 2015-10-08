@@ -37,11 +37,11 @@ function display_committee_list() {
 	echo ob_get_clean();
 }
 
-function display_next_meeting($is_special_meeting=null) {
+function display_next_meeting() {
 	ob_start();
 	?>
 	<div class="next-meeting">
-		<?php if( !is_null($meeting = get_next_meeting(null, $is_special_meeting)) ):
+		<?php if( !is_null($meeting = get_next_meeting(null)) ):
 			$meta  = get_post_custom($meeting->ID);
 			$date  = strtotime($meta['meeting_date'][0]);
 
@@ -71,7 +71,39 @@ function display_next_meeting($is_special_meeting=null) {
 }
 
 function display_special_meeting() {
-	display_next_meeting(true);
+	ob_start();
+	?>
+	<?php if( !is_null($meeting = get_next_meeting(null, true)) ):
+		$meta  = get_post_custom($meeting->ID);
+		$date  = strtotime($meta['meeting_date'][0]);
+
+		$date      = date('F j, Y', $date);
+		$start     = $meta['meeting_start_time'][0];
+		$end       = $meta['meeting_end_time'][0];
+		$location  = $meta['meeting_location'][0];
+		$special_meeting_name = $meta['meeting_special_meeting'][0];
+		$committee = ($meta['meeting_committee'][0]) ? get_post($meta['meeting_committee'][0]) : null;
+	?>
+	<div class="highlight">
+		<h3>Special Meeting</h3>
+		<div class="content">
+			<div class="next-meeting">
+				<span class="date"><?=$date?></span>
+				<?php if($start and $end):?>
+				<span class="time"><?=$start?> - <?=$end?></span>
+				<?php endif;?>
+				<?php if($location):?>
+				<span class="location"><?=$location?></span>
+				<?php endif;?>
+				<?php if($committee):?>
+				<span class="committee"><?=$committee->post_title?></span>
+				<?php endif;?>
+			</div>
+		</div>
+	</div>
+	<?php endif;?>
+	<?
+	echo ob_get_clean();
 }
 
 function display_latest_minutes() {

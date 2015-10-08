@@ -19,12 +19,7 @@
 			<?php display_next_meeting() ?>
 		</div>
 	</div>
-	<div class="highlight">
-		<h3>Special Meeting</h3>
-		<div class="content">
-			<?php display_special_meeting() ?>
-		</div>
-	</div>
+	<?php display_special_meeting() ?>
 	<div class="highlight">
 		<h3>Search this Site</h3>
 		<?php get_template_part('searchform'); ?>
