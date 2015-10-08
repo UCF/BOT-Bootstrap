@@ -37,11 +37,11 @@ function display_committee_list() {
 	echo ob_get_clean();
 }
 
-function display_next_meeting() {
+function display_next_meeting($is_special_meeting=null) {
 	ob_start();
 	?>
 	<div class="next-meeting">
-		<?php if( !is_null($meeting = get_next_meeting()) ):
+		<?php if( !is_null($meeting = get_next_meeting(null, $is_special_meeting)) ):
 			$meta  = get_post_custom($meeting->ID);
 			$date  = strtotime($meta['meeting_date'][0]);
 
@@ -49,6 +49,7 @@ function display_next_meeting() {
 			$start     = $meta['meeting_start_time'][0];
 			$end       = $meta['meeting_end_time'][0];
 			$location  = $meta['meeting_location'][0];
+			$special_meeting_name = $meta['meeting_special_meeting'][0];
 			$committee = ($meta['meeting_committee'][0]) ? get_post($meta['meeting_committee'][0]) : null;
 		?>
 		<span class="date"><?=$date?></span>
@@ -70,42 +71,7 @@ function display_next_meeting() {
 }
 
 function display_special_meeting() {
-	ob_start();
-	?>
-	<div class="next-meeting">
-		<?php if( !is_null($meeting = get_next_meeting(null, true)) ):
-
-			$meta  = get_post_custom($meeting->ID);
-			$today_time = time();
-			$date_time  = strtotime($meta['meeting_date'][0]);
-
-			$date      = date('F j, Y', $date_time);
-
-			$start                = $meta['meeting_start_time'][0];
-			$end                  = $meta['meeting_end_time'][0];
-			$location             = $meta['meeting_location'][0];
-			$special_meeting_name = $meta['meeting_special_meeting'][0];
-			$committee            = ($meta['meeting_committee'][0]) ? get_post($meta['meeting_committee'][0]) : null;
-		?>
-		<?php if($special_meeting_name):?>
-		<span class="special-meeting-name"><?=$special_meeting_name?></span>
-		<?php endif;?>
-		<span class="date"><?=$date?></span>
-		<?php if($start and $end):?>
-		<span class="time"><?=$start?> - <?=$end?></span>
-		<?php endif;?>
-		<?php if($location):?>
-		<span class="location"><?=$location?></span>
-		<?php endif;?>
-		<?php if($committee):?>
-		<span class="committee"><?=$committee->post_title?></span>
-		<?php endif;?>
-		<?php else:?>
-		No upcoming meetings scheduled.
-		<?php endif;?>
-	</div>
-	<?
-	echo ob_get_clean();
+	display_next_meeting(true);
 }
 
 function display_latest_minutes() {
