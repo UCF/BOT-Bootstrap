@@ -63,6 +63,7 @@ Version: v1.0.12
 .next-meeting .time{font-size: 14px; display: block;}
 .next-meeting .location{font-size: 14px; display: block;}
 .next-meeting .committee{font-size: 14px; display: block;}
+.next-meeting .special-meeting-name { font-style: italic; font-size: 13px; display: block; line-height: 16px; padding-bottom: 4px; }
 
 /**
  * Mimetype icons
@@ -154,6 +155,7 @@ Version: v1.0.12
 .meetings .documents{text-align: center; word-spacing: 10px; font-size: 14px; width: 30%;}
 .meetings .location {font-size: 14px; text-align: right; width: 20%;}
 .meetings .special-meeting { font-style: italic; font-size: 11px; line-height: 16px; margin-top: 5px; }
+.meetings .special-meeting-name { font-style: italic; font-size: 13px; display: block; line-height: 16px; padding-bottom: 4px; }
 .meetings h4 a { text-decoration: underline; color: #990000; }
 .meetings h4 a:hover { color: #C30202; }
 

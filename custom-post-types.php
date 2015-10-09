@@ -764,8 +764,13 @@ class Meeting extends CommitteeRelated{
 				'type'    => 'time',
 			),
 			array(
-				'name'    => __('Special Meeting Name'),
-				'desc'    => __('(Optional) Add a special name for the meeting.'),
+				'name'    => __('Special Meeting (Optional)'),
+				'desc'    => __('Label this meeting as a special meeting'),
+				'id'      => $this->options('name').'_special_meeting_on',
+				'type'    => 'checkbox',
+			),
+			array(
+				'desc'    => __('Add a special name for the meeting.'),
 				'id'      => $this->options('name').'_special_meeting',
 				'type'    => 'text',
 			),
