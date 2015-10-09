@@ -87,19 +87,19 @@ function display_special_meeting() {
 		<h3>Special Meeting</h3>
 		<div class="content">
 			<div class="next-meeting">
-				<?php if( $special_meeting_name ) :?>
+				<?php if( $special_meeting_name ) : ?>
 				<span class="special-meeting-name"><?php echo $special_meeting_name; ?></span>
-				<?php endif;?>
+				<?php endif; ?>
 				<span class="date"><?php echo $date; ?></span>
 				<?php if( $start and $end ) : ?>
 				<span class="time"><?php echo $start; ?> - <?php echo $end; ?></span>
-				<?php endif;?>
+				<?php endif; ?>
 				<?php if( $location ) : ?>
 				<span class="location"><?php echo $location; ?></span>
-				<?php endif;?>
+				<?php endif; ?>
 				<?php if( $committee ) : ?>
 				<span class="committee"><?php echo $committee->post_title; ?></span>
-				<?php endif;?>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
