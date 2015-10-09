@@ -771,7 +771,7 @@ class Meeting extends CommitteeRelated{
 			),
 			array(
 				'name'    => __('Special Meeting Name'),
-				'desc'    => __('(Optional) Add a special name for the meeting'),
+				'desc'    => __('(Optional) Add a name for the special meeting'),
 				'id'      => $this->options('name').'_special_meeting',
 				'type'    => 'text',
 			),
