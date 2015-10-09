@@ -23,10 +23,10 @@
 			<div class="highlight">
 				<h3>Next Board Meeting</h3>
 				<div class="content">
-					<?php display_next_meeting() ?>
+					<?php display_next_meeting(); ?>
 				</div>
 			</div>
-			<?php display_special_meeting() ?>
+			<?php display_special_meeting(); ?>
 		</div>
 		<div class="span3" id="sidebar">
 			<div class="highlight">

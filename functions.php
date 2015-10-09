@@ -41,7 +41,7 @@ function display_next_meeting() {
 	ob_start();
 	?>
 	<div class="next-meeting">
-		<?php if( !is_null($meeting = get_next_meeting(null)) ):
+		<?php if( !is_null($meeting = get_next_meeting()) ):
 			$meta  = get_post_custom($meeting->ID);
 			$date  = strtotime($meta['meeting_date'][0]);
 
@@ -72,40 +72,38 @@ function display_next_meeting() {
 
 function display_special_meeting() {
 	ob_start();
-	?>
-	<?php if( !is_null($meeting = get_next_meeting(null, true)) ):
-		$meta  = get_post_custom($meeting->ID);
-		$date  = strtotime($meta['meeting_date'][0]);
+	if( !is_null( $meeting = get_next_meeting( null, true ) ) ):
+		$meta  = get_post_custom( $meeting->ID );
+		$date  = strtotime( $meta['meeting_date'][0] );
 
-		$date      = date('F j, Y', $date);
+		$date      = date( 'F j, Y', $date );
 		$start     = $meta['meeting_start_time'][0];
 		$end       = $meta['meeting_end_time'][0];
 		$location  = $meta['meeting_location'][0];
 		$special_meeting_name = $meta['meeting_special_meeting'][0];
-		$committee = ($meta['meeting_committee'][0]) ? get_post($meta['meeting_committee'][0]) : null;
+		$committee = ( $meta['meeting_committee'][0] ) ? get_post( $meta['meeting_committee'][0] ) : null;
 	?>
 	<div class="highlight">
 		<h3>Special Meeting</h3>
 		<div class="content">
 			<div class="next-meeting">
-				<?php if($special_meeting_name):?>
-				<span class="special-meeting-name"><?=$special_meeting_name?></span>
+				<?php if( $special_meeting_name ) :?>
+				<span class="special-meeting-name"><?php echo $special_meeting_name; ?></span>
 				<?php endif;?>
-				<span class="date"><?=$date?></span>
-				<?php if($start and $end):?>
-				<span class="time"><?=$start?> - <?=$end?></span>
+				<span class="date"><?php echo $date; ?></span>
+				<?php if( $start and $end ) : ?>
+				<span class="time"><?php echo $start; ?> - <?php echo $end; ?></span>
 				<?php endif;?>
-				<?php if($location):?>
-				<span class="location"><?=$location?></span>
+				<?php if( $location ) : ?>
+				<span class="location"><?php echo $location; ?></span>
 				<?php endif;?>
-				<?php if($committee):?>
-				<span class="committee"><?=$committee->post_title?></span>
+				<?php if( $committee ) : ?>
+				<span class="committee"><?php echo $committee->post_title; ?></span>
 				<?php endif;?>
 			</div>
 		</div>
 	</div>
-	<?php endif;?>
-	<?
+	<?php endif;
 	echo ob_get_clean();
 }
 
@@ -192,11 +190,11 @@ function display_agenda_minutes_pages($page, $agendas, $minutes) {
 
 
 /* Utility - Meetings */
-function get_meetings($committee=null, $year=null, $is_special_meeting=null){
+function get_meetings($committee=null, $year=null, $is_special_meeting=false){
 	global $wpdb;
 
 	if (is_null($committee) && $is_special_meeting === true) {
-		$sql .= "
+		$sql = "
 			SELECT post.*
 			FROM   $wpdb->posts post
 			JOIN   $wpdb->postmeta meta
