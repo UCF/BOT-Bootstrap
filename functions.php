@@ -190,10 +190,10 @@ function display_agenda_minutes_pages($page, $agendas, $minutes) {
 
 
 /* Utility - Meetings */
-function get_meetings($committee=null, $year=null, $is_special_meeting=false){
+function get_meetings( $committee=null, $year=null, $is_special_meeting=false ){
 	global $wpdb;
 
-	if (is_null($committee) && $is_special_meeting === true) {
+	if ( is_null( $committee ) && $is_special_meeting === true ) {
 		$sql = "
 			SELECT post.*
 			FROM   $wpdb->posts post
@@ -214,7 +214,7 @@ function get_meetings($committee=null, $year=null, $is_special_meeting=false){
 			             SELECT post_id
 			             FROM   $wpdb->postmeta
 			             WHERE  meta_key = 'meeting_committee')";
-	} else if (is_null($committee) && $is_special_meeting !== true) {
+	} else if ( is_null( $committee ) && $is_special_meeting !== true ) {
 		$sql = "
 			SELECT post.*
 			FROM   $wpdb->posts post
@@ -257,24 +257,24 @@ function get_meetings($committee=null, $year=null, $is_special_meeting=false){
 	}
 
 	// Filter meeting results by the specified year
-	if( !is_null($year) &&
+	if( !is_null( $year ) &&
 		(int)$year != 0 &&
-		($start_time = strtotime($year.'-01-01 00:00:00')) !== False &&
-		($end_time   = strtotime($year.'-12-31 00:00:00')) !== False) {
+		( $start_time = strtotime( $year.'-01-01 00:00:00' ) ) !== false &&
+		( $end_time   = strtotime( $year.'-12-31 00:00:00' ) ) !== false ) {
 
-		$start_date = date('Y-m-d', $start_time);
-		$end_date   = date('Y-m-d', $end_time);
+		$start_date = date( 'Y-m-d', $start_time );
+		$end_date   = date( 'Y-m-d', $end_time );
 
 		$sql .= '
 			AND (
-				STR_TO_DATE('.(is_null($committee) ? '' : 'meta_1.').'meta_value, "%m/%e/%Y") >= STR_TO_DATE("'.$start_date.'", "%Y-%m-%d")
-				AND STR_TO_DATE('.(is_null($committee) ? '' : 'meta_1.').'meta_value, "%m/%e/%Y") <= STR_TO_DATE("'.$end_date.'", "%Y-%m-%d")
+				STR_TO_DATE('.( is_null( $committee ) ? '' : 'meta_1.' ).'meta_value, "%m/%e/%Y") >= STR_TO_DATE("'.$start_date.'", "%Y-%m-%d")
+				AND STR_TO_DATE('.( is_null( $committee ) ? '' : 'meta_1.' ).'meta_value, "%m/%e/%Y") <= STR_TO_DATE("'.$end_date.'", "%Y-%m-%d")
 				)
 
 		';
 	}
 
-	return $wpdb->get_results($sql);
+	return $wpdb->get_results( $sql );
 }
 
 function sort_meetings(&$meetings){
