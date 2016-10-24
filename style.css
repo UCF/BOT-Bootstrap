@@ -2,7 +2,7 @@
 Theme Name: Board of Trustees - Bootstrap
 Author: UCF Web Communications
 Github Theme URI: https://github.com/UCF/BOT-Bootstrap
-Version: v1.0.13
+Version: v1.0.14
 */
 
 /* Header */
@@ -200,3 +200,16 @@ Version: v1.0.13
 .document-table .actions a { color: #990000; text-decoration: underline; }
 .document-table .actions a:hover { color: #C30202; }
 .document-table + h3 { margin-top: 30px; }
+
+
+/* Gravity Forms input size fixes */
+body .gform_wrapper .gform_body .gform_fields .gfield input[type=text],
+body .gform_wrapper .gform_body .gform_fields .gfield input[type=email],
+body .gform_wrapper .gform_body .gform_fields .gfield input[type=tel],
+body .gform_wrapper .gform_body .gform_fields .gfield input[type=url],
+body .gform_wrapper .gform_body .gform_fields .gfield input[type=number],
+body .gform_wrapper .gform_body .gform_fields .gfield input[type=password],
+body .gform_wrapper .gform_body .gform_fields .gfield select {
+  height: 30px;
+}
+
