@@ -1,0 +1,441 @@
+// Force sans-serif font on common components
+.alert,
+.badge,
+.breadcrumb,
+.btn,
+.carousel,
+.collapse,
+.ucf-dropdown,
+.jumbotron,
+.label,
+.list-group,
+.media,
+.modal,
+.nav,
+.navbar,
+.pagination,
+.panel,
+.well {
+  @include no-font-smoothing();
+  font-family: $font-family-sans-serif;
+}
+
+// Add animations to dropdowns
+// Adapted from https://gist.github.com/orizens/4994397
+@include body-prefix(':not(.ie8)') {
+  .ucf-dropdown-menu {
+    @include animation-fill-mode(forwards); // NOTE: deprecated mixin
+    @include scale(1, 0);
+    @include transform-origin(top);
+    @include transition(all .3s cubic-bezier(.190, 1, .220, 1));
+    box-shadow: 0 0 0 transparent;
+    display: block;
+  }
+
+  .open > .ucf-dropdown-menu {
+    @include scale(1, 1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .08);
+  }
+
+  .dropup .ucf-dropdown-menu {
+    @include transform-origin(bottom);
+
+    &:after {
+      border-bottom: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid rgba(39, 45, 51, .9);
+      bottom: -6px;
+      content: '';
+      display: inline-block;
+      left: 50%;
+      position: absolute;
+      top: auto;
+    }
+  }
+}
+
+
+// Modals
+.modal-dialog {
+  margin-top: 75px; // UCF Header height + 25px pad
+}
+
+
+// Social Buttons
+.share-twitter,
+.share-facebook,
+.share-googleplus,
+.share-linkedin,
+.share-email {
+  @include sprite('../img/social-share-extended.png', '../img/social-share-extended-r.png', 354px, 62px);
+  display: inline-block;
+  height: 31px;
+  margin-top: 5px;
+  width: 70px;
+}
+
+.share-twitter {
+  background-position: -71px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -71px -31px;
+  }
+}
+
+.share-facebook {
+  background-position: 0 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: 0 -31px;
+  }
+}
+
+.share-googleplus {
+  background-position: -142px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -142px -31px;
+  }
+}
+
+.share-linkedin {
+  background-position: -213px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -213px -31px;
+  }
+}
+
+.share-email {
+  background-position: -284px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -284px -31px;
+  }
+}
+
+.social-menu {
+  margin: 20px 0;
+
+  li {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+
+  a {
+    @include sprite($url: '../img/footer-social.png', $url-r: '../img/footer-social-r.png', $width: 164px, $height: 30px);
+    height: 35px;
+    width: 32px;
+
+    &[href*="facebook"] {
+      background-position: 1px 0;
+    }
+
+    &[href*="twitter"] {
+      background-position: -66px 1px;
+    }
+
+    &[href*="flickr"] {
+      background-position: -32px 0;
+    }
+
+    &[href*="youtube"] {
+      background-position: -100px 0;
+    }
+
+    &[href*="google"] {
+      background-position: -133px 0;
+    }
+  }
+}
+
+
+// Spinner icon
+.glyphicon-spin {
+  @include animation(spin 2000ms infinite linear);
+}
+
+@keyframes spin {
+  0% {
+    @include rotate(0deg);
+  }
+
+  100% {
+    @include rotate(359deg);
+  }
+}
+
+
+// News, Events
+.news {
+  .title,
+  a {
+    color: #000;
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.events {
+  border-collapse: separate;
+  border-spacing: 16px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -16px;
+
+  .date {
+    background-color: #fef7c8;
+    border: 1px solid #ded7a8;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+    color: #666;
+    font-weight: bold;
+    padding: 8px 12px;
+    text-align: center;
+    width: 1px;
+  }
+
+  .month {
+    font-size: 18px;
+  }
+
+  .day {
+    font-size: 16px;
+  }
+
+  .title {
+    font-size: 14px;
+    padding-left: 10px;
+    text-align: left;
+
+    .wrap {
+      display: block;
+      max-height: 50px;
+      overflow: hidden;
+    }
+  }
+}
+
+.callout {
+  background: #fc0;
+  margin: 0 auto;
+  text-align: center;
+  padding: 48px 0;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .icon-link {
+    display: inline-block;
+    margin: 10px auto;
+    width: 25%;
+
+    @media (max-width: $screen-xs-max) {
+      width: 50%;
+    }
+
+    a {
+      color: #000;
+
+      .fa {
+        font-size: 80px;
+        margin-bottom: 12px;
+        @include transition(color .25s);
+      }
+
+      h3 {
+        background: rgba(30, 30, 30, 0.25);
+        border-radius: 4px;
+        display: inline;
+        font-family: $font-family-sans-serif;
+        font-size: 14px;
+        padding: 2px 14px;
+        @include transition(background .25s, color .25s);
+      }
+
+      p {
+        font-size: 12px;
+        font-style: italic;
+        padding-top: 8px;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+
+        .fa {
+          color: #fff;
+        }
+
+        h3 {
+          background: rgba(10, 10, 10, 0.55);
+          color: #fc0;
+        }
+      }
+    }
+  }
+}
+
+.btn-ucf {
+  background: $ucf-gold;
+  border-radius: 0;
+  color: #000;
+  font-family: $font-family-sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 17px 30px;
+  text-transform: uppercase;
+
+  &:hover {
+    background: $ucf-bg-highlight;
+    color: #fff;
+  }
+}
+
+.navbar-gold {
+  background-color: $ucf-bg-default;
+  border: none;
+  border-radius: 0;
+
+  .navbar-brand {
+    color: $ucf-col-default;
+
+    &:hover,
+    &:focus {
+      color: $ucf-col-highlight;
+    }
+  }
+
+  .navbar-text {
+    color: $ucf-col-default;
+  }
+
+  .navbar-nav {
+    > li {
+      > a {
+        color: $ucf-col-default;
+        &:focus {
+          background-color: $ucf-bg-default;
+          color: $ucf-col-default;
+        }
+
+        &:hover {
+          background: $ucf-bg-highlight;
+          color: $ucf-col-highlight;
+        }
+      }
+
+      > .dropdown-menu {
+        background-color: $ucf-bg-default;
+        > li {
+          > a {
+            color: $ucf-col-default;
+            &:hover,
+            &:focus {
+              color: $ucf-col-highlight;
+              background-color: $ucf-bg-highlight;
+            }
+          }
+          > .divider {
+            background-color: $ucf-bg-highlight;
+          }
+        }
+      }
+    }
+    .open .dropdown-menu > .active {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: $ucf-col-highlight;
+        background-color: $ucf-bg-highlight;
+      }
+    }
+    > .active {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: $ucf-col-highlight;
+        background-color: $ucf-bg-highlight;
+      }
+    }
+    > .open {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: $ucf-col-highlight;
+        background-color: $ucf-bg-highlight;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border-color: $ucf-bg-highlight;
+
+    &:hover,
+    &:focus {
+      background-color: $ucf-bg-highlight;
+    }
+    .icon-bar {
+      background-color: $ucf-col-default;
+    }
+  }
+
+  .navbar-collapse,
+  .navbar-form {
+    border-color: $ucf-col-default;
+  }
+
+  .navbar-link {
+    color: $ucf-col-default;
+    &:hover {
+      color: $ucf-col-highlight;
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .navbar-gold {
+    .navbar-nav .open .dropdown-menu {
+      > li > a {
+        color: $ucf-col-default;
+        &:hover,
+        &:focus {
+          color: $ucf-col-highlight;
+        }
+      }
+      > .active {
+        > a,
+        > a:hover,
+        > a:focus {
+          color: $ucf-col-highlight;
+          background-color: $ucf-bg-highlight;
+        }
+      }
+    }
+  }
+}
+
+.no-pad-left {
+  padding-left: 0;
+
+  @media (max-width: $screen-xs-max) {
+    padding-left: inherit;
+  }
+}

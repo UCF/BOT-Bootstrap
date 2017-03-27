@@ -1,0 +1,36 @@
+// Variable overrides
+@import 'variables';
+
+
+// Import vendor assets
+@import '../components/bootstrap-sass-official/assets/stylesheets/bootstrap';
+@import '../components/font-awesome/scss/font-awesome';
+@import '../components/weather-icons/sass/weather-icons';
+
+
+// Import individual components for our theme here:
+
+// Base mixins, utility styles
+@import 'mixins';
+@import 'utilities';
+
+// Base styles for typography, tables, forms, and images
+@import 'type';
+@import 'tables';
+@import 'forms';
+
+// Styles for custom components and Bootstrap component overrides
+@import 'components';
+
+// Styles for our base header/footer templates
+@import 'header';
+@import 'footer';
+
+// Add more view-specific overrides here.  Try to follow WordPress template
+// naming conventions as closely as possible--e.g. home.php styles should go in
+// a file named _home.scss.
+@import 'home';
+@import 'sections';
+@import 'calendar';
+@import 'mapsearch';
+@import 'page';

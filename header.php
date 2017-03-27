@@ -38,15 +38,33 @@
 
 	</head>
 	<body>
-		<div class="container">
-			<div class="row"  id="header">
-				<h1 class="span12"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
+		<?php if ( is_home() || is_front_page() ) : $header = get_custom_header_extended(); ?>
+		<header class="site-header header-image" style="background-image: url(<?php echo $header->url; ?>);" data-header-md="<?php echo $header->url; ?>" data-header-sm="<?php echo $header->mobile; ?>">
+		<?php else: ?>
+		<header class="site-header no-header-image">
+		<?php endif; ?>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4">
+						<?php if ( is_home() || is_front_page() ) : ?>
+							<h1><a href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a></h1>
+						<?php else: ?>
+							<span class="h1"><a href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a></span>
+						<?php endif; ?>
+					</div>
+					<div class="col-md-8">
+						<?php
+							echo wp_nav_menu(array(
+								'theme_location' => 'header-menu',
+								'container'      => 'false',
+								'menu_class'     => 'menu list-unstyled list-inline',
+								'menu_id'        => 'header-menu',
+								'walker'         => new Bootstrap_Walker_Nav_Menu()
+							));
+						?>
+					</div>
+				</div>
 			</div>
-			<?=wp_nav_menu(array(
-				'theme_location' => 'header-menu',
-				'container'      => 'false',
-				'menu_class'     => 'menu horizontal',
-				'menu_id'        => 'header-menu',
-				'walker'         => new Bootstrap_Walker_Nav_Menu()
-				));
-			?>
+		</header>
+		<div class="container">
+			
