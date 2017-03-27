@@ -186,6 +186,7 @@ array_push(Config::$styles,
 
 # Scripts (output in footer)
 Config::$scripts = array(
+	'//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1',
 	THEME_JS_URL.'/script.min.js',
 );
 
