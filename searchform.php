@@ -1,8 +1,9 @@
-<form role="search" method="get" class="form-search" action="<?=home_url( '/' )?>">
+<form role="search" method="get" class="form-search" action="https://search.ucf.edu">
 	<div>
-		<label for="s">Search:</label>
-		<input type="text" value="<?=htmlentities($_GET['s'])?>" name="s" class="search-field" id="s" />
-		<br />
-		<button type="submit" class="btn">Search</button>
+		<div class="form-group">
+			<input type="text" name="q" class="form-control" id="q" placeholder="Search..." />
+			<input type="hidden" name="sitesearch" value="bot.ucf.edu">
+			<input type="submit" class="hidden">
+		</div>
 	</div>
 </form>

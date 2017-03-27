@@ -15,7 +15,7 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 	$args = array(
 		'post_type'      => 'person',
 		'posts_per_page' => (int)$atts['limit'],
-		'order'          => 'DESC',
+		'order'          => 'ASC',
 		'orderby'        => 'post_title'
 	);
 
@@ -36,23 +36,19 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 	$people = get_posts( $args );
 
 	ob_start();
-?>
-	<div class="row">
-<?php
-	foreach( $people as $person ) :
+	foreach( $people as $i=>$person ) :
 		$person = UCF_People_PostType::append_metadata( $person );
 ?>
-	<div class="col-md-3 col-sm-4">
+	<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
+	<div class="col-md-4 col-sm-6">
 		<figure class="figure person-figure">
 			<img class="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
 			<figcaption class="figure-caption"><?php echo $person->post_title; ?></figcaption>
 		</figure>
 	</div>
+	<?php if ( $i % 3 === 2  || $i == count( $people ) - 1 ) : ?></div><?php endif; ?>
 <?php
 	endforeach;
-?>
-	</div>
-<?php
 	return ob_get_clean();
 }
 

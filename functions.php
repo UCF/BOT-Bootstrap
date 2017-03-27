@@ -21,6 +21,10 @@ function people_group_labels( $labels ) {
 
 add_filter( 'ucf_people_group_labels', 'people_group_labels', 10, 1 );
 
+function get_committee_url( $term ) {
+	return get_site_url( null, '/committees/' . $term->slug );
+}
+
 function get_people_group_data( $tax_term ) {
 	$tax_term->members = get_posts(
 		array(
