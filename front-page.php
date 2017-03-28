@@ -1,4 +1,7 @@
 <?php get_header(); the_post();?>
+</div><!-- break .container -->
+<?php get_sidebar( 'home' ); ?>
+<div class="container">
 <?php $committees = get_terms( array( 'people_group' ) ); ?>
 	<div class="row page-content" id="<?php echo $post->post_name; ?>">
 		<div class="col-md-9">

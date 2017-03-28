@@ -59,6 +59,10 @@
   margin-bottom: 20px;
   padding-bottom: 20px;
 
+  &.header-image {
+    margin-bottom: 0;
+  }
+
   @media (min-width: $screen-sm-min) {
     padding-bottom: 70px;
   }
