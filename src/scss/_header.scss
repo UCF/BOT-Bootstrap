@@ -6,22 +6,25 @@
   padding-top: 15px;
 
   li {
-    padding: 15px 5px;
-    @media (max-width: $screen-sm-max) {
-      padding: 0;
+    padding: 0;
+    margin-bottom: 20px;
+
+    @media (min-width: $screen-md-min) {
+      padding: 20px 5px 0;
     }
   }
 
 
   a {
     color: #fff;
-    font-family: $font-family-serif-alt;
-    font-size: 17px;
+    font-family: $font-family-sans-serif;
+    font-size: 14px;
     font-weight: 400;
     padding: 7px;
+    text-transform: uppercase;
 
-    @media (max-width: $screen-sm-max) {
-      font-size: 14.25px !important;
+    @media (min-width: $screen-lg-min) {
+      font-size: 17px;
     }
 
     &:hover,
@@ -32,7 +35,7 @@
     }
   }
 
-  a[href]:after {
+  a[href]::after {
     @media print {
       content: '';
     }
@@ -52,31 +55,49 @@
 }
 
 .site-header {
+  background-size: cover;
   margin-bottom: 20px;
-  padding-bottom: 70px;
+  padding-bottom: 20px;
 
-  @media (max-width: $screen-xs-max) {
-    padding-bottom: 20px;
+  @media (min-width: $screen-sm-min) {
+    padding-bottom: 70px;
   }
 
-  a {
-    color: #fff;
 
-    &:hover {
-      border-bottom: 2px solid $ucf-gold;
+  h1 {
+    margin-bottom: 0;
+
+    @media (min-width: $screen-md-min) {
+      font-size: 36px;
+      line-height: 30px;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 45px;
+      line-height: 33px;
+    }
+
+    a {
       color: #fff;
-      text-decoration: none;
+
+      &:hover {
+        border-bottom: 2px solid $ucf-gold;
+        color: #fff;
+        text-decoration: none;
+      }
     }
   }
 
-  &.no-header-image { 
+  &.no-header-image {
     padding-bottom: 0;
 
     a {
       color: #000;
 
       &:hover {
+        border-bottom: 2px solid $ucf-gold;
         color: #000;
+        text-decoration: none;
       }
     }
   }
@@ -84,12 +105,13 @@
 
 .header-image {
   background-position: center center;
+  background-size: cover;
+  min-height: 425px;
+  position: relative;
   width: 100%;
-  min-height: 550px;
 
-  @media (max-width: $screen-xs-max) {
-    background-size: cover;
-    min-height: 0;
+  @media (min-width: $screen-sm-max) {
+    min-height: 550px;
   }
 }
 
@@ -130,25 +152,28 @@
     > h1,
     > span {
       @extend .h1;
-      background-color: #FC0;
+      background-color: $ucf-gold;
       background-color: rgba(255, 204, 0, .8);
 
 
       display: block;
-      font-size: 80px;
+      font-size: 40px;
       font-weight: 800;
       margin: 0;
       padding: 4px 30px;
       text-transform: uppercase;
 
-      @media (max-width: $screen-md-max) {
-        font-size: 68px;
-      }
-      @media (max-width: $screen-sm-max) {
+
+      @media (min-width: $screen-sm-min) {
         font-size: 55px;
       }
-      @media (max-width: $screen-xs-max) {
-        font-size: 40px;
+
+      @media (min-width: $screen-md-min) {
+        font-size: 68px;
+      }
+
+      @media (min-width: $screen-lg-min) {
+        font-size: 80px;
       }
     }
   }
@@ -169,12 +194,12 @@
     color: #fff;
     font-family: $font-family-serif;
     font-size: 18px;
+    font-weight: 100;
+    letter-spacing: 1.35px;
     line-height: 32px;
     padding: 6px 20px;
     position: absolute;
     right: 0;
-    letter-spacing: 1.35px;
-    font-weight: 100;
 
     @media (max-width: $screen-xs-max) {
       font-size: 13px;
@@ -190,11 +215,11 @@
       }
 
       span {
-        color: #ffc904;
-        font-size: 27px;
-        display: inline-block;
-        position: relative;
         bottom: -3px;
+        color: #ffc904;
+        display: inline-block;
+        font-size: 27px;
+        position: relative;
 
         @media (max-width: $screen-xs-max) {
           font-size: 20px;
@@ -210,8 +235,8 @@
     }
 
     .temp {
-      margin-left: 4px;
       font-weight: 800;
+      margin-left: 4px;
     }
   }
 }

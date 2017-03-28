@@ -41,7 +41,7 @@
 		<?php if ( is_home() || is_front_page() ) : $header = get_custom_header_extended(); ?>
 		<header class="site-header header-image" style="background-image: url(<?php echo $header->url; ?>);" data-header-md="<?php echo $header->url; ?>" data-header-sm="<?php echo $header->mobile; ?>">
 		<?php else: ?>
-		<header class="site-header no-header-image">
+		<header class="site-header no-header-image position-relative">
 		<?php endif; ?>
 			<div class="container">
 				<div class="row">
@@ -68,20 +68,26 @@
 					if ( ( is_home() || is_front_page() ) &&
 						( get_theme_mod_or_default( 'header_copy' ) || get_theme_mod_or_default( 'header_button_copy' ) ) ) :
 				?>
-					<div class="row">
-						<div class="col-md-9">
-							<?php if ( get_theme_mod_or_default( 'header_copy' ) ) :?>
-								<p><?php echo get_theme_mod_or_default( 'header_copy' ) ?></p>
-							<?php endif; // End header copy if ?>
-						</div>
-						<div class="col-md-3">
-							<?php if ( get_theme_mod_or_default( 'header_button_copy' ) && get_theme_mod_or_default( 'header_button_link' ) ) :?>
-								<a href="<?php echo get_theme_mod_or_default( 'header_button_link' ) ?>" class="btn btn-ucf">
-									<?php echo get_theme_mod_or_default( 'header_button_copy' ) ?>
-								</a>
-							<?php endif; // End Header button if ?>
-						</div>
+				</div>
 					</div>
+						<div class="homepage-header-copy-container">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-8">
+										<?php if ( get_theme_mod_or_default( 'header_copy' ) ) :?>
+											<p class="homepage-header-copy child"><?php echo get_theme_mod_or_default( 'header_copy' ) ?></p>
+										<?php endif; // End header copy if ?>
+									</div>
+									<div class="col-md-3 col-md-offset-1">
+										<?php if ( get_theme_mod_or_default( 'header_button_copy' ) && get_theme_mod_or_default( 'header_button_link' ) ) :?>
+											<a href="<?php echo get_theme_mod_or_default( 'header_button_link' ) ?>" class="btn btn-ucf">
+												<?php echo get_theme_mod_or_default( 'header_button_copy' ) ?>
+											</a>
+										<?php endif; // End Header button if ?>
+									</div>
+								</div>
+							</div>
+						</div>
 				<?php endif; ?>
 			</div>
 		</header>
