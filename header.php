@@ -64,7 +64,26 @@
 						?>
 					</div>
 				</div>
+				<?php
+					if ( ( is_home() || is_front_page() ) &&
+						( get_theme_mod_or_default( 'header_copy' ) || get_theme_mod_or_default( 'header_button_copy' ) ) ) :
+				?>
+					<div class="row">
+						<div class="col-md-9">
+							<?php if ( get_theme_mod_or_default( 'header_copy' ) ) :?>
+								<p><?php echo get_theme_mod_or_default( 'header_copy' ) ?></p>
+							<?php endif; // End header copy if ?>
+						</div>
+						<div class="col-md-3">
+							<?php if ( get_theme_mod_or_default( 'header_button_copy' ) && get_theme_mod_or_default( 'header_button_link' ) ) :?>
+								<a href="<?php echo get_theme_mod_or_default( 'header_button_link' ) ?>" class="btn btn-ucf">
+									<?php echo get_theme_mod_or_default( 'header_button_copy' ) ?>
+								</a>
+							<?php endif; // End Header button if ?>
+						</div>
+					</div>
+				<?php endif; ?>
 			</div>
 		</header>
 		<div class="container">
-			
+

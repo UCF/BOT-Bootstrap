@@ -74,9 +74,57 @@ Config::$custom_taxonomies = array(
 	'Labels'
 );
 
-function define_customizer_fields( $wp_customize ) {
-	
+function define_customizer_sections( $wp_customize ) {
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'homepage',
+		array(
+			'title' => 'Homepage'
+		)
+	);
 }
+add_action( 'customize_register', 'define_customizer_sections' );
+
+function define_customizer_fields( $wp_customize ) {
+	// Home Page Copy
+	$wp_customize->add_setting(
+		'header_copy'
+	);
+	$wp_customize->add_control(
+		'header_copy',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Header Copy',
+			'description' => 'Copy displayed in the header on the homepage.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+		)
+	);
+	// Home Page Button
+	$wp_customize->add_setting(
+		'header_button_copy'
+	);
+	$wp_customize->add_control(
+		'header_button_copy',
+		array(
+			'type'        => 'text',
+			'label'       => 'Header Button Copy',
+			'description' => 'Copy displayed in the button on the homepage.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+		)
+	);
+	$wp_customize->add_setting(
+		'header_button_link'
+	);
+	$wp_customize->add_control(
+		'header_button_link',
+		array(
+			'type'        => 'text',
+			'label'       => 'Header Button Link',
+			'description' => 'Link for the button on the homepage.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+		)
+	);
+}
+add_action( 'customize_register', 'define_customizer_fields' );
 
 /**
  * Configure theme settings, see abstract class Field's descendants for
