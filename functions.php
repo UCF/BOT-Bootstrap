@@ -149,23 +149,26 @@ function get_meetings_committee( $committee, $args=array() ) {
 function get_latest_meeting_minutes( $committee='None', $args=array() ) {
 	$retval = null;
 
+	$today = date('Y-m-d H:i:s');
 	$committee = term_exists( $committee, 'people_group' );
 
 	$args = array(
 		'posts_per_page' => 1,
 		'meta_key'       => 'ucf_meeting_date',
 		'meta_type'      => 'DATETIME',
-		'orderby'        => 'meta_value_num',
+		'orderby'        => 'meta_value',
 		'order'          => 'DESC',
 		'meta_query'     => array(
 			array(
 				'key'     => 'ucf_meeting_date',
-				'compare' => 'EXISTS'
+				'value'   => $today,
+				'compare' => '<=',
+				'type'    => 'DATETIME'
 			),
 			array(
 				'key'     => 'ucf_meeting_committee',
 				'value'   => $committee['term_id'],
-				'compare' => '='
+				'compare' => 'LIKE'
 			),
 			array(
 				'key'     => 'ucf_meeting_minutes',
