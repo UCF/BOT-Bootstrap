@@ -16,4 +16,10 @@
       content: '\f1c2';
     }
   }
+
+  &[href*='.xlsx'] {
+    &::before {
+      content: '\f1c3';
+    }
+  }
 }
