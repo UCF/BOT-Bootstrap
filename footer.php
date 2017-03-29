@@ -24,7 +24,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 text-align-center">
-						&copy; University of Central Florida
+						<img class="ucf-logo-footer" src="<?php echo THEME_STATIC_URL ?>/img/ucf-logo-footer.png" alt="UCF - University of Central Florida">
+						<p class="footer-copyright">
+							&copy; University of Central Florida
+						</p>
 					</div>
 				</div>
 			</div>
