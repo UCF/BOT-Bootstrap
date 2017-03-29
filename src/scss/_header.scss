@@ -6,8 +6,8 @@
   padding-top: 15px;
 
   li {
-    padding: 0;
     margin-bottom: 20px;
+    padding: 0;
 
     @media (min-width: $screen-md-min) {
       padding: 20px 5px 0;
@@ -194,8 +194,8 @@
 
   .weather {
     background: #000;
-    display: inline-block;
     color: #fff;
+    display: inline-block;
     font-family: $font-family-serif;
     font-size: 18px;
     font-weight: 100;

@@ -1,17 +1,18 @@
 .document {
-  &:before {
+  &::before {
     font-family: 'FontAwesome';
     margin-right: 4px;
     position: relative;
   }
 
   &[href*='.pdf'] {
-    &:before {
+    &::before {
       content: '\f1c1';
     }
   }
+
   &[href*='.docx'] {
-    &:before {
+    &::before {
       content: '\f1c2';
     }
   }

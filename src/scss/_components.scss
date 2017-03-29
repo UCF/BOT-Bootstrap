@@ -422,10 +422,10 @@
     margin-bottom: 8px;
 
     &::before {
-      font-family: 'FontAwesome';
-      content: '\f138';
-      margin: 9px 8px 0 -20px;
       color: $ucf-gold;
+      content: '\f138';
+      font-family: 'FontAwesome';
+      margin: 9px 8px 0 -20px;
     }
 
     a {
@@ -445,7 +445,7 @@
   .figure-caption {
     font-family: $font-family-sans-serif;
     font-weight: 600;
-    text-align: center;
     padding: 15px 0;
+    text-align: center;
   }
 }
