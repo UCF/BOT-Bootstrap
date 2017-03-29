@@ -6,7 +6,7 @@
 		<h2>Meetings in <?php echo $today->format( 'Y' ); ?></h2>
 		<?php $meetings = get_meetings_committee( $term ); ?>
 		<?php echo display_meetings( $meetings ); ?>
-		<h2>Committee Memebers</h2>
+		<h2>Committee Members</h2>
 		<?php echo do_shortcode( '[people-list category="trustee" people_group="' . $tax->slug . '"]' ); ?>
 		<h2>Commitee Staff</h2>
 		<?php echo do_shortcode( '[people-list category="committee-staff" people_group="' . $tax->slug . '"]' ); ?>
