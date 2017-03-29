@@ -55,7 +55,6 @@
   }
 }
 
-
 // Modals
 .modal-dialog {
   margin-top: 75px; // UCF Header height + 25px pad
@@ -404,13 +403,6 @@
   @media (max-width: $screen-xs-max) {
     padding-left: inherit;
   }
-}
-
-.h2-gotham {
-  font-family: $font-family-sans-serif;
-  font-size: 18px;
-  margin-bottom: 25px;
-  text-transform: uppercase;
 }
 
 .list-gold-arrow {

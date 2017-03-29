@@ -9,7 +9,7 @@
 		</div>
 		<div class="col-md-3" id="sidebar">
 			<aside>
-				<h2 class="h2-gotham">Committees</h2>
+				<h2>Committees</h2>
 				<ul class="list-gold-arrow">
 				<?php foreach( $committees as $committee ) : ?>
 					<li><a href="<?php echo get_committee_url( $committee ); ?>"><?php echo $committee->name; ?></a></li>
