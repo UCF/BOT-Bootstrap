@@ -405,3 +405,47 @@
     padding-left: inherit;
   }
 }
+
+.h2-gotham {
+  font-family: $font-family-sans-serif;
+  font-size: 18px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+.list-gold-arrow {
+  padding-left: 22px;
+
+  li {
+    font-size: 16px;
+    list-style: none;
+    margin-bottom: 8px;
+
+    &::before {
+      font-family: 'FontAwesome';
+      content: '\f138';
+      margin: 9px 8px 0 -20px;
+      color: $ucf-gold;
+    }
+
+    a {
+      color: $ucf-col-default;
+    }
+  }
+}
+
+.person-figure {
+  background: #f0f1f2;
+  margin-bottom: 30px;
+
+  img {
+    width: 100%;
+  }
+
+  .figure-caption {
+    font-family: $font-family-sans-serif;
+    font-weight: 600;
+    text-align: center;
+    padding: 15px 0;
+  }
+}
