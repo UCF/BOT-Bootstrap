@@ -3,9 +3,8 @@
 	<div class="col-md-8">
 		<h1><?php echo $term->name; ?></h1>
 		<p class="lead"><?php echo $term->description; ?></p>
-		<h2>Meetings in <?php echo $today->format( 'Y' ); ?></h2>
-		<?php $meetings = get_meetings_committee( $term ); ?>
-		<?php echo display_meetings( $meetings ); ?>
+		<?php $meetings = get_meetings_by_year_committee( $term ); ?>
+		<?php echo display_meetings_by_year( $meetings ); ?>
 		<h2>Committee Members</h2>
 		<?php echo do_shortcode( '[people-list category="trustee" people_group="' . $tax->slug . '"]' ); ?>
 		<h2>Commitee Staff</h2>

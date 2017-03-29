@@ -135,6 +135,35 @@ function display_meetings( $meetings ) {
 	return ob_get_clean();
 }
 
+function display_meetings_by_year( $years ) {
+	ob_start();
+	reset( $years );
+	$first_year = key( $years );
+?>
+	<div class="row">
+		<div class="col-md-8">
+			<h2>Meetings in <span id="meeting-year"><?php echo $first_year; ?></span></h2>
+		</div>
+		<div class="col-md-4">
+			<label for="year_select">Select Year</label>
+			<select id="year_select" class="dropdown">
+			<?php foreach ( array_keys( $years ) as $year ) :?>
+				<option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+			<?php endforeach; ?>
+			</select>
+		</div>
+	</div>
+	<div class="tab-content">
+	<?php foreach( $years as $year=>$meetings ) : ?>
+		<div role="tabpanel" class="tab-pane<?php echo ($first_year === $year) ? ' active' : ''; ?>" id="panel_<?php echo $year; ?>">
+			<?php echo display_meetings( $meetings ); ?>
+		</div>
+	<?php endforeach; ?>
+	</div>
+<?php
+	return ob_get_clean();
+}
+
 function get_meetings_committee( $committee, $args=array() ) {
 	$args['meta_query'] = array(
 		array(
@@ -144,6 +173,17 @@ function get_meetings_committee( $committee, $args=array() ) {
 	);
 
 	return UCF_Meeting::all( $args );
+}
+
+function get_meetings_by_year_committee( $committee, $args=array() ) {
+	$args['meta_query'] = array(
+		array(
+			'key'      => 'ucf_meeting_committee',
+			'value'    => $committee->term_id
+		)
+	);
+
+	return UCF_Meeting::group_by_year( $args );
 }
 
 function get_latest_meeting_minutes( $committee='None', $args=array() ) {
