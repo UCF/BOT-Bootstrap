@@ -16,7 +16,7 @@
 						?>
 						</div>
 						<div class="col-md-4">
-							[Search Goes Here]
+							<?php get_search_form(); ?>
 						</div>
 					</div>
 				</div>
