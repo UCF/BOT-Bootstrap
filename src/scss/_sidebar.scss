@@ -2,3 +2,18 @@
   border-radius: 0;
   margin-bottom: 20px;
 }
+
+.sidebar-home,
+.sidebar {
+
+  h3 {
+    border-bottom: 2px solid $ucf-gold;
+    color: #88898a;
+    font-family: $font-family-sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    text-transform: uppercase;
+  }
+}
