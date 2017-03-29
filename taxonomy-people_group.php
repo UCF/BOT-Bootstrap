@@ -6,9 +6,9 @@
 		<?php $meetings = get_meetings_by_year_committee( $term ); ?>
 		<?php echo display_meetings_by_year( $meetings ); ?>
 		<h2>Committee Members</h2>
-		<?php echo do_shortcode( '[people-list category="trustee" people_group="' . $tax->slug . '"]' ); ?>
+		<?php echo do_shortcode( '[people-list category="trustee" people_group="' . $term->slug . '"]' ); ?>
 		<h2>Commitee Staff</h2>
-		<?php echo do_shortcode( '[people-list category="committee-staff" people_group="' . $tax->slug . '"]' ); ?>
+		<?php echo do_shortcode( '[people-list category="committee-staff" people_group="' . $term->slug . '"]' ); ?>
 	</div>
 	<div class="col-md-4">
 	<?php get_sidebar(); ?>
