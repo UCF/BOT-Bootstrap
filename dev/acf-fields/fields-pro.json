@@ -1,0 +1,365 @@
+[
+    {
+        "key": "group_58dd35aa9c60f",
+        "title": "Committee Fields",
+        "fields": [
+            {
+                "key": "field_58d2c175c556e",
+                "label": "Charter",
+                "name": "people_group_charter",
+                "type": "file",
+                "instructions": "The PDF of the committee's charter.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "library": "uploadedTo",
+                "return_format": "url",
+                "min_size": 0,
+                "max_size": 0,
+                "mime_types": ""
+            },
+            {
+                "key": "field_58dd0d2c92039",
+                "label": "Chair",
+                "name": "people_group_chair",
+                "type": "post_object",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "person"
+                ],
+                "taxonomy": [
+                    "category:16",
+                    "category:16"
+                ],
+                "allow_null": 0,
+                "multiple": 0,
+                "return_format": "object",
+                "ui": 1
+            },
+            {
+                "key": "field_58dd0d4f9203a",
+                "label": "Vice Chair",
+                "name": "people_group_vice_chair",
+                "type": "post_object",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "person"
+                ],
+                "taxonomy": [
+                    "category:16",
+                    "category:16"
+                ],
+                "allow_null": 0,
+                "multiple": 0,
+                "return_format": "object",
+                "ui": 1
+            },
+            {
+                "key": "field_58dd0d6e9203b",
+                "label": "Ex Officio",
+                "name": "people_group_ex_officio",
+                "type": "post_object",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "person"
+                ],
+                "taxonomy": [
+                    "category:16",
+                    "category:16"
+                ],
+                "allow_null": 0,
+                "multiple": 0,
+                "return_format": "object",
+                "ui": 1
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "people_group"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "seamless",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            
+        ],
+        "active": 1,
+        "description": "",
+        "old_ID": 11
+    },
+    {
+        "key": "group_58dd35aaa9baa",
+        "title": "Meeting Fields",
+        "fields": [
+            {
+                "key": "field_58d2ddfe61411",
+                "label": "Committee",
+                "name": "ucf_meeting_committee",
+                "type": "taxonomy",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "taxonomy": "people_group",
+                "field_type": "select",
+                "allow_null": 0,
+                "load_save_terms": 0,
+                "return_format": "id",
+                "multiple": 0,
+                "add_term": 1,
+                "load_terms": 0,
+                "save_terms": 0
+            },
+            {
+                "key": "field_58d2de2c61412",
+                "label": "Agenda",
+                "name": "ucf_meeting_agenda",
+                "type": "file",
+                "instructions": "Meeting Agenda",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "library": "uploadedTo",
+                "return_format": "url",
+                "min_size": 0,
+                "max_size": 0,
+                "mime_types": ""
+            },
+            {
+                "key": "field_58d2de4361413",
+                "label": "Minutes",
+                "name": "ucf_meeting_minutes",
+                "type": "file",
+                "instructions": "Meeting minutes",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "library": "uploadedTo",
+                "return_format": "url",
+                "min_size": 0,
+                "max_size": 0,
+                "mime_types": ""
+            },
+            {
+                "key": "field_58d2de5a61414",
+                "label": "Location",
+                "name": "ucf_meeting_location",
+                "type": "text",
+                "instructions": "The meeting's location.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "formatting": "none",
+                "maxlength": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_58d2deb261415",
+                "label": "Special Meeting",
+                "name": "ucf_meeting_special_meeting",
+                "type": "true_false",
+                "instructions": "(Optional) Label this meeting as a special meeting.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0
+            },
+            {
+                "key": "field_58d2ded461416",
+                "label": "Special Meeting Name",
+                "name": "ucf_meeting_special_name",
+                "type": "text",
+                "instructions": "(Optional) Add a name for the special meeting",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58d2deb261415",
+                            "operator": "==",
+                            "value": ""
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "formatting": "none",
+                "maxlength": "",
+                "readonly": 0,
+                "disabled": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "meeting"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            
+        ],
+        "active": 1,
+        "description": "",
+        "old_ID": 29
+    },
+    {
+        "key": "group_58dd35aab84fe",
+        "title": "People Fields",
+        "fields": [
+            {
+                "key": "field_58d2bf3407cf2",
+                "label": "Job Title",
+                "name": "person_job_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "formatting": "none",
+                "maxlength": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_58d2bf8107cf4",
+                "label": "Phone",
+                "name": "person_phone",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "(###) ###-####",
+                "prepend": "",
+                "append": "",
+                "formatting": "none",
+                "maxlength": "",
+                "readonly": 0,
+                "disabled": 0
+            },
+            {
+                "key": "field_58d2bfb307cf5",
+                "label": "Email",
+                "name": "person_email",
+                "type": "email",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "person.name@ucf.edu",
+                "prepend": "",
+                "append": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "person"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            
+        ],
+        "active": 1,
+        "description": "",
+        "old_ID": 6
+    }
+]
