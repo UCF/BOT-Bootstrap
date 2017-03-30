@@ -1,4 +1,5 @@
 <?php get_header(); the_post();?>
+<div class="container">
 	<div class="row page-content" id="<?=$post->post_name?>">
 		<div class="span8">
 			<h2 class="page-title"><?php the_title(); ?></h2>
@@ -9,4 +10,5 @@
 		</div>
 		<?=get_sidebar();?>
 	</div>
+</div>
 <?php get_footer();?>
