@@ -1,7 +1,7 @@
 <?php get_header(); $term = $wp_query->get_queried_object(); $today = new DateTime( 'now' ); ?>
 <div class="container">
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-9">
 			<h1><?php echo $term->name; ?></h1>
 			<p class="lead"><?php echo $term->description; ?></p>
 			<?php $meetings = get_meetings_by_year_committee( $term ); ?>
@@ -14,7 +14,7 @@
 			<?php $charter = get_field( 'people_group_charter', 'people_group_' . $term->term_id ); ?>
 			<a class="document" href="<?php echo $charter; ?>"><?php echo $term->name; ?> Committee Charter</a>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-3">
 		<?php get_sidebar(); ?>
 		</div>
 	</div>
