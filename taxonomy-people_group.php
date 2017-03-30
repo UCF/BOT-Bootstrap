@@ -10,6 +10,9 @@
 			<?php echo display_committee_members( $term ); ?>
 			<h2>Commitee Staff</h2>
 			<?php echo display_committee_staff( $term ); ?>
+			<h2>Committee Charter</h2>
+			<?php $charter = get_field( 'people_group_charter', 'people_group_' . $term->term_id ); ?>
+			<a class="document" href="<?php echo $charter; ?>"><?php echo $term->name; ?> Committee Charter</a>
 		</div>
 		<div class="col-md-4">
 		<?php get_sidebar(); ?>

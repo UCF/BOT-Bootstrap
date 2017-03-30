@@ -188,27 +188,45 @@ function display_meetings( $meetings ) {
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Meeting</th>
+				<th>Date</th>
+				<th>Time</th>
+				<th>Location</th>
 				<th>Agenda</th>
 				<th>Minutes</th>
 			</tr>
 		</thead>
 		<tbody>
 	<?php foreach( $meetings as $post ) : ?>
+	<?php
+		$date = isset( $post->metadata['ucf_meeting_date'] ) ? $post->metadata['ucf_meeting_date']->format( 'F j, Y' ) : 'TBD';
+		$start = isset( $post->metadata['ucf_meeting_start_time'] ) ? $post->metadata['ucf_meeting_start_time'] : null;
+		$end = isset( $post->metadata['ucf_meeting_end_time'] ) ? $post->metadata['ucf_meeting_end_time'] : null;
+		$location = isset( $post->metadata['ucf_meeting_location'] ) ? $post->metadata['ucf_meeting_location'] : 'TBD';
+	?>
 			<tr>
-				<td><?php echo $post->post_title; ?></td>
+				<td><?php echo $date; ?></td>
+				<td>
+				<?php if ( ( $start && ! $end ) || ( $start == $end ) ) : ?>
+					<time><?php echo $start; ?></time>
+				<?php elseif ( $start && $end ) : ?>
+					<time><?php echo $start; ?> - <?php echo $end; ?></time>
+				<?php else : ?>
+					TBD
+				<?php endif; ?>
+				</td>
+				<td><?php echo $post->metadata['ucf_meeting_location']; ?></td>
 				<td>
 					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) ) : ?>
-					<a href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>">Agenda</a>
+					<a class="document text-center" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>">Agenda</a>
 					<?php else: ?>
-					<p>No Agenda</p>
+					<p class="text-center"> - </p>
 					<?php endif; ?>
 				</td>
 				<td>
 					<?php if ( isset( $post->metadata['ucf_meeting_minutes'] ) ) : ?>
-					<a href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>">Minutes</a>
+					<a class="document text-center" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>">Minutes</a>
 					<?php else: ?>
-					<p>No Minutes</p>
+					<p class="text-center"> - </p>
 					<?php endif; ?>
 				</td>
 			</tr>
