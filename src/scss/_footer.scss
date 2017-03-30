@@ -26,6 +26,27 @@ footer {
     a:hover {
       color: #fff;
     }
+
+    .dropdown-menu {
+
+      .menu-item {
+        margin-right: 0 !important;
+
+        &.active {
+          a {
+            background-color: #eee;
+            color: #000;
+          }
+        }
+      }
+
+      a,
+      a:focus,
+      a:active,
+      a:hover {
+        color: #000;
+      }
+    }
   }
 
   .footer-copyright {

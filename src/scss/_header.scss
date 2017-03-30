@@ -60,7 +60,7 @@ header {
         &:active
         &:focus {
           border-bottom: 2px solid $ucf-gold;
-          padding-bottom: 5px;
+          padding-bottom: 7px;
         }
       }
     }
@@ -113,8 +113,22 @@ header {
   .dropdown-menu .menu-item {
     margin-top: 0;
 
+    &.active {
+      a {
+        background-color: #eee;
+        color: #000;
+      }
+    }
+
     a {
+      border-bottom: 0;
       color: #000;
+
+      &:hover,
+      &:active
+      &:focus {
+        border-bottom: 0;
+      }
     }
   }
 
