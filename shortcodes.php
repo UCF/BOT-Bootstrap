@@ -55,4 +55,24 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 }
 
 add_shortcode( 'people-list', 'ucf_people_list_shortcode' );
+
+function ucf_people_group_charter_list_shortcode( $atts, $content="" ) {
+	$none_term = term_exists( 'None', 'people_group' );
+	$terms = get_terms( array(
+		'taxonomy' => 'people_group',
+		'exclude'  => array( $none_term )
+	) );
+	ob_start();
+?>
+	<ul class="list-unstyled">
+	<?php foreach( $terms as $term ) : $charter = get_field( 'people_group_charter', 'people_group_' . $term->term_id ); ?>
+		<li><a class="document" href=<?php echo $charter; ?>><?php echo $term->name; ?> Committee Charter</a></li>
+	<?php endforeach; ?>
+	</ul>
+<?php
+	return ob_get_clean();
+}
+
+add_shortcode( 'charter-list', 'ucf_people_group_charter_list_shortcode' );
+
 ?>

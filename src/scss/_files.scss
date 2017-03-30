@@ -1,24 +1,27 @@
 .document {
   &::before {
     font-family: 'FontAwesome';
-    margin-right: 4px;
+    margin-right: 8px;
     position: relative;
   }
 
   &[href*='.pdf'] {
     &::before {
+      color: #d90200;
       content: '\f1c1';
     }
   }
 
   &[href*='.docx'] {
     &::before {
+      color: #2a5696;
       content: '\f1c2';
     }
   }
 
   &[href*='.xlsx'] {
     &::before {
+      color: #1d7044;
       content: '\f1c3';
     }
   }
