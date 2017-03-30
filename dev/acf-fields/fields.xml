@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-<!-- generator="WordPress/4.7.3" created="2017-03-27 13:26" -->
+<!-- generator="WordPress/4.7.3" created="2017-03-30 14:52" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.1/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -28,8 +28,8 @@
 <channel>
 	<title>Board of Trustees</title>
 	<link>http://localhost/wordpress/bot</link>
-	<description>Just another Jim Dev Sites site</description>
-	<pubDate>Mon, 27 Mar 2017 13:26:01 +0000</pubDate>
+	<description>Board of Trustees</description>
+	<pubDate>Thu, 30 Mar 2017 14:52:06 +0000</pubDate>
 	<language></language>
 	<wp:wxr_version>1.1</wp:wxr_version>
 	<wp:base_site_url>http://localhost/wordpress/</wp:base_site_url>
@@ -108,11 +108,7 @@
 		</wp:postmeta>
 		<wp:postmeta>
 			<wp:meta_key>field_58d2c175c556e</wp:meta_key>
-			<wp:meta_value><![CDATA[a:10:{s:3:"key";s:19:"field_58d2c175c556e";s:5:"label";s:7:"Charter";s:4:"name";s:20:"people_group_charter";s:4:"type";s:4:"file";s:12:"instructions";s:35:"The PDF of the committee's charter.";s:8:"required";s:1:"0";s:11:"save_format";s:3:"url";s:7:"library";s:10:"uploadedTo";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:2:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";}}s:8:"allorany";s:3:"all";}s:8:"order_no";i:0;}]]></wp:meta_value>
-		</wp:postmeta>
-		<wp:postmeta>
-			<wp:meta_key>rule</wp:meta_key>
-			<wp:meta_value><![CDATA[a:5:{s:5:"param";s:11:"ef_taxonomy";s:8:"operator";s:2:"==";s:5:"value";s:12:"people_group";s:8:"order_no";i:0;s:8:"group_no";i:0;}]]></wp:meta_value>
+			<wp:meta_value><![CDATA[a:10:{s:3:"key";s:19:"field_58d2c175c556e";s:5:"label";s:7:"Charter";s:4:"name";s:20:"people_group_charter";s:4:"type";s:4:"file";s:12:"instructions";s:35:"The PDF of the committee's charter.";s:8:"required";s:1:"0";s:11:"save_format";s:3:"url";s:7:"library";s:10:"uploadedTo";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:3:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";s:5:"value";s:0:"";}}s:8:"allorany";s:3:"all";}s:8:"order_no";i:0;}]]></wp:meta_value>
 		</wp:postmeta>
 		<wp:postmeta>
 			<wp:meta_key>position</wp:meta_key>
@@ -125,6 +121,22 @@
 		<wp:postmeta>
 			<wp:meta_key>hide_on_screen</wp:meta_key>
 			<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>field_58dd0d2c92039</wp:meta_key>
+			<wp:meta_value><![CDATA[a:12:{s:3:"key";s:19:"field_58dd0d2c92039";s:5:"label";s:5:"Chair";s:4:"name";s:18:"people_group_chair";s:4:"type";s:11:"post_object";s:12:"instructions";s:0:"";s:8:"required";s:1:"1";s:9:"post_type";a:1:{i:0;s:6:"person";}s:8:"taxonomy";a:2:{i:0;s:11:"category:16";i:1;s:11:"category:16";}s:10:"allow_null";s:1:"0";s:8:"multiple";s:1:"0";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:2:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";}}s:8:"allorany";s:3:"all";}s:8:"order_no";i:1;}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>field_58dd0d4f9203a</wp:meta_key>
+			<wp:meta_value><![CDATA[a:12:{s:3:"key";s:19:"field_58dd0d4f9203a";s:5:"label";s:10:"Vice Chair";s:4:"name";s:23:"people_group_vice_chair";s:4:"type";s:11:"post_object";s:12:"instructions";s:0:"";s:8:"required";s:1:"0";s:9:"post_type";a:1:{i:0;s:6:"person";}s:8:"taxonomy";a:2:{i:0;s:11:"category:16";i:1;s:11:"category:16";}s:10:"allow_null";s:1:"0";s:8:"multiple";s:1:"0";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:3:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";s:5:"value";s:0:"";}}s:8:"allorany";s:3:"all";}s:8:"order_no";i:2;}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>field_58dd0d6e9203b</wp:meta_key>
+			<wp:meta_value><![CDATA[a:12:{s:3:"key";s:19:"field_58dd0d6e9203b";s:5:"label";s:10:"Ex Officio";s:4:"name";s:23:"people_group_ex_officio";s:4:"type";s:11:"post_object";s:12:"instructions";s:0:"";s:8:"required";s:1:"0";s:9:"post_type";a:1:{i:0;s:6:"person";}s:8:"taxonomy";a:2:{i:0;s:11:"category:16";i:1;s:11:"category:16";}s:10:"allow_null";s:1:"0";s:8:"multiple";s:1:"0";s:17:"conditional_logic";a:3:{s:6:"status";s:1:"0";s:5:"rules";a:1:{i:0;a:3:{s:5:"field";s:4:"null";s:8:"operator";s:2:"==";s:5:"value";s:0:"";}}s:8:"allorany";s:3:"all";}s:8:"order_no";i:3;}]]></wp:meta_value>
+		</wp:postmeta>
+		<wp:postmeta>
+			<wp:meta_key>rule</wp:meta_key>
+			<wp:meta_value><![CDATA[a:5:{s:5:"param";s:11:"ef_taxonomy";s:8:"operator";s:2:"==";s:5:"value";s:12:"people_group";s:8:"order_no";i:0;s:8:"group_no";i:0;}]]></wp:meta_value>
 		</wp:postmeta>
 	</item>
 	<item>
