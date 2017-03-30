@@ -42,6 +42,17 @@ function format_meeting_metadata( $metadata ) {
 
 add_filter( 'ucf_meeting_format_metadata', 'format_meeting_metadata', 10, 1 );
 
+function format_people_metadata( $metadata ) {
+	if ( isset( $metadata['_thumbnail_id'] ) ) {
+		$src = wp_get_attachment_image_src( $metadata['_thumbnail_id'], 'people-portrait' );
+		$metadata['thumbnail_url'] = $src[0];
+	}
+
+	return $metadata;
+}
+
+add_filter( 'ucf_people_format_metadata', 'format_people_metadata', 10, 1 );
+
 function get_committee_url( $term ) {
 	return get_site_url( null, '/committees/' . $term->slug );
 }
@@ -296,6 +307,112 @@ function get_next_special_meeting( $committee='None', $args=array() ) {
 	$meeting = $meetings[0];
 
 	return $meeting;
+}
+
+function get_person_markup( $person, $title=null ) {
+	ob_start();
+?>
+	<figure class="figure person-figure">
+		<img clas="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
+		<figcaption class="figure-caption">
+			<?php echo $person->post_title; ?>
+			<?php if ( $title ) : ?>
+			<p class="text-muted"><?php echo $title; ?></p>
+			<?php endif; ?>
+		</figcaption>
+	</figure>
+<?php
+	return ob_get_clean();
+}
+
+function display_committee_members( $people_group ) {
+	$people_group_id = $people_group->term_id;
+
+	$chair = UCF_People_PostType::append_metadata( get_field( 'people_group_chair', 'people_group_' . $people_group_id ) );
+	$vice_chair = UCF_People_PostType::append_metadata( get_field( 'people_group_vice_chair', 'people_group_' . $people_group_id ) );
+	$ex_officio = UCF_People_PostType::append_metadata( get_field( 'people_group_ex_officio', 'people_group_' . $people_group_id ) );
+
+	$exclude = array( $chair->ID, $vice_chair->ID, $ex_officio->ID );
+
+	// Remove the committee officers from the rest of the memebers.
+	$args = array(
+		'post_type'      => 'person',
+		'posts_per_page' => -1,
+		'post__not_in'   => $exclude,
+		'order'          => 'ASC',
+		'orderby'        => 'post_title',
+		'category_name'  => 'trustee',
+		'tax_query'      => array(
+			array(
+				'taxonomy' => 'people_group',
+				'field'    => 'id',
+				'terms'    => $people_group_id
+			)
+		)
+	);
+
+	$people = get_posts( $args );
+
+	ob_start();
+?>
+	<div class="row">
+		<div class="col-md-4">
+			<?php echo get_person_markup( $chair, 'Chair' ); ?>
+		</div>
+		<div class="col-md-4">
+			<?php echo get_person_markup( $vice_chair, 'Vice Chair' ); ?>
+		</div>
+		<div class="col-md-4">
+			<?php echo get_person_markup( $ex_officio, 'Ex Officio' ); ?>
+		</div>
+	</div>
+<?php foreach( $people as $i=>$person ) : $person = UCF_People_PostType::append_metadata( $person ); ?>
+	<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
+	<div class="col-md-4 col-sm-6">
+		<figure class="figure person-figure">
+			<img class="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
+			<figcaption class="figure-caption"><?php echo $person->post_title; ?></figcaption>
+		</figure>
+	</div>
+	<?php if ( $i % 3 === 2  || $i == count( $people ) - 1 ) : ?></div><?php endif; ?>
+<?php 
+	endforeach;
+	return ob_get_clean();
+}
+
+function display_committee_staff( $people_group ) {
+	$people_group_id = $people_group->term_id;
+
+	$args = array(
+		'post_type'      => 'person',
+		'posts_per_page' => -1,
+		'order'          => 'ASC',
+		'orderby'        => 'post_title',
+		'category_name'  => 'committee-staff',
+		'tax_query'      => array(
+			array(
+				'taxonomy' => 'people_group',
+				'field'    => 'id',
+				'terms'    => $people_group_id
+			)
+		)
+	);
+
+	$people = get_posts( $args );
+
+	ob_start();
+	foreach( $people as $i=>$person ) : $person = UCF_People_PostType::append_metadata( $person ); ?>
+	<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
+	<div class="col-md-4 col-sm-6">
+		<figure class="figure person-figure">
+			<img class="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
+			<figcaption class="figure-caption"><?php echo $person->post_title; ?></figcaption>
+		</figure>
+	</div>
+	<?php if ( $i % 3 === 2  || $i == count( $people ) - 1 ) : ?></div><?php endif; ?>
+<?php 
+	endforeach;
+	return ob_get_clean();
 }
 
 ?>
