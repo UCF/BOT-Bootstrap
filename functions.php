@@ -313,13 +313,15 @@ function get_person_markup( $person, $title=null ) {
 	ob_start();
 ?>
 	<figure class="figure person-figure">
-		<img clas="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
-		<figcaption class="figure-caption">
-			<?php echo $person->post_title; ?>
-			<?php if ( $title ) : ?>
-			<p class="text-muted"><?php echo $title; ?></p>
-			<?php endif; ?>
-		</figcaption>
+		<a href="<?php echo get_permalink( $person->ID ); ?>">
+			<img clas="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
+			<figcaption class="figure-caption">
+				<?php echo $person->post_title; ?>
+				<?php if ( $title ) : ?>
+				<p class="text-muted"><?php echo $title; ?></p>
+				<?php endif; ?>
+			</figcaption>
+		</a>
 	</figure>
 <?php
 	return ob_get_clean();
@@ -369,10 +371,7 @@ function display_committee_members( $people_group ) {
 <?php foreach( $people as $i=>$person ) : $person = UCF_People_PostType::append_metadata( $person ); ?>
 	<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
 	<div class="col-md-4 col-sm-6">
-		<figure class="figure person-figure">
-			<img class="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
-			<figcaption class="figure-caption"><?php echo $person->post_title; ?></figcaption>
-		</figure>
+		<?php echo get_person_markup( $person ); ?>
 	</div>
 	<?php if ( $i % 3 === 2  || $i == count( $people ) - 1 ) : ?></div><?php endif; ?>
 <?php 
@@ -404,10 +403,7 @@ function display_committee_staff( $people_group ) {
 	foreach( $people as $i=>$person ) : $person = UCF_People_PostType::append_metadata( $person ); ?>
 	<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
 	<div class="col-md-4 col-sm-6">
-		<figure class="figure person-figure">
-			<img class="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
-			<figcaption class="figure-caption"><?php echo $person->post_title; ?></figcaption>
-		</figure>
+		<?php echo get_person_markup( $person ); ?>
 	</div>
 	<?php if ( $i % 3 === 2  || $i == count( $people ) - 1 ) : ?></div><?php endif; ?>
 <?php 

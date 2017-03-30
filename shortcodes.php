@@ -42,8 +42,10 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 	<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
 	<div class="col-md-4 col-sm-6">
 		<figure class="figure person-figure">
-			<img class="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
-			<figcaption class="figure-caption"><?php echo $person->post_title; ?></figcaption>
+			<a href="<?php echo get_permalink( $person->ID ); ?>">
+				<img class="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
+				<figcaption class="figure-caption"><?php echo $person->post_title; ?></figcaption>
+			</a>
 		</figure>
 	</div>
 	<?php if ( $i % 3 === 2  || $i == count( $people ) - 1 ) : ?></div><?php endif; ?>
