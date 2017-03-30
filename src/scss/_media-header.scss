@@ -7,6 +7,7 @@
 }
 
 .media-header-callout {
+
   @media (min-width: $screen-sm-min) {
     // Callout is absolutely positioned in the background;
     // .media-header's height is determined by .media-header-content's calculated
@@ -23,7 +24,10 @@
 }
 
 .media-header-content {
+  background: #000;
+
   @media (min-width: $screen-sm-min) {
+    background: transparent;
     position: relative;
     z-index: 6;
   }

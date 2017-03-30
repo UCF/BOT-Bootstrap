@@ -33,11 +33,15 @@ header {
   .menu {
 
     .menu-item {
-      font-size: 15px;
+      font-size: 14px;
       text-transform: uppercase;
 
       @media(min-width: $screen-md-min) {
         margin-top: 40px;
+      }
+
+      @media(min-width: $screen-lg-min) {
+        font-size: 16px;
       }
     }
 
@@ -70,27 +74,47 @@ header {
     }
 
     .media-header-copy-wrapper {
-      min-height: 480px;
+      min-height: 180px;
       position: relative;
+
+      @media( min-width: $screen-sm-min) {
+        min-height: 480px;
+      }
 
       .container-wrapper {
         background: linear-gradient(to bottom,transparent 0,#000 100%);
         bottom: 0;
-        padding: 125px 0 30px;
+        padding: 25px 0 30px;
         position: absolute;
         width: 100%;
+
+        @media( min-width: $screen-sm-min) {
+          padding: 125px 0 30px;
+        }
       }
 
       .media-header-copy {
         color: #fff;
-        font-size: 20px;
+        font-size: 14px;
         font-weight: 200;
+
+        @media( min-width: $screen-sm-min) {
+          font-size: 20px;
+        }
       }
 
       a.btn-ucf {
         color: #000;
         margin-top: 25px;
       }
+    }
+  }
+
+  .dropdown-menu .menu-item {
+    margin-top: 0;
+
+    a {
+      color: #000;
     }
   }
 
