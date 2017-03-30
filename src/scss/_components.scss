@@ -446,3 +446,102 @@
     text-align: center;
   }
 }
+
+//
+// @name Media Callout
+// @Description Use to display content stacked on top of a full-width image.
+//
+// @markup
+// <div class="callout-media">
+//   <picture>
+//     <!--[if IE 9]><video style="display: none;"><![endif]-->
+//     <source class="callout-media-src" srcset="//placehold.it/1140x500" media="(min-width: 768px)">
+//     <!--[if IE 9]></video><![endif]-->
+//     <img class="callout-media-src" srcset="//placehold.it/600x400">
+//   </picture>
+//   <div class="callout-media-content position-sm-left-top">
+//     <h2 class="highlighted"><span>Why choose an online program at UCF?</span></h2>
+//   </div>
+// </div>
+//
+.callout-media {
+  display: block;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+
+  @media (min-width: $screen-sm-min) {
+    height: $callout-media-height;
+  }
+
+  // Capture <picture> elements. Make sure they span the full
+  // width/height of .callout-media, so that absolute positioning of
+  // .callout-media-src works properly.
+  > picture {
+    display: block;
+    height: 100%;
+    width: 100%;
+
+    br {
+      display: none;
+    }
+  }
+}
+
+.callout-media-src {
+  height: auto;
+  max-width: 100%;
+
+  @media (min-width: $screen-sm-min) {
+    left: 50%;
+    max-width: none;
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    z-index: 3;
+  }
+
+  &.callout-media-video {
+    display: none;
+
+    @media (min-width: $screen-sm-min) {
+      display: block;
+      z-index: 4;
+    }
+  }
+}
+
+.callout-media-content {
+  width: 100%;
+  z-index: 5;
+
+  @media (max-width: $screen-xs-max) {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  @media (min-width: $screen-sm-min) {
+    width: 80%;
+  }
+
+  @media (min-width: $screen-md-min) {
+    width: 55%;
+  }
+
+  @media (min-width: $screen-lg-min) {
+    width: 45%;
+  }
+
+  > * {
+    margin: 0;
+
+    @media (min-width: $screen-sm-min) {
+      margin: 2em;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+.media-header {
+
+  @media (min-width: $screen-sm-min) {
+    min-height: $callout-media-height;
+    position: relative;
+  }
+}
+
+.media-header-callout {
+
+  @media (min-width: $screen-sm-min) {
+    // Callout is absolutely positioned in the background;
+    // .media-header's height is determined by .media-header-content's calculated
+    // height (preventing content overlap)
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+}
+
+.media-header-content {
+  background: #000;
+
+  @media (min-width: $screen-sm-min) {
+    background: transparent;
+    position: relative;
+    z-index: 6;
+  }
+}
+
+.media-header-title {
+  font-size: 6.5vw;
+  margin: 15px auto 0;
+
+  @media (min-width: 480px) {
+    font-size: 5vw;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    // Intentionally wrapped in max-width media query--allows
+    // .text-right/.text-left to be applied to .media-header-title while
+    // always forcing centered text at -xs
+    text-align: center;
+  }
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 28px;
+    margin: 0 auto 20px;
+  }
+
+  @media (min-width: $screen-md-min) {
+    font-size: 34px;
+  }
+}
