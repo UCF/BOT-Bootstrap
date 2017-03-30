@@ -8,6 +8,79 @@ require_once('shortcodes.php');         		# Per theme shortcodes
 
 // Add theme-specific functions here.
 
+function get_header_menu() {
+	ob_start();
+?>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				<?php if ( is_home() || is_front_page() ) : ?>
+					<h1><a href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a></h1>
+				<?php else: ?>
+					<span class="h1"><a href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a></span>
+				<?php endif; ?>
+			</div>
+			<div class="col-md-8">
+				<?php
+					echo wp_nav_menu(array(
+						'theme_location' => 'header-menu',
+						'container'      => 'false',
+						'menu_class'     => 'menu list-unstyled list-inline',
+						'menu_id'        => 'header-menu',
+						'walker'         => new Bootstrap_Walker_Nav_Menu()
+					));
+				?>
+			</div>
+		</div>
+	</div>
+<?php
+	return ob_get_clean();
+}
+
+/**
+ * Returns the markup for the header with media
+ * @author RJ Bruneel
+ **/
+function get_header_media($header) {
+	ob_start();
+?>
+	<div class="media-header">
+		<div class="media-header-callout">
+			<picture>
+				<!--[if IE 9]><video style="display: none;"><![endif]-->
+				<source class="callout-media-src" srcset="<?php echo $header->url; ?>" media="(min-width: 768px)">
+				<!--[if IE 9]></video><![endif]-->
+				<img class="callout-media-src" srcset="<?php echo $header->mobile; ?>" alt="">
+			</picture>
+		</div>
+		<div class="media-header-content">
+			<?php echo get_header_menu(); ?>
+			<div class="media-header-copy-wrapper">
+				<div class="container-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-8">
+								<?php if ( get_theme_mod_or_default( 'header_copy' ) ) :?>
+									<p class="media-header-copy child"><?php echo get_theme_mod_or_default( 'header_copy' ) ?></p>
+								<?php endif; // End header copy if ?>
+							</div>
+							<div class="col-md-3 col-md-offset-1">
+								<?php if ( get_theme_mod_or_default( 'header_button_copy' ) && get_theme_mod_or_default( 'header_button_link' ) ) :?>
+									<a href="<?php echo get_theme_mod_or_default( 'header_button_link' ) ?>" class="btn btn-ucf">
+										<?php echo get_theme_mod_or_default( 'header_button_copy' ) ?>
+									</a>
+								<?php endif; // End Header button if ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+	return ob_get_clean();
+}
+
 /**
  * Updates the people_group custom taxonomies labels
  **/
