@@ -3,140 +3,89 @@
 
 h1,
 .h1 {
+  font-size: 32px;
+}
+
+h1,
+.h1,
+.menu-item a {
+    padding: 7px;
+
+}
+
+h1,
+.h1 {
+  a:hover,
+  a:active,
   a:focus {
     border-bottom: 2px solid $ucf-gold;
     text-decoration: none;
   }
 }
 
-#header-menu {
-  @include center-block();
-  margin-bottom: 5px;
-  padding-top: 15px;
+// CSS Shared by homepage and subpages
+.media-header {
 
-  li {
-    margin-bottom: 20px;
-    padding: 0;
-
-    @media (min-width: $screen-md-min) {
-      padding: 20px 5px 0;
-    }
-  }
-
-
-  a {
-    color: #fff;
-    font-family: $font-family-sans-serif;
+  .menu-item {
     font-size: 14px;
-    font-weight: 400;
-    padding: 7px;
+    margin-right: 5px;
     text-transform: uppercase;
 
-    @media (min-width: $screen-lg-min) {
-      font-size: 17px;
-    }
-
-    &:hover,
-    &:active,
-    &:focus {
-      border-bottom: 2px solid $ucf-gold;
-      text-decoration: none;
+    @media(min-width: $screen-md-min) {
+      margin-top: 43px;
     }
   }
 
-  a[href]::after {
-    @media print {
-      content: '';
-    }
-  }
-}
+  .menu-item {
+    margin-bottom: 15px;
 
-.no-header-image {
-  #header-menu {
-
-    li {
-      margin-bottom: 20px;
-      padding: 0;
-
-      @media (min-width: $screen-md-min) {
-        padding: 25px 5px 0;
-      }
+    @media(min-width: $screen-md-min) {
+      margin-bottom: 0;
     }
 
     a {
       color: #000;
+      text-decoration: none;
 
       &:hover,
-      &:active,
+      &:active
       &:focus {
-        color: #000;
+        border-bottom: 2px solid $ucf-gold;
+        padding-bottom: 5px;
       }
     }
   }
 }
 
-.site-header {
-  background-size: cover;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-
-  &.header-image {
-    margin-bottom: 0;
+// Homepage media header overides
+.media-header-content {
+  h1 a,
+  .menu-item a {
+    color: #fff;
   }
 
-  @media (min-width: $screen-sm-min) {
-    padding-bottom: 70px;
-  }
+  .media-header-copy-wrapper {
+    min-height: 480px;
+    position: relative;
 
-
-  h1 {
-    margin-bottom: 0;
-
-    @media (min-width: $screen-md-min) {
-      font-size: 36px;
-      line-height: 30px;
+    .container-wrapper {
+      background: linear-gradient(to bottom,transparent 0,#000 100%);
+      bottom: 0;
+      padding: 125px 0 30px;
+      position: absolute;
+      width: 100%;
     }
 
-    @media (min-width: $screen-lg-min) {
-      font-size: 45px;
-      line-height: 33px;
-    }
-
-    a {
+    .media-header-copy {
       color: #fff;
-
-      &:hover {
-        border-bottom: 2px solid $ucf-gold;
-        color: #fff;
-        text-decoration: none;
-      }
+      font-size: 20px;
+      font-weight: 200;
     }
-  }
 
-  &.no-header-image {
-    padding-bottom: 0;
-
-    a {
+    a.btn-ucf {
       color: #000;
-
-      &:hover {
-        border-bottom: 2px solid $ucf-gold;
-        color: #000;
-        text-decoration: none;
-      }
+      margin-top: 25px;
     }
-  }
-}
-
-.header-image {
-  background-position: center center;
-  background-size: cover;
-  min-height: 425px;
-  position: relative;
-  width: 100%;
-
-  @media (min-width: $screen-sm-max) {
-    min-height: 550px;
   }
 }
 
