@@ -1,5 +1,3 @@
-				</div>
-			</div>
 		<footer>
 			<div class="footer-menu-wrapper">
 				<div class="container">
