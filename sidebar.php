@@ -41,4 +41,11 @@
 		<p>No Upcoming Special Meetings</p>
 		<?php endif; ?>
 	</div>
+	<?php $committees = get_terms( array( 'people_group' ) ); ?>
+	<h2>Committees</h2>
+	<ul class="list-gold-arrow">
+	<?php foreach( $committees as $committee ) : ?>
+		<li><a href="<?php echo get_committee_url( $committee ); ?>"><?php echo $committee->name; ?></a></li>
+	<?php endforeach; ?>
+	</ul>
 </aside>
