@@ -21,7 +21,7 @@ function __init__(){
 		'default-text-color' => 'fff'
 	) );
 
-	add_image_size( 'header-mobile', 400, array( 'center', 'bottom' ) );
+	add_image_size( 'header-mobile', 768, 400, array( 'center', 'bottom' ) );
 	add_image_size( 'people-portrait', 300, 300, array( 'center', 'top' ) );
 
 	register_nav_menu( 'header-menu', __( 'Header Menu' ) );
