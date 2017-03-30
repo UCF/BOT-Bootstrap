@@ -9,10 +9,23 @@
  * @author Jared Lang
  **/
 function __init__(){
-	add_theme_support('menus');
-	add_theme_support('post-thumbnails');
-	register_nav_menu('header-menu', __('Header Menu'));
-	register_nav_menu('footer-menu', __('Footer Menu'));
+	add_theme_support( 'menus' );
+	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'custom-header', array(
+		'width'              => 1600,
+		'height'             => 550,
+		'flex-height'        => true,
+		'flex-height'        => true,
+		'uploads'            => true,
+		'header-text'        => true,
+		'default-text-color' => 'fff'
+	) );
+
+	add_image_size( 'header-mobile', 400, array( 'center', 'bottom' ) );
+	add_image_size( 'people-portrait', 300, 300, array( 'center', 'top' ) );
+
+	register_nav_menu( 'header-menu', __( 'Header Menu' ) );
+	register_nav_menu( 'footer-menu', __( 'Footer Menu' ) );
 
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
@@ -30,24 +43,24 @@ add_action('after_setup_theme', '__init__');
 # Set theme constants
 #define('DEBUG', True);                  # Always on
 #define('DEBUG', False);                 # Always off
-define('DEBUG', isset($_GET['debug'])); # Enable via get parameter
-define('THEME_URL', get_stylesheet_directory_uri());
-define('THEME_ADMIN_URL', get_admin_url());
-define('THEME_DIR', get_stylesheet_directory());
-define('THEME_INCLUDES_DIR', THEME_DIR.'/includes');
-define('THEME_STATIC_URL', THEME_URL.'/static');
-define('THEME_IMG_URL', THEME_STATIC_URL.'/img');
-define('THEME_JS_URL', THEME_STATIC_URL.'/js');
-define('THEME_CSS_URL', THEME_STATIC_URL.'/css');
-define('THEME_OPTIONS_GROUP', 'settings');
-define('THEME_OPTIONS_NAME', 'theme');
-define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
+define( 'DEBUG', isset( $_GET['debug'] ) ); # Enable via get parameter
+define( 'THEME_URL', get_stylesheet_directory_uri() );
+define( 'THEME_ADMIN_URL', get_admin_url() );
+define( 'THEME_DIR', get_stylesheet_directory() );
+define( 'THEME_INCLUDES_DIR', THEME_DIR.'/includes' );
+define( 'THEME_STATIC_URL', THEME_URL.'/static' );
+define( 'THEME_IMG_URL', THEME_STATIC_URL.'/img' );
+define( 'THEME_JS_URL', THEME_STATIC_URL.'/js' );
+define( 'THEME_CSS_URL', THEME_STATIC_URL.'/css' );
+define( 'THEME_OPTIONS_GROUP', 'settings' );
+define( 'THEME_OPTIONS_NAME', 'theme' );
+define( 'THEME_OPTIONS_PAGE_TITLE', 'Theme Options' );
+define( 'THEME_CUSTOMIZER_PREFIX', 'bot_' );
 
 $theme_options = get_option(THEME_OPTIONS_NAME);
 define('GA_ACCOUNT', $theme_options['ga_account']);
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
-
 
 /**
  * Set config values including meta tags, registered custom post types, styles,
@@ -55,15 +68,64 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
  * object.
  **/
 Config::$custom_post_types = array(
-	'Document',
-	'Person',
-	'Committee',
-	'Meeting'
+
 );
 
 Config::$custom_taxonomies = array(
 	'Labels'
 );
+
+function define_customizer_sections( $wp_customize ) {
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'homepage',
+		array(
+			'title' => 'Homepage'
+		)
+	);
+}
+add_action( 'customize_register', 'define_customizer_sections' );
+
+function define_customizer_fields( $wp_customize ) {
+	// Home Page Copy
+	$wp_customize->add_setting(
+		'header_copy'
+	);
+	$wp_customize->add_control(
+		'header_copy',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Header Copy',
+			'description' => 'Copy displayed in the header on the homepage.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+		)
+	);
+	// Home Page Button
+	$wp_customize->add_setting(
+		'header_button_copy'
+	);
+	$wp_customize->add_control(
+		'header_button_copy',
+		array(
+			'type'        => 'text',
+			'label'       => 'Header Button Copy',
+			'description' => 'Copy displayed in the button on the homepage.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+		)
+	);
+	$wp_customize->add_setting(
+		'header_button_link'
+	);
+	$wp_customize->add_control(
+		'header_button_link',
+		array(
+			'type'        => 'text',
+			'label'       => 'Header Button Link',
+			'description' => 'Link for the button on the homepage.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+		)
+	);
+}
+add_action( 'customize_register', 'define_customizer_fields' );
 
 /**
  * Configure theme settings, see abstract class Field's descendants for
@@ -156,16 +218,8 @@ Config::$links = array(
 
 # Header styles
 Config::$styles = array(
-	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
-	array('admin' => True, 'src' => THEME_CSS_URL.'/ui-lightness/jquery-ui-1.10.2.custom.min.css',),
-	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.css',
+	THEME_CSS_URL.'/style.min.css',
 );
-
-if ($theme_options['bootstrap_enable_responsive'] == 1) {
-	array_push(Config::$styles,
-		THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap-responsive.css'
-	);
-}
 
 # Only include gravity forms styles if the plugin is active
 include_once(ABSPATH.'wp-admin/includes/plugin.php' );
@@ -176,26 +230,13 @@ if(is_plugin_active('gravityforms/gravityforms.php')) {
 }
 
 array_push(Config::$styles,
-	THEME_STATIC_URL.'/css/base.css',
 	get_bloginfo('stylesheet_url')
 );
 
-# Must be loaded after style.css
-if ($theme_options['bootstrap_enable_responsive'] == 1) {
-	array_push(Config::$styles,
-		THEME_URL.'/style-responsive.css'
-	);
-}
-
 # Scripts (output in footer)
 Config::$scripts = array(
-	array('admin' => True, 'name' => 'jquery-admin', 'src' => '//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js',),
-	array('admin' => True, 'src' => THEME_JS_URL.'/jquery-ui-1.10.2.custom.min.js',),
-	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
-	'//universityheader.ucf.edu/bar/js/university-header.js',
-	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.js',
-	THEME_JS_URL.'/webcom-base.js',
-	THEME_JS_URL.'/script.js',
+	'//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1',
+	THEME_JS_URL.'/script.min.js',
 );
 
 # Header Meta
@@ -213,7 +254,7 @@ if ($theme_options['gw_verify']){
 # Scripts in header
 function jquery_in_header() {
     wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');
+    wp_register_script( 'jquery', '//code.jquery.com/jquery-2.2.4.min.js');
     wp_enqueue_script( 'jquery' );
 }
 

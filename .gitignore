@@ -1,5 +1,6 @@
 # osx noise
 profile
+.DS_STORE
 
 # xcode noise
 build/*
@@ -48,3 +49,9 @@ nbproject
 .svn
 .CVS
 .idea
+
+# Task runner files
+gulp-config.json
+.scss-cache
+node_modules
+src/components

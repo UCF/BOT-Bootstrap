@@ -1,35 +1,44 @@
 <?php disallow_direct_load('sidebar.php');?>
-
-<div class="span3 offset1" id="sidebar">
-	<div class="highlight">
+<aside class="sidebar">
+	<?php get_search_form(); ?>
+	<div class="well">
 		<h3>Latest Board Minutes</h3>
-		<div class="content">
-			<?php display_latest_minutes() ?>
-		</div>
+		<?php $minutes = get_latest_meeting_minutes(); if ( $minutes ) : ?>
+			<a href="<?php echo $minutes['file']; ?>" class="document"><?php echo $minutes['name']; ?></a>
+		<?php endif; ?>
 	</div>
-
-	<?php if ( !is_null( get_next_agenda() ) ): ?>
-	<div class="highlight">
-		<h3>Next Board Agenda</h3>
-		<div class="content">
-			<?php display_next_agenda(); ?>
-		</div>
-	</div>
-	<?php endif; ?>
-
-	<div class="highlight">
+	<div class="well">
 		<h3>Next Board Meeting</h3>
-		<div class="content">
-			<?php display_next_meeting(); ?>
+		<?php $next_meeting = get_next_meeting(); if ( $next_meeting ) : ?>
+		<div class="row">
+			<div class="col-md-1">
+				<span style="margin-top: 10px;" class="fa fa-calendar"></span>
+			</div>
+			<div class="col-md-10">
+				<h4><?php echo $next_meeting->metadata['ucf_meeting_date']->format( 'F j, Y' ); ?></h4>
+				<time><?php echo $next_meeting->metadata['ucf_meeting_start_time']; ?> - <?php echo $next_meeting->metadata['ucf_meeting_end_time']; ?></time>
+				<p><?php echo $next_meeting->metadata['ucf_meeting_location']; ?></p>
+			</div>
 		</div>
+		<?php else: ?>
+		<p>No Upcoming Meetings</p>
+		<?php endif; ?>
 	</div>
-	<?php display_special_meeting(); ?>
-	<div class="highlight">
-		<h3>Search this Site</h3>
-		<?php get_template_part('searchform'); ?>
+	<div class="well">
+		<h3>Special Meeting</h3>
+		<?php $special_meeting = get_next_special_meeting(); if ( $special_meeting ) : ?>
+		<div class="row">
+			<div class="col-md-1">
+				<span style="margin-top: 10px;" class="fa fa-calendar"></span>
+			</div>
+			<div class="col-md-10">
+				<h4><?php echo $special_meeting->metadata['ucf_meeting_date']->format( 'F j, Y' ); ?></h4>
+				<time><?php echo $special_meeting->metadata['ucf_meeting_start_time']; ?> - <?php echo $special_meeting->metadata['ucf_meeting_end_time']; ?></time>
+				<p><?php echo $special_meeting->metadata['ucf_meeting_location']; ?></p>
+			</div>
+		</div>
+		<?php else: ?>
+		<p>No Upcoming Special Meetings</p>
+		<?php endif; ?>
 	</div>
-	<div class="highlight">
-		<h3>Committees</h3>
-		<?php display_committee_list() ?>
-	</div>
-</div>
+</aside>
