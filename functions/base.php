@@ -1015,7 +1015,6 @@ function slug($s, $spaces='-'){
  * @author Jared Lang
  **/
 function header_($tabs=2){
-	opengraph_setup();
 	remove_action('wp_head', 'adjacent_posts_rel_link_wp_head');
 	remove_action('wp_head', 'index_rel_link');
 	remove_action('wp_head', 'rel_canonical');
@@ -1045,81 +1044,6 @@ function footer_($tabs=2){
 	$html = ob_get_clean();
 	return indent($html, $tabs);
 }
-
-
-/**
- * Assembles the appropriate meta elements for facebook's opengraph stuff.
- * Utilizes the themes Config object to queue up the created elements.
- *
- * @return void
- * @author Jared Lang
- **/
-function opengraph_setup(){
-	$options = get_option(THEME_OPTIONS_NAME);
-
-	if (!(bool)$options['enable_og']){return;}
-	if (is_search()){return;}
-
-	global $post, $page;
-	setup_postdata($post);
-
-	if (is_front_page()){
-		$title       = htmlentities(get_bloginfo('name'));
-		$url         = get_bloginfo('url');
-		$site_name   = $title;
-	}else{
-		$title     = htmlentities($post->post_title);
-		$url       = get_permalink($post->ID);
-		$site_name = htmlentities(get_bloginfo('name'));
-	}
-
-	# Set description
-	if (is_front_page()){
-		$description = htmlentities(get_bloginfo('description'));
-	}else{
-		ob_start();
-		the_excerpt();
-		$description = trim(str_replace('[...]', '', ob_get_clean()));
-		# Generate a description if excerpt is unavailable
-		if (strlen($description) < 1){
-			ob_start();
-			the_content();
-			$description = apply_filters('the_excerpt', preg_replace(
-				'/\s+/',
-				' ',
-				strip_tags(ob_get_clean()))
-			);
-			$words       = explode(' ', $description);
-			$description = implode(' ', array_slice($words, 0, 60));
-		}
-	}
-
-	$metas = array(
-		array('property' => 'og:title'      , 'content' => $title),
-		array('property' => 'og:url'        , 'content' => $url),
-		array('property' => 'og:site_name'  , 'content' => $site_name),
-		array('property' => 'og:description', 'content' => $description),
-	);
-
-	# Include image if available
-	if (!is_front_page() and has_post_thumbnail($post->ID)){
-		$image = wp_get_attachment_image_src(
-			get_post_thumbnail_id( $post->ID ),
-			'single-post-thumbnail'
-		);
-		$metas[] = array('property' => 'og:image', 'content' => $image[0]);
-	}
-
-
-	# Include admins if available
-	$admins = trim($options['fb_admins']);
-	if (strlen($admins) > 0){
-		$metas[] = array('property' => 'fb:admins', 'content' => $admins);
-	}
-
-	Config::$metas = array_merge(Config::$metas, $metas);
-}
-
 
 /**
  * Handles generating the meta tags configured for this theme.
