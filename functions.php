@@ -11,7 +11,7 @@ require_once('shortcodes.php');         		# Per theme shortcodes
 function get_header_menu() {
 	ob_start();
 ?>
-	<nav class="navbar navbar-ucf-gold site-navbar" role="navigation" data-spy="affix" data-offset-top="50">
+	<nav class="navbar navbar-ucf-gold site-navbar" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-menu">
