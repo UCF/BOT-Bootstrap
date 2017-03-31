@@ -11,28 +11,39 @@ require_once('shortcodes.php');         		# Per theme shortcodes
 function get_header_menu() {
 	ob_start();
 ?>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<?php if ( is_home() || is_front_page() ) : ?>
-					<h1><a href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a></h1>
-				<?php else: ?>
-					<span class="h1"><a href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a></span>
+	<nav class="navbar navbar-ucf-gold site-navbar" role="navigation" data-spy="affix" data-offset-top="50">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-menu">
+					<span class="navbar-toggle-text"><span class="sr-only">Toggle Navigation</span> Menu</span>
+					<span class="fa fa-bars" aria-hidden="true"></span>
+				</button>
+
+				<?php if ( is_home() || is_front_page() ): ?>
+				<h1 class="margin-xs-top-0">
+				<?php endif; ?>
+
+				<div class="navbar-brand-wrapper">
+					<a class="navbar-brand ucf-online" href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a>
+				</div>
+
+				<?php if ( is_home() || is_front_page() ): ?>
+				</h1>
 				<?php endif; ?>
 			</div>
-			<div class="col-md-8">
+			<div class="collapse navbar-collapse" id="header-menu">
 				<?php
-					echo wp_nav_menu(array(
-						'theme_location' => 'header-menu',
-						'container'      => 'false',
-						'menu_class'     => 'menu list-unstyled list-inline',
-						'menu_id'        => 'header-menu',
-						'walker'         => new Bootstrap_Walker_Nav_Menu()
-					));
+				wp_nav_menu( array(
+					'theme_location' => 'header-menu',
+					'depth'  => 2,
+					'container' => false,
+					'menu_class' => 'nav navbar-nav header-menu-nav',
+					'walker' => new Bootstrap_Walker_Nav_Menu()
+				) );
 				?>
 			</div>
 		</div>
-	</div>
+	</nav>
 <?php
 	return ob_get_clean();
 }
@@ -45,16 +56,9 @@ function get_header_media($header) {
 	ob_start();
 ?>
 	<div class="media-header">
-		<div class="media-header-callout">
-			<picture>
-				<!--[if IE 9]><video style="display: none;"><![endif]-->
-				<source class="callout-media-src" srcset="<?php echo $header->url; ?>" media="(min-width: 768px)">
-				<!--[if IE 9]></video><![endif]-->
-				<img class="callout-media-src" srcset="<?php echo $header->mobile; ?>" alt="">
-			</picture>
-		</div>
-		<div class="media-header-content">
-			<?php echo get_header_menu(); ?>
+		<div class="visible-xs visible-sm"><?php echo get_header_menu(); ?></div>
+		<div class="media-header-content" data-header-md="<?php echo $header->url; ?>" data-header-sm="<?php echo $header->mobile; ?>">
+			<div class="hidden-xs hidden-sm"><?php echo get_header_menu(); ?></div>
 			<div class="media-header-copy-wrapper">
 				<div class="container-wrapper">
 					<div class="container">
@@ -63,13 +67,6 @@ function get_header_media($header) {
 								<?php if ( get_theme_mod_or_default( 'header_copy' ) ) :?>
 									<p class="media-header-copy child"><?php echo get_theme_mod_or_default( 'header_copy' ) ?></p>
 								<?php endif; // End header copy if ?>
-							</div>
-							<div class="col-md-3 col-md-offset-1">
-								<?php if ( get_theme_mod_or_default( 'header_button_copy' ) && get_theme_mod_or_default( 'header_button_link' ) ) :?>
-									<a href="<?php echo get_theme_mod_or_default( 'header_button_link' ) ?>" class="btn btn-ucf">
-										<?php echo get_theme_mod_or_default( 'header_button_copy' ) ?>
-									</a>
-								<?php endif; // End Header button if ?>
 							</div>
 						</div>
 					</div>
@@ -465,7 +462,7 @@ function display_committee_members( $people_group ) {
 		<?php echo get_person_markup( $person ); ?>
 	</div>
 	<?php if ( $i % 3 === 2  || $i == count( $people ) - 1 ) : ?></div><?php endif; ?>
-<?php 
+<?php
 	endforeach;
 	return ob_get_clean();
 }
@@ -497,7 +494,7 @@ function display_committee_staff( $people_group ) {
 		<?php echo get_person_markup( $person ); ?>
 	</div>
 	<?php if ( $i % 3 === 2  || $i == count( $people ) - 1 ) : ?></div><?php endif; ?>
-<?php 
+<?php
 	endforeach;
 	return ob_get_clean();
 }

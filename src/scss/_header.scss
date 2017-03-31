@@ -4,258 +4,181 @@
 header {
 
   h1,
-  .h1 {
-    font-size: 32px;
-  }
+  .navbar-header {
+    color: #fff;
+    font-family: $font-family-serif-alt;
+    font-size: 20px;
+    margin-top: 0;
+    padding-top: 5px;
 
-  h1,
-  .h1,
-  .menu-item a {
-    padding: 7px;
+    @media (min-width: $screen-md-min) {
+      padding: 7px;
 
-  }
+      a:hover,
+      a:active,
+      a:focus {
 
-  h1,
-  .h1 {
+        @media (min-width: $screen-md-min) {
+          border-bottom: 2px solid $ucf-gold;
+        }
+      }
+    }
+
+    a,
     a:hover,
     a:active,
     a:focus {
-      border-bottom: 2px solid $ucf-gold;
-      text-decoration: none;
+      color: #fff;
     }
   }
 
-  .h1 a {
-    color: #000;
+  .navbar-brand {
+
+    @media (min-width: $screen-md-min) {
+      font-size: 32px;
+    }
   }
 
-  // CSS Shared by homepage and subpages
-  .menu {
+  .navbar-toggle {
+    font-family: $font-family-sans-serif;
+    font-size: 16px;
+  }
 
-    .menu-item {
-      font-size: 14px;
+  .navbar {
+    background-color: #000;
+    margin-bottom: 0;
+
+    @media(min-width: $screen-md-min) {
+      background-color: transparent;
+    }
+  }
+
+  .navbar-toggle {
+    color: #fff;
+  }
+
+  .nav {
+
+    .active > {
+      a,
+      a:focus,
+      a:hover,
+      a:active {
+        background-color: #333;
+
+        @media(min-width: $screen-md-min) {
+          background-color: transparent;
+        }
+      }
+    }
+
+    .open > {
+      a,
+      a:focus,
+      a:hover,
+      a:active {
+        background-color: #333;
+
+        @media(min-width: $screen-md-min) {
+          background-color: transparent;
+          border-bottom: 0;
+        }
+      }
+    }
+
+    a {
+      color: #fff;
       text-transform: uppercase;
 
       @media(min-width: $screen-md-min) {
-        margin-top: 40px;
+        padding: 29px 15px 7px;
       }
+    }
 
-      @media(min-width: $screen-lg-min) {
-        font-size: 16px;
+    a:hover,
+    a:active,
+    a:focus {
+      background-color: #333;
+      color: #fff;
+
+      @media(min-width: $screen-md-min) {
+        background-color: transparent;
+        border-bottom: 2px solid $ucf-gold;
       }
     }
 
     .menu-item {
-      margin-bottom: 15px;
-
       @media(min-width: $screen-md-min) {
-        margin-bottom: 0;
-      }
-
-      a {
-        color: #000;
-        text-decoration: none;
-
-        &:hover,
-        &:active
-        &:focus {
-          border-bottom: 2px solid $ucf-gold;
-          padding-bottom: 7px;
-        }
+        padding-top: 7px;
       }
     }
   }
 
-  // Homepage media header overides
+  .dropdown-menu {
+    padding-top: 0;
+
+    @media(min-width: $screen-md-min) {
+      padding-top: 5px;
+
+      a,
+      a:hover,
+      a:active,
+      a:focus {
+        color: #000;
+        border-bottom: 0;
+        padding: 3px 20px;
+      }
+
+      a:hover {
+        background-color: #ccc;
+      }
+    }
+  }
+
+  .sub-page-nav {
+
+    @media(min-width: $screen-md-min) {
+      .navbar-brand-wrapper {
+        padding: 7px;
+      }
+
+      a,
+      a:hover,
+      a:focus,
+      a:active {
+        color: #000;
+      }
+    }
+  }
+
   .media-header-content {
-    h1 a,
-    .menu-item a {
-      color: #fff;
+    background-color: #000;
+    background-size: cover;
+    background-position: center;
+    min-height: 300px;
+
+    @media(min-width: $screen-md-min) {
+      min-height: 550px;
     }
 
     .media-header-copy-wrapper {
-      min-height: 180px;
-      position: relative;
-
-      @media( min-width: $screen-sm-min) {
-        min-height: 480px;
-      }
-
-      .container-wrapper {
-        background: linear-gradient(to bottom,transparent 0,#000 100%);
-        bottom: 0;
-        padding: 25px 0 30px;
-        position: absolute;
-        width: 100%;
-
-        @media( min-width: $screen-sm-min) {
-          padding: 125px 0 30px;
-        }
-      }
-
-      .media-header-copy {
-        color: #fff;
-        font-size: 14px;
-        font-weight: 200;
-
-        @media( min-width: $screen-sm-min) {
-          font-size: 20px;
-        }
-      }
-
-      a.btn-ucf {
-        color: #000;
-        margin-top: 25px;
-      }
-    }
-  }
-
-  .dropdown-menu .menu-item {
-    margin-top: 0;
-
-    &.active {
-      a {
-        background-color: #eee;
-        color: #000;
-      }
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0) 60%, rgba(0,0,0,.5) 80%,rgba(0,0,0,1) 100%);
+      height: 476px;
     }
 
-    a {
-      border-bottom: 0;
-      color: #000;
-
-      &:hover,
-      &:active
-      &:focus {
-        border-bottom: 0;
-      }
-    }
-  }
-
-  .header-center {
-    display: table;
-    height: 100%;
-    width: 100%;
-
-    @media (max-width: $screen-xs-max) {
-      height: 400px;
-      position: relative;
-      top: 0;
-    }
-
-    .title-wrapper {
-      display: table-cell;
-      text-align: center;
-      vertical-align: middle;
-    }
-
-    .header-title {
-      display: inline-block;
-      margin: 0 auto;
-      position: relative;
-      text-align: center;
-    }
-
-    .title-header-container {
-      display: table;
-      margin: 0 auto;
-      position: relative;
-      top: -80px;
-
-      @media (max-width: $screen-xs-max) {
-        top: -100px;
-      }
-
-      > h1,
-      > span {
-        @extend .h1;
-        background-color: $ucf-gold;
-        background-color: rgba(255, 204, 0, .8);
-
-
-        display: block;
-        font-size: 40px;
-        font-weight: 800;
-        margin: 0;
-        padding: 4px 30px;
-        text-transform: uppercase;
-
-
-        @media (min-width: $screen-sm-min) {
-          font-size: 55px;
-        }
-
-        @media (min-width: $screen-md-min) {
-          font-size: 68px;
-        }
-
-        @media (min-width: $screen-lg-min) {
-          font-size: 80px;
-        }
-      }
-    }
-
-    a {
-      &:link,
-      &:visited,
-      &:active,
-      &:hover {
-        color: #000;
-        text-decoration: none;
-      }
-    }
-
-    .weather {
-      background: #000;
+    .media-header-copy {
       color: #fff;
-      display: inline-block;
-      font-family: $font-family-serif;
-      font-size: 18px;
-      font-weight: 100;
-      letter-spacing: 1.35px;
-      line-height: 32px;
-      padding: 6px 20px;
-      position: absolute;
-      right: 0;
+        margin-top: 350px;
 
-      @media (max-width: $screen-xs-max) {
-        font-size: 13px;
-        padding: 0 14px;
+      @media(min-width: 500px) {
+        font-size: 16px;
+        margin-top: 350px;
       }
 
-      .icon {
-        display: inline-block;
-        padding-right: 6px;
-
-        @media (max-width: $screen-xs-max) {
-          padding-right: 4px;
-        }
-
-        span {
-          bottom: -3px;
-          color: #ffc904;
-          display: inline-block;
-          font-size: 27px;
-          position: relative;
-
-          @media (max-width: $screen-xs-max) {
-            font-size: 20px;
-          }
-        }
-      }
-
-      .vertical-rule {
-        border-left: 1px solid #fff;
-        margin-left: 4px;
-        margin-right: 6px;
-        width: 2px;
-      }
-
-      .temp {
-        font-weight: 800;
-        margin-left: 4px;
+      @media(min-width: $screen-md-min) {
+        font-size: 20px;
+        margin-top: 330px;
       }
     }
   }
-
 }

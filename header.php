@@ -47,7 +47,7 @@
 			?>
 			<?php
 				else:
-					echo get_header_menu();
+					echo '<div class="sub-page-nav">' . get_header_menu() . '</div>';
 				endif;
 			?>
 		</header>
