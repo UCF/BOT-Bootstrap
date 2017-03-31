@@ -62,17 +62,8 @@ define('GA_ACCOUNT', $theme_options['ga_account']);
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
 
-/**
- * Set config values including meta tags, registered custom post types, styles,
- * scripts, and any other statically defined assets that belong in the Config
- * object.
- **/
-Config::$custom_post_types = array(
-
-);
-
-Config::$custom_taxonomies = array(
-	'Labels'
+ThemeConfig::$setting_defaults = array(
+	'web_font_key' => '//cloud.typography.com/730568/675644/css/fonts.css'
 );
 
 function define_customizer_sections( $wp_customize ) {
@@ -80,6 +71,13 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'homepage',
 		array(
 			'title' => 'Homepage'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'web_fonts',
+		array(
+			'title' => 'Web Fonts'
 		)
 	);
 }
@@ -124,91 +122,24 @@ function define_customizer_fields( $wp_customize ) {
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
 		)
 	);
+
+	# Typography
+	$wp_customize->add_setting(
+		'web_font_key'
+	);
+
+	$wp_customize->add_control(
+		'web_font_key',
+		array(
+			'type'        => 'text',
+			'label'       => 'Cloud.Typography CSS Key URL',
+			'description' => 'The CSS Key provided by Cloud.Typography for this project.  <strong>Only include the value in the "href" portion of the link tag provided; e.g. "//cloud.typography.com/000000/000000/css/fonts.css".</strong><br><br>NOTE: Make sure the Cloud.Typography project has been configured to deliver fonts to this site\'s domain.<br>See the <a target="_blank" href="http://www.typography.com/cloud/user-guide/managing-domains">Cloud.Typography docs on managing domains</a> for more info.',
+			'default'     => get_setting_default( 'web_font_key' ),
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'web_fonts'
+		)
+	);
 }
 add_action( 'customize_register', 'define_customizer_fields' );
-
-/**
- * Configure theme settings, see abstract class Field's descendants for
- * available fields. -- functions/base.php
- **/
-Config::$theme_settings = array(
-	'Analytics' => array(
-		new TextField(array(
-			'name'        => 'Google WebMaster Verification',
-			'id'          => THEME_OPTIONS_NAME.'[gw_verify]',
-			'description' => 'Example: <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
-			'default'     => null,
-			'value'       => $theme_options['gw_verify'],
-		)),
-		new TextField(array(
-			'name'        => 'Google Analytics Account',
-			'id'          => THEME_OPTIONS_NAME.'[ga_account]',
-			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
-			'default'     => null,
-			'value'       => $theme_options['ga_account'],
-		)),
-	),
-	'Search' => array(
-		new RadioField(array(
-			'name'        => 'Enable Google Search',
-			'id'          => THEME_OPTIONS_NAME.'[enable_google]',
-			'description' => 'Enable to use the google search appliance to power the search functionality.',
-			'default'     => 1,
-			'choices'     => array(
-				'On'  => 1,
-				'Off' => 0,
-			),
-			'value'       => $theme_options['enable_google'],
-	    )),
-		new TextField(array(
-			'name'        => 'Search Domain',
-			'id'          => THEME_OPTIONS_NAME.'[search_domain]',
-			'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example: <em>some.domain.com</em>',
-			'default'     => null,
-			'value'       => $theme_options['search_domain'],
-		)),
-		new TextField(array(
-			'name'        => 'Search Results Per Page',
-			'id'          => THEME_OPTIONS_NAME.'[search_per_page]',
-			'description' => 'Number of search results to show per page of results',
-			'default'     => 10,
-			'value'       => $theme_options['search_per_page'],
-		)),
-	),
-	'Social' => array(
-		new RadioField(array(
-			'name'        => 'Enable OpenGraph',
-			'id'          => THEME_OPTIONS_NAME.'[enable_og]',
-			'description' => 'Turn on the opengraph meta information used by Facebook.',
-			'default'     => 1,
-			'choices'     => array(
-				'On'  => 1,
-				'Off' => 0,
-			),
-			'value'       => $theme_options['enable_og'],
-	    )),
-		new TextField(array(
-			'name'        => 'Facebook Admins',
-			'id'          => THEME_OPTIONS_NAME.'[fb_admins]',
-			'description' => 'Comma seperated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
-			'default'     => null,
-			'value'       => $theme_options['fb_admins'],
-		)),
-	),
-	'Styles' => array(
-		new RadioField(array(
-			'name'        => 'Enable Responsiveness',
-			'id'          => THEME_OPTIONS_NAME.'[bootstrap_enable_responsive]',
-			'description' => 'Turn on responsive styles provided by the Twitter Bootstrap framework.  This setting should be decided upon before building out subpages, etc. to ensure content is designed to shrink down appropriately.  Turning this off will enable the single 940px-wide Bootstrap layout.',
-			'default'     => 0,
-			'choices'     => array(
-				'On'  => 1,
-				'Off' => 0,
-			),
-			'value'       => $theme_options['bootstrap_enable_responsive'],
-	    ))
-	),
-);
 
 # Header links
 Config::$links = array(
@@ -220,6 +151,10 @@ Config::$links = array(
 Config::$styles = array(
 	THEME_CSS_URL.'/style.min.css',
 );
+
+if ( get_theme_mod_or_default( 'web_font_key' ) ) {
+	Config::$styles[] = array( 'name' => 'font-cloudtypography', 'src' => get_theme_mod_or_default( 'web_font_key' ) );
+}
 
 # Only include gravity forms styles if the plugin is active
 include_once(ABSPATH.'wp-admin/includes/plugin.php' );
