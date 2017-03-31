@@ -37,7 +37,7 @@ function get_header_menu() {
 					'theme_location' => 'header-menu',
 					'depth'  => 2,
 					'container' => false,
-					'menu_class' => 'nav navbar-nav header-menu-nav pull-right',
+					'menu_class' => 'nav navbar-nav header-menu-nav navbar-right',
 					'walker' => new Bootstrap_Walker_Nav_Menu()
 				) );
 				?>
