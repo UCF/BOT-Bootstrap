@@ -282,10 +282,14 @@ function get_meetings_committee( $committee, $args=array() ) {
 }
 
 function get_meetings_by_year_committee( $committee, $args=array() ) {
+	$args['meta_key'] = 'ucf_meeting_date';
+	$args['orderby'] = 'meta_value';
+	$args['order'] = 'ASC';
 	$args['meta_query'] = array(
 		array(
 			'key'      => 'ucf_meeting_committee',
-			'value'    => $committee->term_id
+			'value'    => $committee->term_id,
+			'compare'  => 'LIKE'
 		)
 	);
 
