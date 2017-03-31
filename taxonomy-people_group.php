@@ -1,8 +1,8 @@
 <?php get_header(); $term = $wp_query->get_queried_object(); $today = new DateTime( 'now' ); ?>
 <div class="container">
+	<h1><?php echo $term->name; ?></h1>
 	<div class="row">
 		<div class="col-md-9">
-			<h1><?php echo $term->name; ?></h1>
 			<p class="lead"><?php echo $term->description; ?></p>
 			<?php $meetings = get_meetings_by_year_committee( $term ); ?>
 			<?php echo display_meetings_by_year( $meetings ); ?>
