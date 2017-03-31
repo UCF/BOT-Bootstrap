@@ -182,7 +182,8 @@ function get_custom_header_extended() {
 function display_meetings( $meetings ) {
 	ob_start();
 ?>
-	<table class="table">
+	<div class="table-responsive">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Date</th>
@@ -230,6 +231,7 @@ function display_meetings( $meetings ) {
 	<?php endforeach; ?>
 		</tbody>
 	</table>
+	</div>
 <?php
 	return ob_get_clean();
 }
@@ -244,12 +246,14 @@ function display_meetings_by_year( $years ) {
 			<h2>Meetings in <span id="meeting-year"><?php echo $first_year; ?></span></h2>
 		</div>
 		<div class="col-md-4">
-			<label for="year_select">Select Year</label>
-			<select id="year_select" class="dropdown">
-			<?php foreach ( array_keys( $years ) as $year ) :?>
-				<option value="<?php echo $year; ?>"><?php echo $year; ?></option>
-			<?php endforeach; ?>
-			</select>
+			<div class="meeting-select">
+				<label class="form-label" for="year_select">Select Year</label>
+				<select id="year_select" class="form-control dropdown">
+				<?php foreach ( array_keys( $years ) as $year ) :?>
+					<option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+				<?php endforeach; ?>
+				</select>
+			</div>
 		</div>
 	</div>
 	<div class="tab-content">
@@ -275,10 +279,14 @@ function get_meetings_committee( $committee, $args=array() ) {
 }
 
 function get_meetings_by_year_committee( $committee, $args=array() ) {
+	$args['meta_key'] = 'ucf_meeting_date';
+	$args['orderby'] = 'meta_value';
+	$args['order'] = 'ASC';
 	$args['meta_query'] = array(
 		array(
 			'key'      => 'ucf_meeting_committee',
-			'value'    => $committee->term_id
+			'value'    => $committee->term_id,
+			'compare'  => 'LIKE'
 		)
 	);
 
@@ -498,5 +506,17 @@ function display_committee_staff( $people_group ) {
 	endforeach;
 	return ob_get_clean();
 }
+
+/**
+ * Add ID attribute to registered University Header script.
+ **/
+function add_id_to_ucfhb($url) {
+    if ( (false !== strpos($url, 'bar/js/university-header.js')) || (false !== strpos($url, 'bar/js/university-header-full.js')) ) {
+      remove_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
+      return "$url' id='ucfhb-script";
+    }
+    return $url;
+}
+add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
 
 ?>

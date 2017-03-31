@@ -3,11 +3,15 @@
 
 header {
 
+  margin-bottom: 10px;
+
   h1,
   .navbar-header {
+    border-bottom: 0;
     color: #fff;
     font-family: $font-family-serif-alt;
     font-size: 20px;
+    font-weight: normal;
     margin-top: 0;
     padding-top: 5px;
 
@@ -42,6 +46,7 @@ header {
   .navbar-toggle {
     font-family: $font-family-sans-serif;
     font-size: 16px;
+    text-transform: uppercase;
   }
 
   .navbar {
@@ -68,6 +73,7 @@ header {
 
         @media(min-width: $screen-md-min) {
           background-color: transparent;
+          color: #000;
         }
       }
     }

@@ -7,12 +7,15 @@ textarea {
   font-family: $font-family-sans-serif;
 }
 
-#gform_fields_1 {
-  list-style: none;
-  padding: 0;
+.gform_wrapper {
+  .textarea {
+    width: 100%;
+
+    @media( min-width: $screen-sm-min ) {
+      width: calc(50% - 8px)!important;
+    }
+  }
 }
-
-
 
 .ginput_container {
   > input,
@@ -22,14 +25,6 @@ textarea {
 
   > textarea {
     height: 100px;
-  }
-}
-
-.gfield {
-  margin-bottom: 12px;
-
-  .gfield_label {
-    display: none !important;
   }
 }
 
