@@ -12,14 +12,16 @@
     }
   }
 
-  &[href*='.docx'] {
+  &[href*='.docx'],
+  &[href*='.doc'] {
     &::before {
       color: #2a5696;
       content: '\f1c2';
     }
   }
 
-  &[href*='.xlsx'] {
+  &[href*='.xlsx'],
+  &[href*='xls'] {
     &::before {
       color: #1d7044;
       content: '\f1c3';
