@@ -35,6 +35,7 @@ header {
   }
 
   .navbar-brand {
+    font-family: $font-family-serif;
 
     @media (min-width: $screen-md-min) {
       font-size: 32px;
