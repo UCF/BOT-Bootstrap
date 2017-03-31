@@ -1,6 +1,5 @@
 <?php disallow_direct_load('sidebar.php');?>
 <aside class="sidebar">
-	<?php get_search_form(); ?>
 	<div class="well">
 		<h3>Latest Board Minutes</h3>
 		<?php $minutes = get_latest_meeting_minutes(); if ( $minutes ) : ?>

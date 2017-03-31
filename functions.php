@@ -185,7 +185,8 @@ function get_custom_header_extended() {
 function display_meetings( $meetings ) {
 	ob_start();
 ?>
-	<table class="table">
+	<div class="table-responsive">
+	<table class="table table-striped">
 		<thead>
 			<tr>
 				<th>Date</th>
@@ -233,6 +234,7 @@ function display_meetings( $meetings ) {
 	<?php endforeach; ?>
 		</tbody>
 	</table>
+	</div>
 <?php
 	return ob_get_clean();
 }
@@ -247,12 +249,14 @@ function display_meetings_by_year( $years ) {
 			<h2>Meetings in <span id="meeting-year"><?php echo $first_year; ?></span></h2>
 		</div>
 		<div class="col-md-4">
-			<label for="year_select">Select Year</label>
-			<select id="year_select" class="dropdown">
-			<?php foreach ( array_keys( $years ) as $year ) :?>
-				<option value="<?php echo $year; ?>"><?php echo $year; ?></option>
-			<?php endforeach; ?>
-			</select>
+			<div class="meeting-select">
+				<label class="form-label" for="year_select">Select Year</label>
+				<select id="year_select" class="form-control dropdown">
+				<?php foreach ( array_keys( $years ) as $year ) :?>
+					<option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+				<?php endforeach; ?>
+				</select>
+			</div>
 		</div>
 	</div>
 	<div class="tab-content">

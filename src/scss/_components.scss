@@ -545,3 +545,11 @@
     }
   }
 }
+
+.meeting-select {
+  margin: 10px 0 10px;
+
+  @media( min-width: $screen-sm-min ) {
+    margin: 50px 0 20px;
+  }
+}
