@@ -13,7 +13,7 @@
 						<h4><?php echo $next_meeting->metadata['ucf_meeting_date']->format( 'F j, Y' ); ?></h4>
 						<time><?php echo $next_meeting->metadata['ucf_meeting_start_time']; ?> - <?php echo $next_meeting->metadata['ucf_meeting_end_time']; ?></time>
 						<p class="mb-0"><?php echo $next_meeting->metadata['ucf_meeting_location']; ?></p>
-						<?php if ( isset( $next_meeting->metadata['ucf_meeting_agenda'] ) ) : $file_url = wp_get_attachment_url( $next_meeting->metadata['ucf_meeting_agenda'] ); ?>
+						<?php if ( $next_meeting->metadata['ucf_meeting_agenda'] ) : $file_url = wp_get_attachment_url( $next_meeting->metadata['ucf_meeting_agenda'] ); ?>
 						<p class="mb-0"><a class="document" href="<?php echo $file_url; ?>">View Agenda</a></li>
 						<?php endif ; ?>
 					</div>
