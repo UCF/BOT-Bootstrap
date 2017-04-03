@@ -64,9 +64,9 @@ function ucf_people_group_charter_list_shortcode( $atts, $content="" ) {
 	) );
 	ob_start();
 ?>
-	<ul class="list-unstyled">
+	<ul class="list-unstyled document-list">
 	<?php foreach( $terms as $term ) : $charter = get_field( 'people_group_charter', 'people_group_' . $term->term_id ); ?>
-		<li class="document-list-item"><a class="document" href=<?php echo $charter; ?>><?php echo $term->name; ?> Committee Charter</a></li>
+		<li><a class="document" href=<?php echo $charter; ?>><?php echo $term->name; ?> Committee Charter</a></li>
 	<?php endforeach; ?>
 	</ul>
 <?php

@@ -8,7 +8,7 @@
 			<?php echo display_meetings_by_year( $meetings ); ?>
 			<h2>Committee Members</h2>
 			<?php echo display_committee_members( $term ); ?>
-			<h2>Commitee Staff</h2>
+			<h2>Committee Staff</h2>
 			<?php echo display_committee_staff( $term ); ?>
 			<h2>Committee Charter</h2>
 			<?php $charter = get_field( 'people_group_charter', 'people_group_' . $term->term_id ); ?>
