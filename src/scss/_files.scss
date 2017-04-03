@@ -1,4 +1,9 @@
+.document-list-item {
+  margin-bottom: 8px;
+}
+
 .document {
+
   &::before {
     font-family: 'FontAwesome';
     margin-right: 8px;

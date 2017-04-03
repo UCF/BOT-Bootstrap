@@ -213,18 +213,18 @@ function display_meetings( $meetings ) {
 				<?php endif; ?>
 				</td>
 				<td><?php echo $post->metadata['ucf_meeting_location']; ?></td>
-				<td>
+				<td class="text-center">
 					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) ) : ?>
-					<a class="document text-center" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>">Agenda</a>
+					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>">Agenda</a>
 					<?php else: ?>
-					<p class="text-center"> - </p>
+					-
 					<?php endif; ?>
 				</td>
 				<td>
 					<?php if ( isset( $post->metadata['ucf_meeting_minutes'] ) ) : ?>
-					<a class="document text-center" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>">Minutes</a>
+					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>">Minutes</a>
 					<?php else: ?>
-					<p class="text-center"> - </p>
+					-
 					<?php endif; ?>
 				</td>
 			</tr>
