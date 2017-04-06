@@ -41,11 +41,20 @@ var meetingTabs = function($) {
   }
 };
 
+var peopleImages = function($) {
+  $figures = $('figure.person-figure');
+
+  if ( $figures ) {
+    $figures.matchHeight();
+  }
+};
+
 if (jQuery !== 'undefined') {
   var $headerImg = $('.media-header-content');
 
   jQuery(document).ready(function ($) {
     headerImages($);
     meetingTabs($);
+    peopleImages($);
   });
 }

@@ -80,6 +80,13 @@ function define_customizer_sections( $wp_customize ) {
 			'title' => 'Web Fonts'
 		)
 	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'board_positions',
+		array(
+			'title' => 'Board Titles'
+		)
+	);
 }
 add_action( 'customize_register', 'define_customizer_sections' );
 
@@ -136,6 +143,39 @@ function define_customizer_fields( $wp_customize ) {
 			'description' => 'The CSS Key provided by Cloud.Typography for this project.  <strong>Only include the value in the "href" portion of the link tag provided; e.g. "//cloud.typography.com/000000/000000/css/fonts.css".</strong><br><br>NOTE: Make sure the Cloud.Typography project has been configured to deliver fonts to this site\'s domain.<br>See the <a target="_blank" href="http://www.typography.com/cloud/user-guide/managing-domains">Cloud.Typography docs on managing domains</a> for more info.',
 			'default'     => get_setting_default( 'web_font_key' ),
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'web_fonts'
+		)
+	);
+
+	# Board Titles
+	$board_members = get_board_members_as_options();
+
+	$wp_customize->add_setting(
+		'board_chair'
+	);
+
+	$wp_customize->add_control(
+		'board_chair',
+		array(
+			'type'        => 'select',
+			'label'       => 'Board Chairman',
+			'description' => 'Select the current board chairman.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'board_positions',
+			'choices'     => $board_members
+		)
+	);
+
+	$wp_customize->add_setting(
+		'board_vice_chair'
+	);
+
+	$wp_customize->add_control(
+		'board_vice_chair',
+		array(
+			'type'        => 'select',
+			'label'       => 'Board Vice Chairman',
+			'description' => 'Select the current board vice chairman.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'board_positions',
+			'choices'     => $board_members
 		)
 	);
 }

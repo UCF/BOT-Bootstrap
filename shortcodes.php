@@ -7,6 +7,7 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 		array(
 			'people_group' => null,
 			'category'     => null,
+			'positions'    => false,
 			'limit'        => -1
 		),
 		$atts
@@ -33,22 +34,65 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 		);
 	}
 
-	$people = get_posts( $args );
+		// Create iterator for layout here.
+	$i = 0;
 
 	ob_start();
-	foreach( $people as $i=>$person ) :
+
+	if ( $atts['positions'] ) {
+		$chair_id = get_theme_mod_or_default( 'board_chair' );
+		$vice_chair_id = get_theme_mod_or_default( 'board_vice_chair' );
+
+		$exlude = array();
+
+		if ( $chair_id ) {
+			$chair = get_post( $chair_id );
+			$chair = UCF_People_PostType::append_metadata( $chair );
+			$exclude[] = $chair->ID;
+		}
+
+		if ( $vice_chair_id ) {
+			$vice_chair = get_post( $vice_chair_id );
+			$vice_chair = UCF_People_PostType::append_metadata( $vice_chair );
+			$exclude[] = $vice_chair->ID;
+		}
+
+		if ( count( $exclude ) > 0 ) {
+			$args['post__not_in'] = $exclude;
+		}
+	}
+
+	$people = get_posts( $args );
+	$count = count( $people ) - 1;
+
+	if ( $chair ) : 
+?>
+		<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
+		<div class="col-md-4 col-sm-6">
+			<?php echo get_person_markup( $chair, 'Board Chairman' ); ?>
+		</div>
+		<?php if ( $i % 3 === 2 ) : ?></div><?php endif; $i++; $count++; ?>
+<?php
+	endif;
+
+	if ( $vice_chair ) :
+?>
+		<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
+		<div class="col-md-4 col-sm-6">
+			<?php echo get_person_markup( $vice_chair, 'Board Vice Chairman' ); ?>
+		</div>
+		<?php if ( $i % 3 === 2 ) : ?></div><?php endif; $i++; $count++; ?>
+<?php
+	endif;
+
+	foreach( $people as $person ) : 
 		$person = UCF_People_PostType::append_metadata( $person );
 ?>
 	<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
 	<div class="col-md-4 col-sm-6">
-		<figure class="figure person-figure">
-			<a href="<?php echo get_permalink( $person->ID ); ?>">
-				<img class="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
-				<figcaption class="figure-caption"><?php echo $person->post_title; ?></figcaption>
-			</a>
-		</figure>
+		<?php echo get_person_markup( $person ); ?>
 	</div>
-	<?php if ( $i % 3 === 2  || $i == count( $people ) - 1 ) : ?></div><?php endif; ?>
+	<?php if ( $i % 3 === 2  || $i === $count ) : ?></div><?php endif; $i++; ?>
 <?php
 	endforeach;
 	return ob_get_clean();

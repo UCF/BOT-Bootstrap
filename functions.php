@@ -127,6 +127,27 @@ function get_committee_url( $term ) {
 	return get_site_url( null, '/committees/' . $term->slug );
 }
 
+function get_board_members() {
+	$args = array(
+		'post_type'      => 'person',
+		'posts_per_page' => -1,
+		'category_name'  => 'trustee'
+	);
+
+	return get_posts( $args );
+}
+
+function get_board_members_as_options() {
+	$members = get_board_members();
+	$retval = array();
+
+	foreach( $members as $member ) {
+		$retval[$member->ID] = $member->post_title;
+	}
+
+	return $retval;
+}
+
 function get_people_group_data( $tax_term ) {
 	$tax_term->members = get_posts(
 		array(
