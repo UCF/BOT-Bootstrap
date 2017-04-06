@@ -458,8 +458,9 @@ function display_committee_members( $people_group ) {
 		'post_type'      => 'person',
 		'posts_per_page' => -1,
 		'post__not_in'   => $exclude,
+		'meta_key'       => 'person_last_name',
 		'order'          => 'ASC',
-		'orderby'        => 'post_title',
+		'orderby'        => 'meta_value',
 		'category_name'  => 'trustee',
 		'tax_query'      => array(
 			array(
@@ -502,8 +503,9 @@ function display_committee_staff( $people_group ) {
 	$args = array(
 		'post_type'      => 'person',
 		'posts_per_page' => -1,
+		'meta_key'       => 'person_last_name',
 		'order'          => 'ASC',
-		'orderby'        => 'post_title',
+		'orderby'        => 'meta_value',
 		'category_name'  => 'committee-staff',
 		'tax_query'      => array(
 			array(

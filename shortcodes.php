@@ -16,8 +16,9 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 	$args = array(
 		'post_type'      => 'person',
 		'posts_per_page' => (int)$atts['limit'],
+		'meta_key'       => 'person_last_name',
 		'order'          => 'ASC',
-		'orderby'        => 'post_title'
+		'orderby'        => 'meta_value'
 	);
 
 	if ( $atts['category'] ) {

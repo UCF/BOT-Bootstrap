@@ -339,6 +339,27 @@
                 "placeholder": "person.name@ucf.edu",
                 "prepend": "",
                 "append": ""
+            },
+            {
+                "key": "field_58e6899182fa5",
+                "label": "Last Name",
+                "name": "person_last_name",
+                "type": "text",
+                "instructions": "The person's last name. Used to allow for proper alphabetical ordering.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": "",
+                "readonly": 0,
+                "disabled": 0
             }
         ],
         "location": [
@@ -355,11 +376,8 @@
         "style": "default",
         "label_placement": "top",
         "instruction_placement": "label",
-        "hide_on_screen": [
-            
-        ],
+        "hide_on_screen": "",
         "active": 1,
-        "description": "",
-        "old_ID": 6
+        "description": ""
     }
 ]
