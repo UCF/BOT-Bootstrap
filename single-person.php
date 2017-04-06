@@ -4,7 +4,7 @@
 	<div class="page-content person-profile">
 		<div class="row">
 			<div class="col-md-3 details">
-				<img class="img-responsive" src="<?php echo isset( $post->metadata['thumbnail_url'] ) ? $post->metadata['thumbnail_url'] : get_bloginfo('stylesheet_directory').'/static/img/no-photo.jpg'?>" />
+				<img class="img-responsive img-circle" src="<?php echo isset( $post->metadata['thumbnail_url'] ) ? $post->metadata['thumbnail_url'] : get_bloginfo('stylesheet_directory').'/static/img/no-photo.jpg'?>" />
 			</div>
 			<div class="col-md-6">
 				<h1 class="mt-0"><?php echo $post->post_title; ?></h1>
