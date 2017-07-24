@@ -4,6 +4,7 @@ require_once('custom-taxonomies.php');  		# Where per theme taxonomies are defin
 require_once('custom-post-types.php');  		# Where per theme post types are defined
 require_once('functions/admin.php');  			# Admin/login functions
 require_once('functions/config.php');			# Where per theme settings are registered
+require_once('functions/meta.php');             # Hooks for header meta
 require_once('shortcodes.php');         		# Per theme shortcodes
 
 // Add theme-specific functions here.
@@ -97,14 +98,18 @@ function format_meeting_metadata( $metadata ) {
 		$metadata['ucf_meeting_date'] = $date;
 	}
 
-	if ( isset( $metadata['ucf_meeting_start_time'] ) ) {
+	if ( ! empty( $metadata['ucf_meeting_start_time'] ) ) {
 		$date = new DateTime( $metadata['ucf_meeting_start_time'] );
 		$metadata['ucf_meeting_start_time'] = $date->format( 'g:i a' );
+	} else {
+		$metadata['ucf_meeting_start_time'] = 'TBD';
 	}
 
-	if ( isset( $metadata['ucf_meeting_end_time'] ) ) {
+	if ( ! empty ( $metadata['ucf_meeting_end_time'] ) ) {
 		$date = new DateTime( $metadata['ucf_meeting_end_time'] );
 		$metadata['ucf_meeting_end_time'] = $date->format( 'g:i a' );
+	} else {
+		$metadata['ucf_meeting_end_time'] = 'TBD';
 	}
 
 	return $metadata;
@@ -385,7 +390,12 @@ function get_next_meeting( $committee='None', $args=array() ) {
 	);
 
 	$meetings = UCF_Meeting::all( $args );
-	$meeting = $meetings[0];
+
+	if ( $meetings ) {
+		$meeting = $meetings[0];
+	} else {
+		$meeting = null;
+	}
 
 	return $meeting;
 }
