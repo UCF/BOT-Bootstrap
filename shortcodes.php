@@ -64,9 +64,10 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 	}
 
 	$people = get_posts( $args );
+	var_dump( $args );
 	$count = count( $people ) - 1;
 
-	if ( $chair ) : 
+	if ( $chair ) :
 ?>
 		<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
 		<div class="col-md-4 col-sm-6">
@@ -86,7 +87,7 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 <?php
 	endif;
 
-	foreach( $people as $person ) : 
+	foreach( $people as $person ) :
 		$person = UCF_People_PostType::append_metadata( $person );
 ?>
 	<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>

@@ -57,11 +57,6 @@ define( 'THEME_OPTIONS_NAME', 'theme' );
 define( 'THEME_OPTIONS_PAGE_TITLE', 'Theme Options' );
 define( 'THEME_CUSTOMIZER_PREFIX', 'bot_' );
 
-$theme_options = get_option(THEME_OPTIONS_NAME);
-define('GA_ACCOUNT', $theme_options['ga_account']);
-define('CB_UID', $theme_options['cb_uid']);
-define('CB_DOMAIN', $theme_options['cb_domain']);
-
 ThemeConfig::$setting_defaults = array(
 	'web_font_key' => '//cloud.typography.com/730568/675644/css/fonts.css'
 );
@@ -85,6 +80,13 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'board_positions',
 		array(
 			'title' => 'Board Titles'
+		)
+	);
+
+	$wp_customizer->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'analytics',
+		array(
+			'title' => 'Analytics'
 		)
 	);
 }
@@ -178,6 +180,32 @@ function define_customizer_fields( $wp_customize ) {
 			'choices'     => $board_members
 		)
 	);
+
+	// Analytics
+	$wp_customize->add_setting(
+		'gw_verify'
+	);
+	$wp_customize->add_control(
+		'gw_verify',
+		array(
+			'type'        => 'text',
+			'label'       => 'Google WebMaster Verification',
+			'description' => 'Example: <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
+	$wp_customize->add_setting(
+		'ga_account'
+	);
+	$wp_customize->add_control(
+		'ga_account',
+		array(
+			'type'        => 'text',
+			'label'       => 'Google Analytics Account',
+			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
 }
 add_action( 'customize_register', 'define_customizer_fields' );
 
@@ -218,13 +246,6 @@ Config::$scripts = array(
 Config::$metas = array(
 	array('charset' => 'utf-8',),
 );
-
-if ($theme_options['gw_verify']){
-	Config::$metas[] = array(
-		'name'    => 'google-site-verification',
-		'content' => htmlentities($theme_options['gw_verify']),
-	);
-}
 
 # Scripts in header
 function jquery_in_header() {
