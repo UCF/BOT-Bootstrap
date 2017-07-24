@@ -27,9 +27,6 @@ function __init__(){
 	register_nav_menu( 'header-menu', __( 'Header Menu' ) );
 	register_nav_menu( 'footer-menu', __( 'Footer Menu' ) );
 
-	foreach(Config::$styles as $style){Config::add_css($style);}
-	foreach(Config::$scripts as $script){Config::add_script($script);}
-
 	global $timer;
 	$timer = Timer::start();
 
@@ -38,7 +35,12 @@ function __init__(){
 }
 add_action('after_setup_theme', '__init__');
 
+function enqueue_assets() {
+	foreach(Config::$styles as $style){Config::add_css($style);}
+	foreach(Config::$scripts as $script){Config::add_script($script);}
+}
 
+add_action( 'wp_enqueue_scripts', 'enqueue_assets' );
 
 # Set theme constants
 #define('DEBUG', True);                  # Always on
