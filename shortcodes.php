@@ -64,7 +64,6 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 	}
 
 	$people = get_posts( $args );
-	var_dump( $args );
 	$count = count( $people ) - 1;
 
 	if ( $chair ) :

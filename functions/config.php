@@ -83,7 +83,7 @@ function define_customizer_sections( $wp_customize ) {
 		)
 	);
 
-	$wp_customizer->add_section(
+	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'analytics',
 		array(
 			'title' => 'Analytics'
