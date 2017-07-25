@@ -36,7 +36,7 @@ header {
 
   .navbar-brand {
     font-family: $font-family-serif;
-    padding: 15px 8px;
+    margin-left: 0;
 
     @media (min-width: $screen-md-min) {
       font-size: 32px;
@@ -140,11 +140,11 @@ header {
 
   .sub-page-nav {
 
-    @media(min-width: $screen-md-min) {
-      .navbar-brand-wrapper {
-        padding: 7px;
-      }
+    .navbar-brand {
+      margin-left: -15px;
+    }
 
+    @media(min-width: $screen-md-min) {
       a,
       a:hover,
       a:focus,
