@@ -37,6 +37,7 @@ header {
   .navbar-brand {
     font-family: $font-family-serif;
     margin-left: 0;
+    padding: 23px 15px;
 
     @media (min-width: $screen-md-min) {
       font-size: 32px;
@@ -107,6 +108,7 @@ header {
       @media(min-width: $screen-md-min) {
         background-color: transparent;
         border-bottom: 2px solid $ucf-gold;
+        padding-bottom: 5px;
       }
     }
 
