@@ -240,14 +240,14 @@ function display_meetings( $meetings ) {
 				</td>
 				<td><?php echo $post->metadata['ucf_meeting_location']; ?></td>
 				<td class="text-center">
-					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) ) : ?>
+					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) && ! empty( $post->metadata['ucf_meeting_agenda'] ) ) : ?>
 					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>">Agenda</a>
 					<?php else: ?>
 					-
 					<?php endif; ?>
 				</td>
 				<td>
-					<?php if ( isset( $post->metadata['ucf_meeting_minutes'] ) ) : ?>
+					<?php if ( isset( $post->metadata['ucf_meeting_minutes'] ) && ! empty( $post->metadata['ucf_meeting_minutes'] ) ) : ?>
 					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>">Minutes</a>
 					<?php else: ?>
 					-
@@ -265,7 +265,7 @@ function display_meetings( $meetings ) {
 function display_meetings_by_year( $years ) {
 	ob_start();
 	reset( $years );
-	$first_year = key( $years );
+	$first_year = (int)date( "Y" );
 ?>
 	<div class="row">
 		<div class="col-md-8">
@@ -276,7 +276,7 @@ function display_meetings_by_year( $years ) {
 				<label class="form-label" for="year_select">Select Year</label>
 				<select id="year_select" class="form-control dropdown">
 				<?php foreach ( array_keys( $years ) as $year ) :?>
-					<option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+					<option value="<?php echo $year; ?>"<?php echo ( $first_year === $year ) ? ' selected' : ''; ?>><?php echo $year; ?></option>
 				<?php endforeach; ?>
 				</select>
 			</div>
@@ -313,6 +313,18 @@ function get_meetings_by_year_committee( $committee, $args=array() ) {
 			'key'      => 'ucf_meeting_committee',
 			'value'    => $committee->term_id,
 			'compare'  => 'LIKE'
+		),
+		array(
+			'relation' => 'OR',
+			array(
+				'key'      => 'ucf_meeting_special_meeting',
+				'compare'  => 'NOT EXISTS'
+			),
+			array(
+				'key'      => 'ucf_meeting_special_meeting',
+				'value'    => 1,
+				'compare'  => '!='
+			)
 		)
 	);
 

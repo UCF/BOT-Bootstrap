@@ -44,7 +44,7 @@ var meetingTabs = function($) {
 var peopleImages = function($) {
   $figures = $('figure.person-figure');
 
-  if ( $figures ) {
+  if ( $figures.length ) {
     $figures.matchHeight();
   }
 };

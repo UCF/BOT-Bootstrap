@@ -14,7 +14,7 @@ header {
     padding-top: 5px;
 
     @media (min-width: $screen-md-min) {
-      padding: 7px;
+      padding: 7px 0;
 
       a:hover,
       a:active,
@@ -36,6 +36,8 @@ header {
 
   .navbar-brand {
     font-family: $font-family-serif;
+    margin-left: 0;
+    padding: 23px 15px;
 
     @media (min-width: $screen-md-min) {
       font-size: 32px;
@@ -106,6 +108,7 @@ header {
       @media(min-width: $screen-md-min) {
         background-color: transparent;
         border-bottom: 2px solid $ucf-gold;
+        padding-bottom: 5px;
       }
     }
 
@@ -139,11 +142,11 @@ header {
 
   .sub-page-nav {
 
-    @media(min-width: $screen-md-min) {
-      .navbar-brand-wrapper {
-        padding: 7px;
-      }
+    .navbar-brand {
+      margin-left: -15px;
+    }
 
+    @media(min-width: $screen-md-min) {
       a,
       a:hover,
       a:focus,

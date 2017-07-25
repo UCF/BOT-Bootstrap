@@ -20,6 +20,7 @@ function __init__(){
 		'header-text'        => true,
 		'default-text-color' => 'fff'
 	) );
+	add_theme_support( 'title-tag' );
 
 	add_image_size( 'header-mobile', 768, 550, array( 'left', 'top' ) );
 	add_image_size( 'people-portrait', 300, 300, array( 'center', 'top' ) );
