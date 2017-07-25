@@ -265,7 +265,7 @@ function display_meetings( $meetings ) {
 function display_meetings_by_year( $years ) {
 	ob_start();
 	reset( $years );
-	$first_year = key( $years );
+	$first_year = (int)date( "Y" );
 ?>
 	<div class="row">
 		<div class="col-md-8">
@@ -276,7 +276,7 @@ function display_meetings_by_year( $years ) {
 				<label class="form-label" for="year_select">Select Year</label>
 				<select id="year_select" class="form-control dropdown">
 				<?php foreach ( array_keys( $years ) as $year ) :?>
-					<option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+					<option value="<?php echo $year; ?>"<?php echo ( $first_year === $year ) ? ' selected' : ''; ?>><?php echo $year; ?></option>
 				<?php endforeach; ?>
 				</select>
 			</div>
