@@ -495,8 +495,11 @@ function display_committee_members( $people_group ) {
 
 	$people = get_posts( $args );
 
+	if ( count( $people ) < 1 ) return;
+
 	ob_start();
 ?>
+	<h2>Committee Mememers</h2>
 	<div class="row">
 		<div class="col-md-4">
 			<?php echo get_person_markup( $chair, 'Chair' ); ?>
@@ -540,7 +543,12 @@ function display_committee_staff( $people_group ) {
 
 	$people = get_posts( $args );
 
+	if ( count( $people ) < 1 ) return;
+
 	ob_start();
+?>
+	<h2>Committee Staff</h2>
+<?php
 	foreach( $people as $i=>$person ) : $person = UCF_People_PostType::append_metadata( $person ); ?>
 	<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
 	<div class="col-md-4 col-sm-6">
