@@ -313,6 +313,18 @@ function get_meetings_by_year_committee( $committee, $args=array() ) {
 			'key'      => 'ucf_meeting_committee',
 			'value'    => $committee->term_id,
 			'compare'  => 'LIKE'
+		),
+		array(
+			'relation' => 'OR',
+			array(
+				'key'      => 'ucf_meeting_special_meeting',
+				'compare'  => 'NOT EXISTS'
+			),
+			array(
+				'key'      => 'ucf_meeting_special_meeting',
+				'value'    => 1,
+				'compare'  => '!='
+			)
 		)
 	);
 
