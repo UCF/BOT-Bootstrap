@@ -14,7 +14,7 @@ header {
     padding-top: 5px;
 
     @media (min-width: $screen-md-min) {
-      padding: 7px;
+      padding: 7px 0;
 
       a:hover,
       a:active,
@@ -36,6 +36,7 @@ header {
 
   .navbar-brand {
     font-family: $font-family-serif;
+    padding: 15px 8px;
 
     @media (min-width: $screen-md-min) {
       font-size: 32px;
