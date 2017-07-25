@@ -499,7 +499,7 @@ function display_committee_members( $people_group ) {
 
 	ob_start();
 ?>
-	<h2>Committee Mememers</h2>
+	<h2>Committee Members</h2>
 	<div class="row">
 		<div class="col-md-4">
 			<?php echo get_person_markup( $chair, 'Chair' ); ?>
