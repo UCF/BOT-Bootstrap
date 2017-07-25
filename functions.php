@@ -240,14 +240,14 @@ function display_meetings( $meetings ) {
 				</td>
 				<td><?php echo $post->metadata['ucf_meeting_location']; ?></td>
 				<td class="text-center">
-					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) ) : ?>
+					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) && ! empty( $post->metadata['ucf_meeting_agenda'] ) ) : ?>
 					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>">Agenda</a>
 					<?php else: ?>
 					-
 					<?php endif; ?>
 				</td>
 				<td>
-					<?php if ( isset( $post->metadata['ucf_meeting_minutes'] ) ) : ?>
+					<?php if ( isset( $post->metadata['ucf_meeting_minutes'] ) && ! empty( $post->metadata['ucf_meeting_minutes'] ) ) : ?>
 					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>">Minutes</a>
 					<?php else: ?>
 					-
