@@ -2,6 +2,7 @@
 <?php disallow_direct_load('404.php');?>
 
 <?php get_header(); the_post();?>
+<div class="container">
 	<div class="row">
 		<div class="span12">
 			<h2>Page Not Found</h2>
@@ -20,4 +21,5 @@
 			<?php endif;?>
 		</div>
 	</div>
+</div>
 <?php get_footer();?>
