@@ -226,6 +226,7 @@ function display_meetings( $meetings ) {
 		$start = isset( $post->metadata['ucf_meeting_start_time'] ) ? $post->metadata['ucf_meeting_start_time'] : null;
 		$end = isset( $post->metadata['ucf_meeting_end_time'] ) ? $post->metadata['ucf_meeting_end_time'] : null;
 		$location = isset( $post->metadata['ucf_meeting_location'] ) ? $post->metadata['ucf_meeting_location'] : 'TBD';
+		$special_meeting_name = isset( $post->metadata['ucf_meeting_special_name'] ) ? $post->metadata['ucf_meeting_special_name'] : null;
 	?>
 			<tr>
 				<td><?php echo $date; ?></td>
@@ -238,9 +239,9 @@ function display_meetings( $meetings ) {
 					TBD
 				<?php endif; ?>
 				</td>
-				<td><?php echo $post->metadata['ucf_meeting_location']; ?>
-					<?php if ( isset( $post->metadata['ucf_meeting_special_name'] ) && ! empty( $post->metadata['ucf_meeting_special_name'] ) ) : ?>
-						<br /><i><?php echo $post->metadata['ucf_meeting_special_name']; ?></i>
+				<td><?php echo $location; ?>
+					<?php if ( isset( $special_meeting_name ) ) : ?>
+						<br /><i><?php echo $special_meeting_name; ?></i>
 					<?php endif; ?>
 				</td>
 				<td class="text-center">
