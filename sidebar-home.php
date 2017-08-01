@@ -39,6 +39,9 @@
 						<h4><?php echo $special_meeting->metadata['ucf_meeting_date']->format( 'F j, Y' ); ?></h4>
 						<time><?php echo $special_meeting->metadata['ucf_meeting_start_time']; ?> - <?php echo $special_meeting->metadata['ucf_meeting_end_time']; ?></time>
 						<p><?php echo $special_meeting->metadata['ucf_meeting_location']; ?></p>
+						<?php if ( isset( $special_meeting->metadata['ucf_meeting_special_name'] ) && ! empty( $special_meeting->metadata['ucf_meeting_special_name'] ) ) : ?>
+							<p><i><?php echo $special_meeting->metadata['ucf_meeting_special_name']; ?></i></p>
+						<?php endif; ?>
 					</div>
 				</div>
 				<?php else: ?>
