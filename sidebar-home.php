@@ -15,7 +15,7 @@
 						<p class="mb-0">
 							<?php echo $next_meeting->metadata['ucf_meeting_location']; ?>
 							<?php if ( isset( $next_meeting->metadata['ucf_meeting_special_name'] ) && ! empty( $next_meeting->metadata['ucf_meeting_special_name'] ) ) : ?>
-								<br /><i><?php echo $next_meeting->metadata['ucf_meeting_special_name']; ?></i>
+								<br /><em><?php echo $next_meeting->metadata['ucf_meeting_special_name']; ?></em>
 							<?php endif; ?>
 						</p>
 						<?php if ( $next_meeting->metadata['ucf_meeting_agenda'] ) : $file_url = wp_get_attachment_url( $next_meeting->metadata['ucf_meeting_agenda'] ); ?>
@@ -46,7 +46,7 @@
 						<p>
 							<?php echo $special_meeting->metadata['ucf_meeting_location']; ?>
 							<?php if ( isset( $special_meeting->metadata['ucf_meeting_special_name'] ) && ! empty( $special_meeting->metadata['ucf_meeting_special_name'] ) ) : ?>
-								<br /><i><?php echo $special_meeting->metadata['ucf_meeting_special_name']; ?></i>
+								<br /><em><?php echo $special_meeting->metadata['ucf_meeting_special_name']; ?></em>
 							<?php endif; ?>
 						</p>
 					</div>
