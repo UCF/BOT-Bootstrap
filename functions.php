@@ -238,10 +238,7 @@ function display_meetings( $meetings ) {
 					TBD
 				<?php endif; ?>
 				</td>
-				<td><?php echo $post->metadata['ucf_meeting_location']; ?>
-					<?php if ( isset( $post->metadata['ucf_meeting_special_name'] ) && ! empty( $post->metadata['ucf_meeting_special_name'] ) ) : ?>
-						<i><?php echo $post->metadata['ucf_meeting_special_name']; ?></i>
-					<?php endif; ?>
+				<td><?php echo $location; ?>
 				</td>
 				<td class="text-center">
 					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) && ! empty( $post->metadata['ucf_meeting_agenda'] ) ) : ?>

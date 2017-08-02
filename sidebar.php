@@ -10,7 +10,11 @@
 			<div class="col-md-10">
 				<h4><?php echo $next_meeting->metadata['ucf_meeting_date']->format( 'F j, Y' ); ?></h4>
 				<time><?php echo $next_meeting->metadata['ucf_meeting_start_time']; ?> - <?php echo $next_meeting->metadata['ucf_meeting_end_time']; ?></time>
-				<p><?php echo $next_meeting->metadata['ucf_meeting_location']; ?></p>
+				<p><?php echo $next_meeting->metadata['ucf_meeting_location']; ?>
+					<?php if ( isset( $next_meeting->metadata['ucf_meeting_special_name'] ) && ! empty( $next_meeting->metadata['ucf_meeting_special_name'] ) ) : ?>
+						<br /><em><?php echo $next_meeting->metadata['ucf_meeting_special_name']; ?></em>
+					<?php endif; ?>
+				</p>
 				<?php if ( $next_meeting->metadata['ucf_meeting_agenda'] ) : $file_url = wp_get_attachment_url( $next_meeting->metadata['ucf_meeting_agenda'] ); ?>
 				<p><a class="document" href="<?php echo $file_url; ?>">View Agenda</a></li>
 				<?php endif ; ?>
@@ -36,10 +40,11 @@
 			<div class="col-md-10">
 				<h4><?php echo $special_meeting->metadata['ucf_meeting_date']->format( 'F j, Y' ); ?></h4>
 				<time><?php echo $special_meeting->metadata['ucf_meeting_start_time']; ?> - <?php echo $special_meeting->metadata['ucf_meeting_end_time']; ?></time>
-				<p><?php echo $special_meeting->metadata['ucf_meeting_location']; ?></p>
+				<p><?php echo $special_meeting->metadata['ucf_meeting_location']; ?>
 				<?php if ( isset( $special_meeting->metadata['ucf_meeting_special_name'] ) && ! empty( $special_meeting->metadata['ucf_meeting_special_name'] ) ) : ?>
-					<p><i><?php echo $special_meeting->metadata['ucf_meeting_special_name']; ?></i></p>
+					<br /><em><?php echo $special_meeting->metadata['ucf_meeting_special_name']; ?></em>
 				<?php endif; ?>
+				</p>
 			</div>
 		</div>
 		<?php else: ?>
