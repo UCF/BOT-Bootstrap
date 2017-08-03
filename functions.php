@@ -398,6 +398,18 @@ function get_next_meeting( $committee='None', $args=array() ) {
 				'key'     => 'ucf_meeting_committee',
 				'value'   => $committee['term_id'],
 				'compare' => '='
+			),
+			array(
+				'relation' => 'OR',
+				array(
+					'key'      => 'ucf_meeting_special_meeting',
+					'compare'  => 'NOT EXISTS'
+				),
+				array(
+					'key'      => 'ucf_meeting_special_meeting',
+					'value'    => '1',
+					'compare'  => '!='
+				)
 			)
 		)
 	);
