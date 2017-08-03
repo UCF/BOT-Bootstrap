@@ -433,10 +433,11 @@ function get_next_special_meeting( $committee='None', $args=array() ) {
 
 	$args = array(
 		'posts_per_page' => 1,
+		'post_type'      => 'meeting',
 		'meta_key'       => 'ucf_meeting_date',
 		'meta_type'      => 'DATETIME',
 		'orderby'        => 'meta_value',
-		'order'          => 'DESC',
+		'order'          => 'ASC',
 		'meta_query' => array(
 			array(
 				'key'     => 'ucf_meeting_date',
