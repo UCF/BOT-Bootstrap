@@ -407,7 +407,7 @@ function get_next_meeting( $committee='None', $args=array() ) {
 				),
 				array(
 					'key'      => 'ucf_meeting_special_meeting',
-					'value'    => 1,
+					'value'    => '1',
 					'compare'  => '!='
 				)
 			)
@@ -434,7 +434,7 @@ function get_next_special_meeting( $committee='None', $args=array() ) {
 		'meta_key'       => 'ucf_meeting_date',
 		'meta_type'      => 'DATETIME',
 		'orderby'        => 'meta_value',
-		'order'          => 'DESC',
+		'order'          => 'ASC',
 		'meta_query' => array(
 			array(
 				'key'     => 'ucf_meeting_date',
@@ -450,7 +450,7 @@ function get_next_special_meeting( $committee='None', $args=array() ) {
 			array(
 				'key'     => 'ucf_meeting_special_meeting',
 				'value'   => '1',
-				'compare' => '=='
+				'compare' => '='
 			)
 		)
 	);
