@@ -403,6 +403,7 @@ function get_next_meeting( $committee='None', $args=array() ) {
 				'relation' => 'OR',
 				array(
 					'key'      => 'ucf_meeting_special_meeting',
+					'value'    => '',
 					'compare'  => 'NOT EXISTS'
 				),
 				array(
@@ -450,7 +451,7 @@ function get_next_special_meeting( $committee='None', $args=array() ) {
 			array(
 				'key'     => 'ucf_meeting_special_meeting',
 				'value'   => '1',
-				'compare' => '=='
+				'compare' => '='
 			)
 		)
 	);
