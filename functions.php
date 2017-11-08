@@ -426,7 +426,7 @@ function get_next_meeting( $committee='None', $args=array() ) {
 }
 
 function get_next_special_meeting( $committee='None', $args=array() ) {
-	$today = date('Y-m-d H:i:s');
+	$today = date('Y-m-d');
 	$committee = term_exists( $committee, 'people_group' );
 
 	$args = array(
@@ -440,7 +440,7 @@ function get_next_special_meeting( $committee='None', $args=array() ) {
 				'key'     => 'ucf_meeting_date',
 				'value'   => $today,
 				'compare' => '>=',
-				'type'    => 'DATETIME'
+				'type'    => 'DATE'
 			),
 			array(
 				'key'     => 'ucf_meeting_committee',
