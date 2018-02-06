@@ -332,6 +332,28 @@ function get_meetings_by_year_committee( $committee, $args=array() ) {
 	return UCF_Meeting::group_by_year( $args );
 }
 
+function get_special_meetings_by_year_committee( $committee, $args=array() ) {
+	$args['meta_key'] = 'ucf_meeting_date';
+	$args['orderby'] = 'meta_value';
+	$args['order'] = 'ASC';
+	$args['meta_query'] = array(
+		array(
+			'key'      => 'ucf_meeting_committee',
+			'value'    => $committee->term_id,
+			'compare'  => 'LIKE'
+		),
+		array(
+			array(
+				'key'      => 'ucf_meeting_special_meeting',
+				'value'    => 1,
+				'compare'  => '='
+			)
+		)
+	);
+
+	return UCF_Meeting::group_by_year( $args );
+}
+
 function get_latest_meeting_minutes( $committee='None', $args=array() ) {
 	$retval = null;
 

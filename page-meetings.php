@@ -7,10 +7,15 @@
 			<?php 
 				$none_term = get_term_by( 'name', 'None', 'people_group' ); 
 				$board_meetings = get_meetings_by_year_committee( $none_term );
+				
 
 				echo display_meetings_by_year( $board_meetings );
 			?>
-			
+			<h2>Special Meetings</h2>
+			<?php
+				$special_meetings = get_special_meetings_by_year_committee( $none_term );
+				echo display_meetings_by_year( $special_meetings );
+			?>
 		</div>
 		<div class="col-md-3">
 			<?php get_sidebar(); ?>
