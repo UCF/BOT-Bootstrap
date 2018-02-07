@@ -5,9 +5,12 @@
 		<div class="col-md-9">
 			<?php the_content();?>
 			<?php 
-                $none_term = get_term_by( 'name', 'None', 'people_group' ); 
-                $special_meetings = get_special_meetings_by_year_committee( $none_term );
-				echo display_meetings_by_year( $special_meetings );
+				$none_term = get_term_by( 'name', 'None', 'people_group' );
+				
+				if ( $none_term ) {
+					$special_meetings = get_special_meetings_by_year_committee( $none_term );
+					echo display_meetings_by_year( $special_meetings );
+				}
 			?>
 		</div>
 		<div class="col-md-3">
