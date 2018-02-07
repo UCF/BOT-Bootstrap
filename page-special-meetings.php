@@ -8,9 +8,8 @@
 				$none_term = get_term_by( 'name', 'None', 'people_group' );
 				
 				if ( $none_term ) {
-					$board_meetings = get_meetings_by_year_committee( $none_term );
-
-					echo display_meetings_by_year( $board_meetings );	
+					$special_meetings = get_special_meetings_by_year_committee( $none_term );
+					echo display_meetings_by_year( $special_meetings );
 				}
 			?>
 		</div>
