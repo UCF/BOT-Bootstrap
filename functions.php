@@ -610,7 +610,7 @@ add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
 /**
  * Function that adds the `special meeting` column
  */
-function add_special_meeting_dropdown() {
+function add_special_meeting_checkbox() {
 	global $post_type;
 
 	$checked = ( isset( $_GET['meeting_special'] ) && $_GET['meeting_special'] === 'on' ) ? true : false;
@@ -622,7 +622,7 @@ function add_special_meeting_dropdown() {
 	endif;
 }
 
-add_action( 'restrict_manage_posts', 'add_special_meeting_dropdown', 10, 0 );
+add_action( 'restrict_manage_posts', 'add_special_meeting_checkbox', 10, 0 );
 
 /**
  * If the meeting_special query var is on, only list special meetings.
