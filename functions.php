@@ -400,14 +400,14 @@ function get_latest_meeting_minutes( $committee='None', $args=array() ) {
 }
 
 function get_next_meeting( $committee='None', $args=array() ) {
-	$today = date('Y-m-d H:i:s');
+	$today = date('Y-m-d');
 	$committee = term_exists( $committee, 'people_group' );
 
 	$args = array(
 		'posts_per_page' => 1,
 		'post_type'      => 'meeting',
 		'meta_key'       => 'ucf_meeting_date',
-		'meta_type'      => 'DATETIME',
+		'meta_type'      => 'DATE',
 		'orderby'        => 'meta_value',
 		'order'          => 'ASC',
 		'meta_query'     => array(
@@ -415,7 +415,7 @@ function get_next_meeting( $committee='None', $args=array() ) {
 				'key'     => 'ucf_meeting_date',
 				'value'   => $today,
 				'compare' => '>=',
-				'type'    => 'DATETIME'
+				'type'    => 'DATE'
 			),
 			array(
 				'key'     => 'ucf_meeting_committee',
@@ -450,14 +450,14 @@ function get_next_meeting( $committee='None', $args=array() ) {
 }
 
 function get_next_special_meeting( $committee='None', $args=array() ) {
-	$today = date('Y-m-d H:i:s');
+	$today = date('Y-m-d');
 	$committee = term_exists( $committee, 'people_group' );
 
 	$args = array(
 		'posts_per_page' => 1,
 		'post_type'      => 'meeting',
 		'meta_key'       => 'ucf_meeting_date',
-		'meta_type'      => 'DATETIME',
+		'meta_type'      => 'DATE',
 		'orderby'        => 'meta_value',
 		'order'          => 'ASC',
 		'meta_query' => array(
@@ -465,7 +465,7 @@ function get_next_special_meeting( $committee='None', $args=array() ) {
 				'key'     => 'ucf_meeting_date',
 				'value'   => $today,
 				'compare' => '>=',
-				'type'    => 'DATETIME'
+				'type'    => 'DATE'
 			),
 			array(
 				'key'     => 'ucf_meeting_committee',
@@ -609,5 +609,45 @@ function add_id_to_ucfhb($url) {
     return $url;
 }
 add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
+
+/**
+ * Function that adds the `special meeting` column
+ */
+function add_special_meeting_dropdown() {
+	global $post_type;
+
+	$checked = ( isset( $_GET['meeting_special'] ) && $_GET['meeting_special'] === 'on' ) ? true : false;
+
+	if ( $post_type === 'meeting' ) :
+?>
+	<label><input type="checkbox" name="meeting_special" id="meeting_special"<?php echo ( $checked ) ? ' checked' : '';?>> Special Meetings</label>
+<?php
+	endif;
+}
+
+add_action( 'restrict_manage_posts', 'add_special_meeting_dropdown', 10, 0 );
+
+/**
+ * If the meeting_special query var is on, only list special meetings.
+ */
+function special_meeting_filter( $query ) {
+	global $pagenow, $post_type;
+
+	if ( $post_type === 'meeting' &&
+		is_admin() &&
+		$pagenow == 'edit.php' &&
+		isset( $_GET['meeting_special'] ) &&
+		$_GET['meeting_special'] === 'on' )
+	{
+
+		$query->query_vars['meta_key']   = 'ucf_meeting_special_meeting';
+		$query->query_vars['meta_value'] = '1';
+		$query->query_vars['meta_compare'] = '=';
+
+		return $query;
+	}
+}
+
+add_action( 'parse_query', 'special_meeting_filter' , 10, 1 );
 
 ?>
