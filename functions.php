@@ -607,4 +607,44 @@ function add_id_to_ucfhb($url) {
 }
 add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
 
+/**
+ * Function that adds the `special meeting` column
+ */
+function add_special_meeting_checkbox() {
+	global $post_type;
+
+	$checked = ( isset( $_GET['meeting_special'] ) && $_GET['meeting_special'] === 'on' ) ? true : false;
+
+	if ( $post_type === 'meeting' ) :
+?>
+	<label><input type="checkbox" name="meeting_special" id="meeting_special"<?php echo ( $checked ) ? ' checked' : '';?>> Special Meetings</label>
+<?php
+	endif;
+}
+
+add_action( 'restrict_manage_posts', 'add_special_meeting_checkbox', 10, 0 );
+
+/**
+ * If the meeting_special query var is on, only list special meetings.
+ */
+function special_meeting_filter( $query ) {
+	global $pagenow, $post_type;
+
+	if ( $post_type === 'meeting' &&
+		is_admin() &&
+		$pagenow == 'edit.php' &&
+		isset( $_GET['meeting_special'] ) &&
+		$_GET['meeting_special'] === 'on' )
+	{
+
+		$query->query_vars['meta_key']   = 'ucf_meeting_special_meeting';
+		$query->query_vars['meta_value'] = '1';
+		$query->query_vars['meta_compare'] = '=';
+
+		return $query;
+	}
+}
+
+add_action( 'parse_query', 'special_meeting_filter' , 10, 1 );
+
 ?>
