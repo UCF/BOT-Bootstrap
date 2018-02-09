@@ -513,7 +513,19 @@ function display_committee_members( $people_group ) {
 	$vice_chair = get_field( 'people_group_vice_chair', 'people_group_' . $people_group_id );
 	$ex_officio = get_field( 'people_group_ex_officio', 'people_group_' . $people_group_id );
 
-	$exclude = array( $vice_chair->ID, $ex_officio->ID );
+	$exclude = array();
+
+	if ( $chair ) {
+		$exclude[] = $chair->ID;
+	}
+
+	if ( $vice_chair ) {
+		$exclude[] = $vice_chair->ID;
+	}
+	
+	if ( $ex_officio ) {
+		$exclude[] = $ex_officio->ID;
+	}
 
 	// Remove the committee officers from the rest of the memebers.
 	$args = array(
