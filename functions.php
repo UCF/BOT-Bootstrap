@@ -484,11 +484,13 @@ function get_next_special_meeting( $committee='None', $args=array() ) {
 }
 
 function get_person_markup( $person, $title=null ) {
+	$img = isset( $person->metadata['thumbnail_url'] ) ? $person->metadata['thumbnail_url'] : get_bloginfo('stylesheet_directory') . '/static/img/no-photo.jpg';
+
 	ob_start();
 ?>
 	<figure class="figure person-figure">
 		<a href="<?php echo get_permalink( $person->ID ); ?>">
-			<img clas="img-responsive" src="<?php echo $person->metadata['thumbnail_url']; ?>" alt="<?php echo $person->post_title; ?>">
+			<img clas="img-responsive" src="<?php echo $img; ?>" alt="<?php echo $person->post_title; ?>">
 			<figcaption class="figure-caption">
 				<?php echo $person->post_title; ?>
 				<?php if ( $title ) : ?>
