@@ -558,9 +558,9 @@ function display_committee_members( $people_group ) {
 		<div class="col-md-4 col-sm-6">
 			<?php echo get_person_markup( $person ); ?>
 		</div>
+	<?php endforeach; ?>
 	</div>
 	<?php
-		endforeach;
 	return ob_get_clean();
 }
 
