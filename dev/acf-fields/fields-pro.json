@@ -28,7 +28,7 @@
                 "name": "people_group_chair",
                 "type": "post_object",
                 "instructions": "",
-                "required": 1,
+                "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
                     "width": "",
@@ -38,11 +38,8 @@
                 "post_type": [
                     "person"
                 ],
-                "taxonomy": [
-                    "category:16",
-                    "category:16"
-                ],
-                "allow_null": 0,
+                "taxonomy": [],
+                "allow_null": 1,
                 "multiple": 0,
                 "return_format": "object",
                 "ui": 1
@@ -63,11 +60,8 @@
                 "post_type": [
                     "person"
                 ],
-                "taxonomy": [
-                    "category:16",
-                    "category:16"
-                ],
-                "allow_null": 0,
+                "taxonomy": [],
+                "allow_null": 1,
                 "multiple": 0,
                 "return_format": "object",
                 "ui": 1
@@ -88,11 +82,8 @@
                 "post_type": [
                     "person"
                 ],
-                "taxonomy": [
-                    "category:16",
-                    "category:16"
-                ],
-                "allow_null": 0,
+                "taxonomy": [],
+                "allow_null": 1,
                 "multiple": 0,
                 "return_format": "object",
                 "ui": 1
@@ -112,12 +103,9 @@
         "style": "seamless",
         "label_placement": "top",
         "instruction_placement": "label",
-        "hide_on_screen": [
-            
-        ],
+        "hide_on_screen": "",
         "active": 1,
-        "description": "",
-        "old_ID": 11
+        "description": ""
     },
     {
         "key": "group_58dd35aaa9baa",
@@ -220,7 +208,10 @@
                     "id": ""
                 },
                 "message": "",
-                "default_value": 0
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
             },
             {
                 "key": "field_58d2ded461416",
@@ -267,9 +258,7 @@
         "style": "default",
         "label_placement": "top",
         "instruction_placement": "label",
-        "hide_on_screen": [
-            
-        ],
+        "hide_on_screen": [],
         "active": 1,
         "description": "",
         "old_ID": 29
