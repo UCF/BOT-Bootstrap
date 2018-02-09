@@ -507,9 +507,9 @@ function get_person_markup( $person, $title=null ) {
 function display_committee_members( $people_group ) {
 	$people_group_id = $people_group->term_id;
 
-	$chair = UCF_People_PostType::append_metadata( get_field( 'people_group_chair', 'people_group_' . $people_group_id ) );
-	$vice_chair = UCF_People_PostType::append_metadata( get_field( 'people_group_vice_chair', 'people_group_' . $people_group_id ) );
-	$ex_officio = UCF_People_PostType::append_metadata( get_field( 'people_group_ex_officio', 'people_group_' . $people_group_id ) );
+	$chair = get_field( 'people_group_chair', 'people_group_' . $people_group_id );
+	$vice_chair = get_field( 'people_group_vice_chair', 'people_group_' . $people_group_id );
+	$ex_officio = get_field( 'people_group_ex_officio', 'people_group_' . $people_group_id );
 
 	$exclude = array( $chair->ID, $vice_chair->ID, $ex_officio->ID );
 
@@ -539,15 +539,21 @@ function display_committee_members( $people_group ) {
 ?>
 	<h2>Committee Members</h2>
 	<div class="row">
+		<?php if ( $chair ) : UCF_People_PostType::append_metadata( $chair ); ?>
 		<div class="col-md-4">
 			<?php echo get_person_markup( $chair, 'Chair' ); ?>
 		</div>
+		<?php endif; ?>
+		<?php if ( $vice_chair ) : UCF_People_PostType::append_metadata( $vice_chair ); ?>
 		<div class="col-md-4">
 			<?php echo get_person_markup( $vice_chair, 'Vice Chair' ); ?>
 		</div>
+		<?php endif; ?>
+		<?php if ( $ex_officio ) : UCF_People_PostType::append_metadata( $ex_officio ); ?>
 		<div class="col-md-4">
 			<?php echo get_person_markup( $ex_officio, 'Ex Officio' ); ?>
 		</div>
+		<?php endif; ?>
 	</div>
 <?php foreach( $people as $i=>$person ) : $person = UCF_People_PostType::append_metadata( $person ); ?>
 	<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
