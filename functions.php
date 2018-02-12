@@ -265,8 +265,17 @@ function display_meetings( $meetings ) {
 
 function display_meetings_by_year( $years ) {
 	ob_start();
+
+	if ( ! $years ) :
+?>
+	<p>No meetings to display.</p>
+<?php
+	return ob_get_clean();
+
+	endif;
+
 	reset( $years );
-	$first_year = (int)date( "Y" );
+	$first_year = ( is_array( $years ) ) ? (int)key( $years ) : null;
 ?>
 	<div class="row">
 		<div class="col-md-8">
@@ -519,7 +528,7 @@ function display_committee_members( $people_group ) {
 	if ( $vice_chair ) {
 		$exclude[] = $vice_chair->ID;
 	}
-	
+
 	if ( $ex_officio ) {
 		$exclude[] = $ex_officio->ID;
 	}
