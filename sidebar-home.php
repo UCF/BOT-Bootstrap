@@ -19,7 +19,7 @@
 							<?php endif; ?>
 						</p>
 						<?php if ( $next_meeting->metadata['ucf_meeting_agenda'] ) : $file_url = wp_get_attachment_url( $next_meeting->metadata['ucf_meeting_agenda'] ); ?>
-						<p class="mb-0"><a class="document" href="<?php echo $file_url; ?>">View Agenda</a></li>
+						<p class="mb-0"><a class="document" href="<?php echo $file_url; ?>" target="_blank">View Agenda</a></li>
 						<?php endif ; ?>
 					</div>
 				</div>
