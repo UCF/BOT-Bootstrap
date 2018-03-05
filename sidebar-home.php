@@ -52,7 +52,6 @@
 						?>
 							<p class="mb-0"><a class="document" href="<?php echo $special_meeting_agenda; ?>" target="_blank">View Agenda</a></p>
 						<?php endif; ?>
-						</p>
 					</div>
 				</div>
 				<?php else: ?>

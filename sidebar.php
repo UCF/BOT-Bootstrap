@@ -16,7 +16,7 @@
 					<?php endif; ?>
 				</p>
 				<?php if ( $next_meeting->metadata['ucf_meeting_agenda'] ) : $file_url = wp_get_attachment_url( $next_meeting->metadata['ucf_meeting_agenda'] ); ?>
-				<p><a class="document" href="<?php echo $file_url; ?>">View Agenda</a></li>
+				<p><a class="document" href="<?php echo $file_url; ?>" target="_blank">View Agenda</a></li>
 				<?php endif ; ?>
 			</div>
 		</div>
@@ -40,11 +40,15 @@
 			<div class="col-md-10">
 				<h4><?php echo $special_meeting->metadata['ucf_meeting_date']->format( 'F j, Y' ); ?></h4>
 				<time><?php echo $special_meeting->metadata['ucf_meeting_start_time']; ?> - <?php echo $special_meeting->metadata['ucf_meeting_end_time']; ?></time>
-				<p><?php echo $special_meeting->metadata['ucf_meeting_location']; ?>
+				<p class="my-1"><?php echo $special_meeting->metadata['ucf_meeting_location']; ?></p>
 				<?php if ( isset( $special_meeting->metadata['ucf_meeting_special_name'] ) && ! empty( $special_meeting->metadata['ucf_meeting_special_name'] ) ) : ?>
-					<br /><em><?php echo $special_meeting->metadata['ucf_meeting_special_name']; ?></em>
+					<p class="my-1"><em><?php echo $special_meeting->metadata['ucf_meeting_special_name']; ?></em></p>
 				<?php endif; ?>
-				</p>
+				<?php if ( isset( $special_meeting->metadata['ucf_meeting_agenda'] ) && ! empty( $special_meeting->metadata['ucf_meeting_agenda'] ) ) :
+					$special_meeting_agenda = wp_get_attachment_url( $special_meeting->metadata['ucf_meeting_agenda'] );
+				?>
+					<p class="mb-0"><a class="document" href="<?php echo $special_meeting_agenda; ?>" target="_blank">View Agenda</a></p>
+				<?php endif; ?>
 			</div>
 		</div>
 		<?php else: ?>
