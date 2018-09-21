@@ -65,10 +65,26 @@ ThemeConfig::$setting_defaults = array(
 );
 
 function define_customizer_sections( $wp_customize ) {
+	$wp_customize->add_panel(
+		THEME_CUSTOMIZER_PREFIX . 'homepanel',
+		array(
+			'title' => 'Homepage'
+		)
+	);
+
 	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'homepage',
 		array(
-			'title' => 'Homepage'
+			'title' => 'Homepage Header',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'homepanel'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'call_to_action',
+		array(
+			'title' => 'Homepage Call to Action',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'homepanel'
 		)
 	);
 
@@ -145,7 +161,7 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'checkbox',
 			'label'       => 'Show Call to Action',
 			'description' => 'Show the call to action in the hompage sidebar.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action',
 			'default'     => false
 		)
 	);
@@ -160,7 +176,7 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Call to Action Title',
 			'description' => 'The title that appears at the top of the home page sidebar call to action.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
 		)
 	);
 
@@ -174,7 +190,7 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'textarea',
 			'label'       => 'Call to Action Content',
 			'description' => 'The content of the home page sidebar call to action.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
 		)
 	);
 
@@ -188,7 +204,7 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Call to Action Button Text',
 			'description' => 'The text used in the call to action button.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
 		)
 	);
 
@@ -202,7 +218,7 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'url',
 			'label'       => 'Call to Action Button URL',
 			'description' => 'The URL used in the call to action button.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
 		)
 	);
 
