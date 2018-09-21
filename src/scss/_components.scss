@@ -264,6 +264,16 @@
   }
 }
 
+.btn-ucf-inverse {
+  background: $ucf-col-default;
+  color: $ucf-col-highlight;
+
+  &:hover {
+    background-color: lighten($ucf-col-default, 15);
+    color: $ucf-col-highlight;
+  }
+}
+
 .navbar-gold {
   background-color: $ucf-bg-default;
   border: 0;

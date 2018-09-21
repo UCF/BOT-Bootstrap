@@ -65,10 +65,26 @@ ThemeConfig::$setting_defaults = array(
 );
 
 function define_customizer_sections( $wp_customize ) {
+	$wp_customize->add_panel(
+		THEME_CUSTOMIZER_PREFIX . 'homepanel',
+		array(
+			'title' => 'Homepage'
+		)
+	);
+
 	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'homepage',
 		array(
-			'title' => 'Homepage'
+			'title' => 'Homepage Header',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'homepanel'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'call_to_action',
+		array(
+			'title' => 'Homepage Call to Action',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'homepanel'
 		)
 	);
 
@@ -134,6 +150,78 @@ function define_customizer_fields( $wp_customize ) {
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
 		)
 	);
+
+	$wp_customize->add_setting(
+		'show_call_to_action'
+	);
+
+	$wp_customize->add_control(
+		'show_call_to_action',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Show Call to Action',
+			'description' => 'Show the call to action in the homepage sidebar.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action',
+			'default'     => false
+		)
+	);
+
+	$wp_customize->add_setting(
+		'call_to_action_title'
+	);
+
+	$wp_customize->add_control(
+		'call_to_action_title',
+		array(
+			'type'        => 'text',
+			'label'       => 'Call to Action Title',
+			'description' => 'The title that appears at the top of the homepage sidebar call to action.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'call_to_action_content'
+	);
+
+	$wp_customize->add_control(
+		'call_to_action_content',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Call to Action Content',
+			'description' => 'The content of the homepage sidebar call to action.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'call_to_action_button_text'
+	);
+
+	$wp_customize->add_control(
+		'call_to_action_button_text',
+		array(
+			'type'        => 'text',
+			'label'       => 'Call to Action Button Text',
+			'description' => 'The text used in the call to action button.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'call_to_action_button_url'
+	);
+
+	$wp_customize->add_control(
+		'call_to_action_button_url',
+		array(
+			'type'        => 'url',
+			'label'       => 'Call to Action Button URL',
+			'description' => 'The URL used in the call to action button.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
+		)
+	);
+
 
 	# Typography
 	$wp_customize->add_setting(

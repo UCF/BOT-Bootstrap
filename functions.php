@@ -242,14 +242,14 @@ function display_meetings( $meetings ) {
 				</td>
 				<td class="text-center">
 					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) && ! empty( $post->metadata['ucf_meeting_agenda'] ) ) : ?>
-					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>">Agenda</a>
+					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>" target="_blank">Agenda</a>
 					<?php else: ?>
 					-
 					<?php endif; ?>
 				</td>
 				<td>
 					<?php if ( isset( $post->metadata['ucf_meeting_minutes'] ) && ! empty( $post->metadata['ucf_meeting_minutes'] ) ) : ?>
-					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>">Minutes</a>
+					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>" target="_blank">Minutes</a>
 					<?php else: ?>
 					-
 					<?php endif; ?>
@@ -620,6 +620,23 @@ function display_committee_staff( $people_group ) {
 <?php
 	endforeach;
 	return ob_get_clean();
+}
+
+/**
+ * Return object with homepage Call to Action details
+ */
+function get_homepage_cta_object() {
+	$retval = array();
+	$retval['show'] = get_theme_mod_or_default( 'show_call_to_action' );
+	$retval['title'] = get_theme_mod_or_default( 'call_to_action_title' );
+	$retval['content'] = get_theme_mod_or_default( 'call_to_action_content' );
+	$retval['btn_text'] = get_theme_mod_or_default( 'call_to_action_button_text' );
+	$retval['btn_url'] = get_theme_mod_or_default( 'call_to_action_button_url' );
+
+	$retval['has_content'] = ( ! empty( $retval['title'] ) || ! empty( $retval['content'] ) ) ? true : false;
+	$retval['has_button'] = ( ! empty( $retval['btn_text'] ) && ! empty( $retval['btn_url'] ) ) ? true : false;
+
+	return (object)$retval;
 }
 
 /**
