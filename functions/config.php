@@ -160,7 +160,7 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'type'        => 'checkbox',
 			'label'       => 'Show Call to Action',
-			'description' => 'Show the call to action in the hompage sidebar.',
+			'description' => 'Show the call to action in the homepage sidebar.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action',
 			'default'     => false
 		)
@@ -175,7 +175,7 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'type'        => 'text',
 			'label'       => 'Call to Action Title',
-			'description' => 'The title that appears at the top of the home page sidebar call to action.',
+			'description' => 'The title that appears at the top of the homepage sidebar call to action.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
 		)
 	);
@@ -189,7 +189,7 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'type'        => 'textarea',
 			'label'       => 'Call to Action Content',
-			'description' => 'The content of the home page sidebar call to action.',
+			'description' => 'The content of the homepage sidebar call to action.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
 		)
 	);
