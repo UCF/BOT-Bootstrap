@@ -626,6 +626,23 @@ function display_committee_staff( $people_group ) {
 }
 
 /**
+ * Return object with homepage Call to Action details
+ */
+function get_homepage_cta_object() {
+	$retval = array();
+	$retval['show'] = get_theme_mod_or_default( 'show_call_to_action' );
+	$retval['title'] = get_theme_mod_or_default( 'call_to_action_title' );
+	$retval['content'] = get_theme_mod_or_default( 'call_to_action_content' );
+	$retval['btn_text'] = get_theme_mod_or_default( 'call_to_action_button_text' );
+	$retval['btn_url'] = get_theme_mod_or_default( 'call_to_action_button_url' );
+
+	$retval['has_content'] = ( ! empty( $retval['title'] ) || ! empty( $retval['content'] ) ) ? true : false;
+	$retval['has_button'] = ( ! empty( $retval['btn_text'] ) && ! empty( $retval['btn_url'] ) ) ? true : false;
+
+	return (object)$retval;
+}
+
+/**
  * Add ID attribute to registered University Header script.
  **/
 function add_id_to_ucfhb($url) {

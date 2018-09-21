@@ -135,6 +135,78 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(
+		'show_call_to_action'
+	);
+
+	$wp_customize->add_control(
+		'show_call_to_action',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Show Call to Action',
+			'description' => 'Show the call to action in the hompage sidebar.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage',
+			'default'     => false
+		)
+	);
+
+	$wp_customize->add_setting(
+		'call_to_action_title'
+	);
+
+	$wp_customize->add_control(
+		'call_to_action_title',
+		array(
+			'type'        => 'text',
+			'label'       => 'Call to Action Title',
+			'description' => 'The title that appears at the top of the home page sidebar call to action.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'call_to_action_content'
+	);
+
+	$wp_customize->add_control(
+		'call_to_action_content',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Call to Action Content',
+			'description' => 'The content of the home page sidebar call to action.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'call_to_action_button_text'
+	);
+
+	$wp_customize->add_control(
+		'call_to_action_button_text',
+		array(
+			'type'        => 'text',
+			'label'       => 'Call to Action Button Text',
+			'description' => 'The text used in the call to action button.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'call_to_action_button_url'
+	);
+
+	$wp_customize->add_control(
+		'call_to_action_button_url',
+		array(
+			'type'        => 'url',
+			'label'       => 'Call to Action Button URL',
+			'description' => 'The URL used in the call to action button.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'homepage'
+		)
+	);
+
+
 	# Typography
 	$wp_customize->add_setting(
 		'web_font_key'

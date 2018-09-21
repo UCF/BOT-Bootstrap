@@ -6,6 +6,39 @@ body.fixed-navbar {
   margin-bottom: 32px;
 }
 
+.homepage-cta {
+  background: $ucf-gold;
+  margin-top: 101px;
+  min-height: 230px;
+  padding: 2em 1em;
+
+  @media(max-width: $screen-sm-min) {
+    margin-top: 20px;
+  }
+}
+
+.homepage-cta-title {
+  margin: 0;
+  text-align: center;
+}
+
+.homepage-cta-content-wrap {
+  min-height: 110px;
+}
+
+.homepage-cta-content {
+  margin: 0;
+  font-family: $font-family-serif;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.homepage-cta-btn {
+  display: block;
+  margin-top: 2em;
+  text-align: center;
+}
+
 .homepage-header-copy-container {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
   bottom: 0;
