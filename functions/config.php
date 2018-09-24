@@ -171,39 +171,26 @@ function define_customizer_fields( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
-		'call_to_action_background_color',
+		'call_to_action_theme',
 		array(
-			'default' => '#ffc904'
+			'default' => 'cta-gold'
 		)
 	);
 
 	$wp_customize->add_control(
-		new WP_Customize_Color_Control( 
-			$wp_customize, 
-			'call_to_action_background_color', 
-			array(
-				'label'      => 'Call to action background color.',
-				'section'    => THEME_CUSTOMIZER_PREFIX . 'call_to_action',
-				'settings'   => 'call_to_action_background_color'
-			) ) 
-	);
-
-	$wp_customize->add_setting(
-		'call_to_action_text_color',
+		'call_to_action_theme',
 		array(
-			'default' => '#000000'
+			'type'        => 'select',
+			'label'       => 'Call to Action Theme',
+			'description' => 'The visual theme to use for the homepage sidebar call to action.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action',
+			'choices'     => array(
+				'cta-gold'  => 'Gold',
+				'cta-grey'  => 'Grey',
+				'cta-black' => 'Black',
+				'cta-red'   => 'Emergency'
+			)
 		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control( 
-			$wp_customize, 
-			'call_to_action_text_color', 
-			array(
-				'label'      => 'Call to action text color.',
-				'section'    => THEME_CUSTOMIZER_PREFIX . 'call_to_action',
-				'settings'   => 'call_to_action_text_color'
-			) ) 
 	);
 
 	$wp_customize->add_setting(
@@ -232,42 +219,6 @@ function define_customizer_fields( $wp_customize ) {
 			'description' => 'The content of the homepage sidebar call to action.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
 		)
-	);
-
-	$wp_customize->add_setting(
-		'call_to_action_btn_background_color',
-		array(
-			'default' => '#000000'
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control( 
-			$wp_customize, 
-			'call_to_action_btn_background_color', 
-			array(
-				'label'      => 'Call to action button background color.',
-				'section'    => THEME_CUSTOMIZER_PREFIX . 'call_to_action',
-				'settings'   => 'call_to_action_btn_background_color'
-			) ) 
-	);
-
-	$wp_customize->add_setting(
-		'call_to_action_btn_text_color',
-		array(
-			'default' => '#ffffff'
-		)
-	);
-
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control( 
-			$wp_customize, 
-			'call_to_action_btn_text_color', 
-			array(
-				'label'      => 'Call to action button text color.',
-				'section'    => THEME_CUSTOMIZER_PREFIX . 'call_to_action',
-				'settings'   => 'call_to_action_btn_text_color'
-			) ) 
 	);
 
 	$wp_customize->add_setting(
