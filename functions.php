@@ -628,11 +628,11 @@ function display_committee_staff( $people_group ) {
 function get_homepage_cta_object() {
 	$retval = array();
 	$retval['show'] = get_theme_mod_or_default( 'show_call_to_action' );
+	$retval['theme'] = get_theme_mod_or_default( 'call_to_action_theme' );
 	$retval['title'] = get_theme_mod_or_default( 'call_to_action_title' );
 	$retval['content'] = get_theme_mod_or_default( 'call_to_action_content' );
 	$retval['btn_text'] = get_theme_mod_or_default( 'call_to_action_button_text' );
 	$retval['btn_url'] = get_theme_mod_or_default( 'call_to_action_button_url' );
-
 	$retval['has_content'] = ( ! empty( $retval['title'] ) || ! empty( $retval['content'] ) ) ? true : false;
 	$retval['has_button'] = ( ! empty( $retval['btn_text'] ) && ! empty( $retval['btn_url'] ) ) ? true : false;
 

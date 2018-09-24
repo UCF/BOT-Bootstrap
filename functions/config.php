@@ -151,8 +151,13 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+
+	# Call to action section
 	$wp_customize->add_setting(
-		'show_call_to_action'
+		'show_call_to_action',
+		array(
+			'default' => false
+		)
 	);
 
 	$wp_customize->add_control(
@@ -161,8 +166,30 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'checkbox',
 			'label'       => 'Show Call to Action',
 			'description' => 'Show the call to action in the homepage sidebar.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'call_to_action_theme',
+		array(
+			'default' => 'cta-gold'
+		)
+	);
+
+	$wp_customize->add_control(
+		'call_to_action_theme',
+		array(
+			'type'        => 'select',
+			'label'       => 'Call to Action Theme',
+			'description' => 'The visual theme to use for the homepage sidebar call to action.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'call_to_action',
-			'default'     => false
+			'choices'     => array(
+				'cta-gold'  => 'Gold',
+				'cta-grey'  => 'Grey',
+				'cta-black' => 'Black',
+				'cta-red'   => 'Emergency'
+			)
 		)
 	);
 
