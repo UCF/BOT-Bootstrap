@@ -147,7 +147,7 @@ function get_board_members_as_options() {
 	$retval = array();
 
 	// Add an empty value as an option
-	$retval[] = '';
+	$retval[''] = '';
 
 	foreach( $members as $member ) {
 		$retval[$member->ID] = $member->post_title;
