@@ -44,7 +44,7 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 		$chair_id = get_theme_mod_or_default( 'board_chair' );
 		$vice_chair_id = get_theme_mod_or_default( 'board_vice_chair' );
 
-		$exlude = array();
+		$exclude = array();
 
 		if ( !empty( $chair_id ) ) {
 			$chair = get_post( $chair_id );
