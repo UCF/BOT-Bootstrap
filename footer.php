@@ -5,7 +5,7 @@
 						<div class="col-md-8">
 						<?php
 							echo wp_nav_menu(array(
-								'theme_location' => 'header-menu',
+								'theme_location' => 'footer-menu',
 								'container'      => 'false',
 								'menu_class'     => 'menu list-unstyled list-inline',
 								'menu_id'        => 'footer-menu',
