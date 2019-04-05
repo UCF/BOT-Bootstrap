@@ -44,15 +44,15 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 		$chair_id = get_theme_mod_or_default( 'board_chair' );
 		$vice_chair_id = get_theme_mod_or_default( 'board_vice_chair' );
 
-		$exlude = array();
+		$exclude = array();
 
-		if ( $chair_id ) {
+		if ( !empty( $chair_id ) ) {
 			$chair = get_post( $chair_id );
 			$chair = UCF_People_PostType::append_metadata( $chair );
 			$exclude[] = $chair->ID;
 		}
 
-		if ( $vice_chair_id ) {
+		if ( !empty( $vice_chair_id ) ) {
 			$vice_chair = get_post( $vice_chair_id );
 			$vice_chair = UCF_People_PostType::append_metadata( $vice_chair );
 			$exclude[] = $vice_chair->ID;
@@ -66,7 +66,7 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 	$people = get_posts( $args );
 	$count = count( $people ) - 1;
 
-	if ( $chair ) :
+	if ( isset( $chair ) ) :
 ?>
 		<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
 		<div class="col-md-4 col-sm-6">
@@ -76,7 +76,7 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 <?php
 	endif;
 
-	if ( $vice_chair ) :
+	if ( isset( $vice_chair ) ) :
 ?>
 		<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
 		<div class="col-md-4 col-sm-6">
