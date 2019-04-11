@@ -40,6 +40,7 @@ function ucfwp_add_google_analytics() {
 		<?php
 	endif;
 }
+
 add_action( 'wp_head', 'ucfwp_add_google_analytics' );
 
 
