@@ -154,6 +154,22 @@
                 "mime_types": ""
             },
             {
+                "key": "field_5cfe5b805d1cf",
+                "label": "Video",
+                "name": "ucf_meeting_video",
+                "type": "url",
+                "instructions": "Enter the URL of the YouTube live stream or video.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "https:\/\/www.youtube.com\/watch?v=popkIIRZpFY or https:\/\/youtu.be\/popkIIRZpFY"
+            },
+            {
                 "key": "field_58d2de4361413",
                 "label": "Minutes",
                 "name": "ucf_meeting_minutes",
