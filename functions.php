@@ -245,14 +245,14 @@ function display_meetings( $meetings ) {
 				</td>
 				<td data-title="Agenda">
 					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) && ! empty( $post->metadata['ucf_meeting_agenda'] ) ) : ?>
-					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>" target="_blank">Agenda</a>
+					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>" target="_blank">Download</a>
 					<?php else: ?>
 					-
 					<?php endif; ?>
 				</td>
 				<td data-title="Minutes">
 					<?php if ( isset( $post->metadata['ucf_meeting_minutes'] ) && ! empty( $post->metadata['ucf_meeting_minutes'] ) ) : ?>
-					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>" target="_blank">Minutes</a>
+					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>" target="_blank">Download</a>
 					<?php else: ?>
 					-
 					<?php endif; ?>
