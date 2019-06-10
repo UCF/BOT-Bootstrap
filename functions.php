@@ -211,8 +211,7 @@ function get_custom_header_extended() {
 function display_meetings( $meetings ) {
 	ob_start();
 ?>
-	<div class="table-responsive">
-	<table class="table table-striped">
+	<table class="table table-collapse table-striped">
 		<thead>
 			<tr>
 				<th>Date</th>
@@ -220,19 +219,20 @@ function display_meetings( $meetings ) {
 				<th>Location</th>
 				<th>Agenda</th>
 				<th>Minutes</th>
+				<th>Video</th>
 			</tr>
 		</thead>
 		<tbody>
 	<?php foreach( $meetings as $post ) : ?>
 	<?php
-		$date = isset( $post->metadata['ucf_meeting_date'] ) ? $post->metadata['ucf_meeting_date']->format( 'F j, Y' ) : 'TBD';
+		$date = isset( $post->metadata['ucf_meeting_date'] ) ? $post->metadata['ucf_meeting_date']->format( 'M j, Y' ) : 'TBD';
 		$start = isset( $post->metadata['ucf_meeting_start_time'] ) ? $post->metadata['ucf_meeting_start_time'] : null;
 		$end = isset( $post->metadata['ucf_meeting_end_time'] ) ? $post->metadata['ucf_meeting_end_time'] : null;
 		$location = isset( $post->metadata['ucf_meeting_location'] ) ? $post->metadata['ucf_meeting_location'] : 'TBD';
 	?>
-			<tr>
-				<td><?php echo $date; ?></td>
-				<td>
+			<tr class="mb-3">
+				<td data-title="Date"><?php echo $date; ?></td>
+				<td data-title="Time">
 				<?php if ( ( $start && ! $end ) || ( $start == $end ) ) : ?>
 					<time><?php echo $start; ?></time>
 				<?php elseif ( $start && $end ) : ?>
@@ -241,19 +241,26 @@ function display_meetings( $meetings ) {
 					TBD
 				<?php endif; ?>
 				</td>
-				<td><?php echo $location; ?>
+				<td data-title="Location"><?php echo ! empty( $location ) ? $location : '-'; ?>
 				</td>
-				<td class="text-center">
+				<td data-title="Agenda">
 					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) && ! empty( $post->metadata['ucf_meeting_agenda'] ) ) : ?>
-					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>" target="_blank">Agenda</a>
+					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>" target="_blank">Download</a>
 					<?php else: ?>
 					-
 					<?php endif; ?>
 				</td>
-				<td>
+				<td data-title="Minutes">
 					<?php if ( isset( $post->metadata['ucf_meeting_minutes'] ) && ! empty( $post->metadata['ucf_meeting_minutes'] ) ) : ?>
-					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>" target="_blank">Minutes</a>
+					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>" target="_blank">Download</a>
 					<?php else: ?>
+					-
+					<?php endif; ?>
+				</td>
+				<td data-title="Video">
+					<?php if ( isset( $post->metadata['ucf_meeting_video'] ) && ! empty( $post->metadata['ucf_meeting_video'] ) ) : ?>
+					<a class="document" href="<?php echo $post->metadata['ucf_meeting_video']; ?>" target="_blank">Watch</a>
+					<?php else : ?>
 					-
 					<?php endif; ?>
 				</td>
@@ -261,7 +268,6 @@ function display_meetings( $meetings ) {
 	<?php endforeach; ?>
 		</tbody>
 	</table>
-	</div>
 <?php
 	return ob_get_clean();
 }
@@ -403,8 +409,9 @@ function get_latest_meeting_minutes( $committee='None', $args=array() ) {
 	if ( $meeting ) {
 
 		$retval = array(
-			'name' => $meeting->metadata['ucf_meeting_date']->format( 'F j, Y' ),
-			'file' => wp_get_attachment_url( $meeting->metadata['ucf_meeting_minutes'] )
+			'name'  => $meeting->metadata['ucf_meeting_date']->format( 'F j, Y' ),
+			'file'  => wp_get_attachment_url( $meeting->metadata['ucf_meeting_minutes'] ),
+			'video' => isset( $meeting->metadata['ucf_meeting_video'] ) ? $meeting->metadata['ucf_meeting_video'] : null
 		);
 	}
 
