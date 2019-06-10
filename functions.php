@@ -242,7 +242,7 @@ function display_meetings( $meetings ) {
 					TBD
 				<?php endif; ?>
 				</td>
-				<td data-title="Location"><?php echo $location; ?>
+				<td data-title="Location"><?php echo ! empty( $location ) ? $location : '-'; ?>
 				</td>
 				<td data-title="Agenda">
 					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) && ! empty( $post->metadata['ucf_meeting_agenda'] ) ) : ?>
