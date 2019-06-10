@@ -211,7 +211,6 @@ function get_custom_header_extended() {
 function display_meetings( $meetings ) {
 	ob_start();
 ?>
-	<div class="table-responsive text-truncate">
 	<table class="table table-collapse table-striped">
 		<thead>
 			<tr>
@@ -226,7 +225,7 @@ function display_meetings( $meetings ) {
 		<tbody>
 	<?php foreach( $meetings as $post ) : ?>
 	<?php
-		$date = isset( $post->metadata['ucf_meeting_date'] ) ? $post->metadata['ucf_meeting_date']->format( 'F j, Y' ) : 'TBD';
+		$date = isset( $post->metadata['ucf_meeting_date'] ) ? $post->metadata['ucf_meeting_date']->format( 'M j, Y' ) : 'TBD';
 		$start = isset( $post->metadata['ucf_meeting_start_time'] ) ? $post->metadata['ucf_meeting_start_time'] : null;
 		$end = isset( $post->metadata['ucf_meeting_end_time'] ) ? $post->metadata['ucf_meeting_end_time'] : null;
 		$location = isset( $post->metadata['ucf_meeting_location'] ) ? $post->metadata['ucf_meeting_location'] : 'TBD';
@@ -269,7 +268,6 @@ function display_meetings( $meetings ) {
 	<?php endforeach; ?>
 		</tbody>
 	</table>
-	</div>
 <?php
 	return ob_get_clean();
 }
