@@ -409,8 +409,9 @@ function get_latest_meeting_minutes( $committee='None', $args=array() ) {
 	if ( $meeting ) {
 
 		$retval = array(
-			'name' => $meeting->metadata['ucf_meeting_date']->format( 'F j, Y' ),
-			'file' => wp_get_attachment_url( $meeting->metadata['ucf_meeting_minutes'] )
+			'name'  => $meeting->metadata['ucf_meeting_date']->format( 'F j, Y' ),
+			'file'  => wp_get_attachment_url( $meeting->metadata['ucf_meeting_minutes'] ),
+			'video' => isset( $meeting->metadata['ucf_meeting_video'] ) ? $meeting->metadata['ucf_meeting_video'] : null
 		);
 	}
 

@@ -14,6 +14,9 @@
 				<?php if ( $next_meeting->metadata['ucf_meeting_agenda'] ) : $file_url = wp_get_attachment_url( $next_meeting->metadata['ucf_meeting_agenda'] ); ?>
 				<p class="mb-0"><a class="document" href="<?php echo $file_url; ?>" target="_blank">View Agenda</a></li>
 				<?php endif ; ?>
+				<?php if ( $next_meeting->metadata['ucf_meeting_video'] ) : ?>
+				<p class="mt-1 mb-0"><a class="document" href="<?php echo $next_meeting->metadata['ucf_meeting_video']; ?>" target="_blank">Watch</a></p>
+				<?php endif; ?>
 			</div>
 		</div>
 		<?php else: ?>
@@ -22,8 +25,10 @@
 	</div>
 	<div class="well">
 		<h3>Latest Board Minutes</h3>
-		<?php $minutes = get_latest_meeting_minutes(); if ( $minutes ) : ?>
-			<a href="<?php echo $minutes['file']; ?>" class="document"><?php echo $minutes['name']; ?></a>
+		<?php $minutes = get_latest_meeting_minutes(); if ( $minutes && ! empty( $minutes['file'] ) ) : ?>
+			<a href="<?php echo $minutes['file']; ?>" class="document latest-board-minutes"><?php echo $minutes['name']; ?></a>
+		<?php else : ?>
+			<p class="mb-0">No Minutes Available for Latest Meeting</p>
 		<?php endif; ?>
 	</div>
 	<div class="well">
@@ -44,6 +49,9 @@
 					$special_meeting_agenda = wp_get_attachment_url( $special_meeting->metadata['ucf_meeting_agenda'] );
 				?>
 					<p class="mb-0"><a class="document" href="<?php echo $special_meeting_agenda; ?>" target="_blank">View Agenda</a></p>
+				<?php endif; ?>
+				<?php if ( isset( $special_meeting->metadata['ucf_meeting_video'] ) && ! empty( $special_meeting->metadata['ucf_meeting_video'] ) ) : ?>
+					<p class="mt-1 mb-0"><a class="document" href="<?php echo $special_meeting->metadata['ucf_meeting_video']; ?>" target="_blank">Watch</a></p>
 				<?php endif; ?>
 			</div>
 		</div>
