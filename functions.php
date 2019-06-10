@@ -230,7 +230,7 @@ function display_meetings( $meetings ) {
 		$end = isset( $post->metadata['ucf_meeting_end_time'] ) ? $post->metadata['ucf_meeting_end_time'] : null;
 		$location = isset( $post->metadata['ucf_meeting_location'] ) ? $post->metadata['ucf_meeting_location'] : 'TBD';
 	?>
-			<tr>
+			<tr class="mb-3">
 				<td data-title="Date"><?php echo $date; ?></td>
 				<td data-title="Time">
 				<?php if ( ( $start && ! $end ) || ( $start == $end ) ) : ?>
@@ -259,7 +259,7 @@ function display_meetings( $meetings ) {
 				</td>
 				<td data-title="Video">
 					<?php if ( isset( $post->metadata['ucf_meeting_video'] ) && ! empty( $post->metadata['ucf_meeting_video'] ) ) : ?>
-					<a class="document" href="<?php echo $post->metadata['ucf_meeting_video']; ?>" target="_blank">Video</a>
+					<a class="document" href="<?php echo $post->metadata['ucf_meeting_video']; ?>" target="_blank">Watch</a>
 					<?php else : ?>
 					-
 					<?php endif; ?>
