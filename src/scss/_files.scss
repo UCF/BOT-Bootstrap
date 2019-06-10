@@ -32,4 +32,12 @@
       content: '\f1c3';
     }
   }
+
+  &[href*='youtube.com'],
+  &[href*='youtu.be'] {
+    &::before {
+      color: #ff0000;
+      content: '\f01d';
+    }
+  }
 }

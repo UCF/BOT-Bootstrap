@@ -211,8 +211,8 @@ function get_custom_header_extended() {
 function display_meetings( $meetings ) {
 	ob_start();
 ?>
-	<div class="table-responsive">
-	<table class="table table-striped">
+	<div class="table-responsive text-truncate">
+	<table class="table table-collapse table-striped">
 		<thead>
 			<tr>
 				<th>Date</th>
@@ -220,6 +220,7 @@ function display_meetings( $meetings ) {
 				<th>Location</th>
 				<th>Agenda</th>
 				<th>Minutes</th>
+				<th>Video</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -231,8 +232,8 @@ function display_meetings( $meetings ) {
 		$location = isset( $post->metadata['ucf_meeting_location'] ) ? $post->metadata['ucf_meeting_location'] : 'TBD';
 	?>
 			<tr>
-				<td><?php echo $date; ?></td>
-				<td>
+				<td data-title="Date"><?php echo $date; ?></td>
+				<td data-title="Time">
 				<?php if ( ( $start && ! $end ) || ( $start == $end ) ) : ?>
 					<time><?php echo $start; ?></time>
 				<?php elseif ( $start && $end ) : ?>
@@ -241,19 +242,26 @@ function display_meetings( $meetings ) {
 					TBD
 				<?php endif; ?>
 				</td>
-				<td><?php echo $location; ?>
+				<td data-title="Location"><?php echo $location; ?>
 				</td>
-				<td class="text-center">
+				<td data-title="Agenda">
 					<?php if ( isset( $post->metadata['ucf_meeting_agenda'] ) && ! empty( $post->metadata['ucf_meeting_agenda'] ) ) : ?>
 					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_agenda'] ); ?>" target="_blank">Agenda</a>
 					<?php else: ?>
 					-
 					<?php endif; ?>
 				</td>
-				<td>
+				<td data-title="Minutes">
 					<?php if ( isset( $post->metadata['ucf_meeting_minutes'] ) && ! empty( $post->metadata['ucf_meeting_minutes'] ) ) : ?>
 					<a class="document" href="<?php echo wp_get_attachment_url( $post->metadata['ucf_meeting_minutes'] ); ?>" target="_blank">Minutes</a>
 					<?php else: ?>
+					-
+					<?php endif; ?>
+				</td>
+				<td data-title="Video">
+					<?php if ( isset( $post->metadata['ucf_meeting_video'] ) && ! empty( $post->metadata['ucf_meeting_video'] ) ) : ?>
+					<a class="document" href="<?php echo $post->metadata['ucf_meeting_video']; ?>" target="_blank">Video</a>
+					<?php else : ?>
 					-
 					<?php endif; ?>
 				</td>
