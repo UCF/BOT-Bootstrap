@@ -4,3 +4,46 @@
   font-family: $font-family-sans-serif;
   font-size: $font-size-base;
 }
+
+@media only screen and (max-width: 767px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100%;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid $cta-grey;
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid $cta-grey;
+    position: relative !important;
+    padding-left: 30vw !important;
+    white-space: normal;
+    text-align: left;
+
+    &:before {
+      content: attr(data-title);
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 25vw;
+      padding-right: 10px;
+      white-space: nowrap;
+      text-align: left;
+      font-weight: bold;
+    }
+  }
+}
