@@ -29,10 +29,11 @@
   td {
     border: none;
     border-bottom: 1px solid $cta-grey;
+    font-size: 12px;
     position: relative !important;
     padding-left: 30vw !important;
-    white-space: normal;
     text-align: left;
+    white-space: normal;
 
     &:before {
       content: attr(data-title);
