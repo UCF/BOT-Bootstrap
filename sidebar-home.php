@@ -17,7 +17,7 @@
 						<p class="mb-0"><a class="document" href="<?php echo $file_url; ?>" target="_blank">View Agenda</a></li>
 						<?php endif ; ?>
 						<?php if ( $next_meeting->metadata['ucf_meeting_video'] ) : ?>
-						<p class="mt-1 mb-0"><a class="document" href="<?php echo $next_meeting->metadata['ucf_meeting_video']; ?>" target="_blank">Watch</a></p>
+						<p class="mt-1 mb-0"><a class="document" href="<?php echo $next_meeting->metadata['ucf_meeting_video']; ?>" target="_blank">View Livestream</a></p>
 						<?php endif; ?>
 					</div>
 				</div>
@@ -53,7 +53,7 @@
 							<p class="mb-0"><a class="document" href="<?php echo $special_meeting_agenda; ?>" target="_blank">View Agenda</a></p>
 						<?php endif; ?>
 						<?php if ( isset( $special_meeting->metadata['ucf_meeting_video'] ) && ! empty( $special_meeting->metadata['ucf_meeting_video'] ) ) : ?>
-							<p class="mt-1 mb-0"><a class="document" href="<?php echo $special_meeting->metadata['ucf_meeting_video']; ?>" target="_blank">Watch</a></p>
+							<p class="mt-1 mb-0"><a class="document" href="<?php echo $special_meeting->metadata['ucf_meeting_video']; ?>" target="_blank">View Livestream</a></p>
 						<?php endif; ?>
 					</div>
 				</div>
