@@ -44,9 +44,6 @@ function enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'enqueue_assets' );
 
 # Set theme constants
-#define('DEBUG', True);                  # Always on
-#define('DEBUG', False);                 # Always off
-define( 'DEBUG', isset( $_GET['debug'] ) ); # Enable via get parameter
 define( 'THEME_URL', get_stylesheet_directory_uri() );
 define( 'THEME_ADMIN_URL', get_admin_url() );
 define( 'THEME_DIR', get_stylesheet_directory() );
