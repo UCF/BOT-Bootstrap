@@ -907,18 +907,6 @@ function set_defaults_for_options(){
 
 
 /**
- * Runs as wordpress is shutting down.
- *
- * @return void
- * @author Jared Lang
- **/
-function __shutdown__(){
-	global $timer;
-}
-add_action('shutdown', '__shutdown__');
-
-
-/**
  * Will return a string $s normalized to a slug value.  The optional argument,
  * $spaces, allows you to define what spaces and other undesirable characters
  * will be replaced with.  Useful for content that will appear in urls or
