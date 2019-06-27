@@ -404,7 +404,7 @@ function get_latest_meeting_minutes( $committee='None', $args=array() ) {
 	);
 
 	$meetings = UCF_Meeting::all( $args );
-	$meeting = $meetings[0];
+	$meeting = ( $meetings ) ? $meetings[0] : null;
 
 	if ( $meeting ) {
 
@@ -457,13 +457,7 @@ function get_next_meeting( $committee='None', $args=array() ) {
 
 	$meetings = UCF_Meeting::all( $args );
 
-	if ( $meetings ) {
-		$meeting = $meetings[0];
-	} else {
-		$meeting = null;
-	}
-
-	return $meeting;
+	return ( $meetings ) ? $meetings[0] : null;
 }
 
 function get_next_special_meeting( $committee='None', $args=array() ) {
@@ -497,9 +491,8 @@ function get_next_special_meeting( $committee='None', $args=array() ) {
 	);
 
 	$meetings = UCF_Meeting::all( $args );
-	$meeting = $meetings[0];
 
-	return $meeting;
+	return ( $meetings ) ? $meetings[0] : null;
 }
 
 function get_person_markup( $person, $title=null ) {
