@@ -31,17 +31,20 @@ function __init__(){
 	global $timer;
 	$timer = Timer::start();
 
-	wp_deregister_script('l10n');
 	set_defaults_for_options();
 }
-add_action('after_setup_theme', '__init__');
+add_action( 'after_setup_theme', '__init__' );
 
-function enqueue_assets() {
-	foreach(Config::$styles as $style){Config::add_css($style);}
-	foreach(Config::$scripts as $script){Config::add_script($script);}
+function bot_add_scripts() {
+	foreach( Config::$styles as $style ) {
+		Config::add_css( $style );
+	}
+ 	foreach( Config::$scripts as $script ) {
+		Config::add_script( $script );
+	}
+ 	wp_deregister_script( 'l10n' );
 }
-
-add_action( 'wp_enqueue_scripts', 'enqueue_assets' );
+ add_action( 'wp_enqueue_scripts', 'bot_add_scripts' );
 
 # Set theme constants
 define( 'THEME_URL', get_stylesheet_directory_uri() );
