@@ -208,7 +208,7 @@ function get_custom_header_extended() {
  * @author Jim Barnes
  * @param $meetings Array<WP_Post>
  **/
-function display_meetings( $meetings ) {
+function display_meetings( $meetings, $show_videos = true ) {
 	ob_start();
 ?>
 	<table class="table table-collapse table-striped">
@@ -219,7 +219,9 @@ function display_meetings( $meetings ) {
 				<th>Location</th>
 				<th>Agenda</th>
 				<th>Minutes</th>
+			<?php if( $show_videos ) { ?>
 				<th>Video</th>
+			<?php } ?>
 			</tr>
 		</thead>
 		<tbody>
@@ -257,6 +259,7 @@ function display_meetings( $meetings ) {
 					-
 					<?php endif; ?>
 				</td>
+			<?php if( $show_videos ) : ?>
 				<td data-title="Video">
 					<?php if ( isset( $post->metadata['ucf_meeting_video'] ) && ! empty( $post->metadata['ucf_meeting_video'] ) ) : ?>
 					<a class="document" href="<?php echo $post->metadata['ucf_meeting_video']; ?>" target="_blank">Watch</a>
@@ -264,6 +267,7 @@ function display_meetings( $meetings ) {
 					-
 					<?php endif; ?>
 				</td>
+			<?php endif; ?>
 			</tr>
 	<?php endforeach; ?>
 		</tbody>
@@ -272,7 +276,7 @@ function display_meetings( $meetings ) {
 	return ob_get_clean();
 }
 
-function display_meetings_by_year( $years ) {
+function display_meetings_by_year( $years, $show_videos = true ) {
 	ob_start();
 
 	if ( ! $years ) :
@@ -304,7 +308,7 @@ function display_meetings_by_year( $years ) {
 	<div class="tab-content">
 	<?php foreach( $years as $year=>$meetings ) : ?>
 		<div role="tabpanel" class="tab-pane<?php echo ($first_year === $year) ? ' active' : ''; ?>" id="panel_<?php echo $year; ?>">
-			<?php echo display_meetings( $meetings ); ?>
+			<?php echo display_meetings( $meetings, $show_videos ); ?>
 		</div>
 	<?php endforeach; ?>
 	</div>
