@@ -103,6 +103,13 @@ function define_customizer_sections( $wp_customize ) {
 	);
 
 	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'board_meeting_videos',
+		array(
+			'title' => 'Board Meeting Videos'
+		)
+	);
+
+	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'analytics',
 		array(
 			'title' => 'Analytics'
@@ -296,6 +303,42 @@ function define_customizer_fields( $wp_customize ) {
 			'description' => 'Select the current board vice chairman.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'board_positions',
 			'choices'     => $board_members
+		)
+	);
+
+
+	# Meeting Videos	
+	$wp_customize->add_setting(
+		'show_board_meeting_videos',
+		array(
+			'default' => true
+		)
+	);
+
+	$wp_customize->add_control(
+		'show_board_meeting_videos',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Show Board Meeting Videos',
+			'description' => 'Show videos column in the list of board meetings.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'board_meeting_videos'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'show_special_meeting_videos',
+		array(
+			'default' => true
+		)
+	);
+
+	$wp_customize->add_control(
+		'show_special_meeting_videos',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Show Special Meeting Videos',
+			'description' => 'Show videos column in the list of special meetings.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'board_meeting_videos'
 		)
 	);
 
