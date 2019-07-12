@@ -87,6 +87,25 @@
                 "multiple": 0,
                 "return_format": "object",
                 "ui": 1
+            },
+            {
+                "key": "field_5d289fb97b279",
+                "label": "Show Videos",
+                "name": "people_group_video_toggle",
+                "type": "true_false",
+                "instructions": "If checked videos will be displayed for committee meetings.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
             }
         ],
         "location": [
