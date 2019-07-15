@@ -7,7 +7,6 @@
 		<?php 
 			$meetings = get_meetings_by_year_committee( $term );
 					
-			$term = get_queried_object();
 			$show_videos = get_field('people_group_video_toggle', $term);
 			echo display_meetings_by_year( $meetings, $show_videos );
 			
