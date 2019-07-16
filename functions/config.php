@@ -31,17 +31,20 @@ function __init__(){
 	global $timer;
 	$timer = Timer::start();
 
-	wp_deregister_script('l10n');
 	set_defaults_for_options();
 }
-add_action('after_setup_theme', '__init__');
+add_action( 'after_setup_theme', '__init__' );
 
-function enqueue_assets() {
-	foreach(Config::$styles as $style){Config::add_css($style);}
-	foreach(Config::$scripts as $script){Config::add_script($script);}
+function bot_add_scripts() {
+	foreach( Config::$styles as $style ) {
+		Config::add_css( $style );
+	}
+ 	foreach( Config::$scripts as $script ) {
+		Config::add_script( $script );
+	}
+ 	wp_deregister_script( 'l10n' );
 }
-
-add_action( 'wp_enqueue_scripts', 'enqueue_assets' );
+ add_action( 'wp_enqueue_scripts', 'bot_add_scripts' );
 
 # Set theme constants
 define( 'THEME_URL', get_stylesheet_directory_uri() );
@@ -96,6 +99,13 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'board_positions',
 		array(
 			'title' => 'Board Titles'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'board_meeting_videos',
+		array(
+			'title' => 'Board Meeting Videos'
 		)
 	);
 
@@ -293,6 +303,42 @@ function define_customizer_fields( $wp_customize ) {
 			'description' => 'Select the current board vice chairman.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'board_positions',
 			'choices'     => $board_members
+		)
+	);
+
+
+	# Meeting Videos	
+	$wp_customize->add_setting(
+		'show_board_meeting_videos',
+		array(
+			'default' => true
+		)
+	);
+
+	$wp_customize->add_control(
+		'show_board_meeting_videos',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Show Board Meeting Videos',
+			'description' => 'Show videos column in the list of board meetings.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'board_meeting_videos'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'show_special_meeting_videos',
+		array(
+			'default' => true
+		)
+	);
+
+	$wp_customize->add_control(
+		'show_special_meeting_videos',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Show Special Meeting Videos',
+			'description' => 'Show videos column in the list of special meetings.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'board_meeting_videos'
 		)
 	);
 
