@@ -70,7 +70,7 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 ?>
 		<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
 		<div class="col-md-4 col-sm-6">
-			<?php echo get_person_markup( $chair, 'Board Chairman' ); ?>
+			<?php echo get_person_markup( $chair, 'Board Chair' ); ?>
 		</div>
 		<?php if ( $i % 3 === 2 ) : ?></div><?php endif; $i++; $count++; ?>
 <?php
@@ -80,7 +80,7 @@ function ucf_people_list_shortcode( $atts, $content='' ) {
 ?>
 		<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>
 		<div class="col-md-4 col-sm-6">
-			<?php echo get_person_markup( $vice_chair, 'Board Vice Chairman' ); ?>
+			<?php echo get_person_markup( $vice_chair, 'Board Vice Chair' ); ?>
 		</div>
 		<?php if ( $i % 3 === 2 ) : ?></div><?php endif; $i++; $count++; ?>
 <?php

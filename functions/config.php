@@ -284,8 +284,8 @@ function define_customizer_fields( $wp_customize ) {
 		'board_chair',
 		array(
 			'type'        => 'select',
-			'label'       => 'Board Chairman',
-			'description' => 'Select the current board chairman.',
+			'label'       => 'Board Chair',
+			'description' => 'Select the current board chair.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'board_positions',
 			'choices'     => $board_members
 		)
@@ -299,8 +299,8 @@ function define_customizer_fields( $wp_customize ) {
 		'board_vice_chair',
 		array(
 			'type'        => 'select',
-			'label'       => 'Board Vice Chairman',
-			'description' => 'Select the current board vice chairman.',
+			'label'       => 'Board Vice Chair',
+			'description' => 'Select the current board vice chair.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'board_positions',
 			'choices'     => $board_members
 		)
