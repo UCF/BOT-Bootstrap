@@ -11,40 +11,41 @@ require_once('shortcodes.php');         		# Per theme shortcodes
 
 function get_header_menu() {
 	ob_start();
+	$nav_class = ( is_home() || is_front_page() ) ? "navbar-inverse" : "navbar-light";
+
 ?>
-	<nav class="navbar navbar-ucf-gold site-navbar" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-menu">
-					<span class="navbar-toggle-text"><span class="sr-only">Toggle Navigation</span> Menu</span>
-					<span class="fa fa-bars" aria-hidden="true"></span>
-				</button>
+	<div class="container">
+		<nav class="navbar navbar-toggleable-md <?php echo $nav_class; ?>">
 
-				<?php if ( is_home() || is_front_page() ): ?>
-				<h1 class="margin-xs-top-0">
-				<?php endif; ?>
+			<?php if ( is_home() || is_front_page() ): ?>
+			<h1 class="mt-0">
+			<?php endif; ?>
 
-				<div class="navbar-brand-wrapper">
-					<a class="navbar-brand ucf-online" href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a>
-				</div>
+			<a class="navbar-brand font-serif font-weight-light" href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a>
 
-				<?php if ( is_home() || is_front_page() ): ?>
-				</h1>
-				<?php endif; ?>
-			</div>
-			<div class="collapse navbar-collapse" id="header-menu">
+			<?php if ( is_home() || is_front_page() ): ?>
+			</h1>
+			<?php endif; ?>
+			
+			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
 				<?php
 				wp_nav_menu( array(
 					'theme_location' => 'header-menu',
 					'depth'  => 2,
 					'container' => false,
-					'menu_class' => 'nav navbar-nav header-menu-nav navbar-right',
+					'menu_class' => 'nav-link',
 					'walker' => new Bootstrap_Walker_Nav_Menu()
 				) );
 				?>
+				</ul>
 			</div>
-		</div>
-	</nav>
+		</nav>
+	</div>
 <?php
 	return ob_get_clean();
 }
@@ -57,9 +58,8 @@ function get_header_media($header) {
 	ob_start();
 ?>
 	<div class="media-header">
-		<div class="visible-xs visible-sm"><?php echo get_header_menu(); ?></div>
 		<div class="media-header-content" data-header-md="<?php echo $header->url; ?>" data-header-sm="<?php echo $header->mobile; ?>">
-			<div class="hidden-xs hidden-sm"><?php echo get_header_menu(); ?></div>
+			<?php echo get_header_menu(); ?>
 			<div class="media-header-copy-wrapper">
 				<div class="container-wrapper">
 					<div class="container">
@@ -509,11 +509,11 @@ function get_person_markup( $person, $title=null ) {
 ?>
 	<figure class="figure person-figure">
 		<a href="<?php echo get_permalink( $person->ID ); ?>">
-			<img clas="img-responsive" src="<?php echo $img; ?>" alt="<?php echo $person->post_title; ?>">
-			<figcaption class="figure-caption">
+			<img class="img-fluid" src="<?php echo $img; ?>" alt="<?php echo $person->post_title; ?>">
+			<figcaption class="figure-caption font-weight-bold text-center py-3 bg-faded">
 				<?php echo $person->post_title; ?>
 				<?php if ( $title ) : ?>
-				<p class="text-muted"><?php echo $title; ?></p>
+				<p class="font-weight-normal mb-0"><?php echo $title; ?></p>
 				<?php endif; ?>
 			</figcaption>
 		</a>

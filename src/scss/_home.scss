@@ -19,17 +19,11 @@ body.fixed-navbar {
     font-size: 16px;
     font-weight: 100;
 
-    @media (min-width: $screen-md-min) {
-      font-size: 24px;
-    }
   }
 
   .btn {
     margin-top: 12px;
 
-    @media (min-width: $screen-md-min) {
-      margin-top: 32px;
-    }
   }
 }
 
@@ -54,20 +48,6 @@ body.fixed-navbar {
     text-shadow: 1px 1px 8px #000;
     text-transform: uppercase;
     top: 20px;
-
-    @media (min-width: $screen-lg-min) {
-      font-size: 27px;
-    }
-
-    @media (max-width: $screen-sm-max) {
-      font-size: 27px;
-    }
-
-    @media (max-width: $screen-xs-max) {
-      font-size: 7vw;
-      letter-spacing: 2px;
-      line-height: 1.2;
-    }
   }
 
   .btn-wrapper {
@@ -89,9 +69,6 @@ body.fixed-navbar {
 body.admin-bar .navbar-fixed-top {
   margin-top: 32px;
 
-  @media (max-width: $screen-xs-max) {
-    margin-top: 0;
-  }
 }
 
 #sections-navbar {
@@ -102,9 +79,6 @@ body.admin-bar .navbar-fixed-top {
   text-transform: uppercase;
   transition: box-shadow .75s;
 
-  @media (max-width: $screen-sm-max) {
-    overflow: visible;
-  }
 
 
   &.center {
@@ -138,9 +112,6 @@ body.admin-bar .navbar-fixed-top {
     float: left;
     padding: 18px 0 0 18px;
 
-    @media (min-width: $screen-md-min) {
-      display: none;
-    }
   }
 
   .weather {
@@ -155,19 +126,6 @@ body.admin-bar .navbar-fixed-top {
     text-transform: none;
     transition: transform .75s;
 
-    @media (max-width: 1250px) {
-      padding: 17px 30px 17px 52px;
-    }
-
-    .location {
-      @media (max-width: 1250px) {
-        display: none;
-      }
-    }
-
-    @media (max-width: 1090px) {
-      display: none;
-    }
 
     .icon {
       color: $ucf-gold;

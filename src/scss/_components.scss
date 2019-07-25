@@ -20,42 +20,6 @@
   font-family: $font-family-sans-serif;
 }
 
-// Add animations to dropdowns
-// Adapted from https://gist.github.com/orizens/4994397
-@include body-prefix(':not(.ie8)') {
-  .ucf-dropdown-menu {
-    @include animation-fill-mode(forwards); // NOTE: deprecated mixin
-    @include scale(1, 0);
-    @include transform-origin(top);
-    @include transition(all .3s cubic-bezier(.190, 1, .220, 1));
-    box-shadow: 0 0 0 transparent;
-    display: block;
-  }
-
-  .open > .ucf-dropdown-menu {
-    @include scale(1, 1);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, .08);
-  }
-
-  .dropup .ucf-dropdown-menu {
-    @include transform-origin(bottom);
-
-    &::after {
-      border-bottom: 0;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent;
-      border-top: 6px solid rgba(39, 45, 51, .9);
-      bottom: -6px;
-      content: '';
-      display: inline-block;
-      left: 50%;
-      position: absolute;
-      top: auto;
-    }
-  }
-}
-
-
 // Modals
 .modal-dialog {
   margin-top: 75px; // UCF Header height + 25px pad
@@ -157,22 +121,6 @@
     &[href*="google"] {
       background-position: -133px 0;
     }
-  }
-}
-
-
-// Spinner icon
-.glyphicon-spin {
-  @include animation(spin 2000ms infinite linear);
-}
-
-@keyframes spin {
-  0% {
-    @include rotate(0deg);
-  }
-
-  100% {
-    @include rotate(359deg);
   }
 }
 
@@ -384,36 +332,8 @@
   }
 }
 
-@media (max-width: $screen-xs-max) {
-  .navbar-gold {
-    .navbar-nav .open .dropdown-menu {
-      > li > a {
-        color: $ucf-col-default;
-
-        &:hover,
-        &:focus {
-          color: $ucf-col-highlight;
-        }
-      }
-
-      > .active {
-        > a,
-        > a:hover,
-        > a:focus {
-          background-color: $ucf-bg-highlight;
-          color: $ucf-col-highlight;
-        }
-      }
-    }
-  }
-}
-
 .no-pad-left {
   padding-left: 0;
-
-  @media (max-width: $screen-xs-max) {
-    padding-left: inherit;
-  }
 }
 
 .list-gold-arrow {
@@ -482,10 +402,6 @@
   width: 100%;
   z-index: 2;
 
-  @media (min-width: $screen-sm-min) {
-    height: $callout-media-height;
-  }
-
   // Capture <picture> elements. Make sure they span the full
   // width/height of .callout-media, so that absolute positioning of
   // .callout-media-src works properly.
@@ -504,25 +420,8 @@
   height: auto;
   max-width: 100%;
 
-  @media (min-width: $screen-sm-min) {
-    left: 50%;
-    max-width: none;
-    min-height: 100%;
-    min-width: 100%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: auto;
-    z-index: 3;
-  }
-
   &.callout-media-video {
     display: none;
-
-    @media (min-width: $screen-sm-min) {
-      display: block;
-      z-index: 4;
-    }
   }
 }
 
@@ -530,36 +429,9 @@
   width: 100%;
   z-index: 5;
 
-  @media (max-width: $screen-xs-max) {
-    margin: 10px 0;
-    text-align: center;
-  }
-
-  @media (min-width: $screen-sm-min) {
-    width: 80%;
-  }
-
-  @media (min-width: $screen-md-min) {
-    width: 55%;
-  }
-
-  @media (min-width: $screen-lg-min) {
-    width: 45%;
-  }
-
-  > * {
-    margin: 0;
-
-    @media (min-width: $screen-sm-min) {
-      margin: 2em;
-    }
-  }
 }
 
 .meeting-select {
   margin: 10px 0;
 
-  @media(min-width: $screen-sm-min) {
-    margin: 50px 0 20px;
-  }
 }

@@ -1,23 +1,31 @@
 {
   "private": true,
   "devDependencies": {
-    "bower": "^1.6.8",
-    "browser-sync": "^2.10.0",
-    "gulp": "~3.9.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-bless": "3.0.1",
-    "gulp-bower": "0.0.11",
-    "gulp-clean-css": "^3.0.4",
-    "gulp-concat": "^2.6.0",
-    "gulp-debug": "^2.1.2",
-    "gulp-jshint": "^2.0.0",
-    "gulp-notify": "~2.2.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "~2.1.0",
-    "gulp-scss-lint": "^0.3.8",
-    "gulp-uglify": "^1.5.1",
-    "jshint": "^2.9.1",
-    "jshint-stylish": "^2.1.0",
-    "merge": "^1.2.0"
-  }
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
+    "browser-sync": "^2.26.5",
+    "eslint": "^5.16.0",
+    "font-awesome": "github:FortAwesome/Font-Awesome#v4.7.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^5.0.0",
+    "gulp-eslint-if-fixed": "^1.0.0",
+    "gulp-include": "^2.4.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "~4.0.2",
+    "gulp-sass-lint": "^1.4.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "js-cookie": "^2.2.0",
+    "merge": "^1.2.1",
+    "ucf-athena-framework": "^1.0.6"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ]
 }
