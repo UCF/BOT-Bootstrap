@@ -1,2 +1,21 @@
+@import 'variables';
+
+// Variable overrides
+@import './ucf-athena-framework/src/scss/variables';
+
+// Import vendor assets
 @import './ucf-athena-framework/src/scss/framework';
 @import './font-awesome/scss/font-awesome';
+
+// Base mixins, utility styles
+@import 'mixins';
+
+// Base styles for typography, tables, forms, and images
+@import 'files';
+@import 'tables';
+
+// Styles for custom components and Bootstrap component overrides
+@import 'components';
+
+// Styles for call to action themes
+@import 'cta';

@@ -1,36 +1,6 @@
-// Custom variables:
+$fa-font-path: '../fonts/font-awesome';
 
-$ucf-gold: #ffc904;
-$ucf-gold-light: #ffeeaf;
-$ucf-metal-gold: #c90;
-
-$ucf-bg-default: #fc0;
-$ucf-bg-highlight: #c90;
 $ucf-col-default: #000;
 $ucf-col-highlight: #fff;
 
 $cta-grey: #ddd;
-
-$grid-float-breakpoint: 992px;
-
-// Bootstrap overrides:
-$icon-font-path: '../fonts/bootstrap/';
-$fa-font-path: '../fonts/font-awesome/';
-$wi-path: '../fonts/weather-icons/';
-
-$font-family-serif: "Archer A", "Archer B", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif !default;
-$font-family-serif-alt: Georgia, serif !default;
-$font-family-sans-serif: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
-$font-family-header: Verdana, Geneva, sans-serif;
-
-$callout-media-height: 550px;
-
-$spacer: 1rem !default;
-$spacers: (
-  0: 0,
-  1: ($spacer * .25),
-  2: ($spacer * .5),
-  3: $spacer,
-  4: ($spacer * 1.5),
-  5: ($spacer * 3)
-) !default;

@@ -1,66 +1,67 @@
 .homepage-cta {
-    background: $ucf-gold;
-    margin-top: 101px;
-    min-height: 230px;
-    padding: 2em 1em;
+  background: $ucf-gold;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  min-height: 230px;
+  padding: 2em 1em;
 
 }
 
 .homepage-cta-title {
-    font-family: $font-family-serif;
-    font-weight: 700;
-    margin: 0 0 1em;
-    text-align: center;
+  font-family: $font-family-serif;
+  font-weight: 700;
+  margin: 0 0 1em;
+  text-align: center;
 }
 
 .homepage-cta-content-wrap {
-    min-height: auto;
+  min-height: auto;
 
 }
 
 .homepage-cta-content {
-    margin: 0;
-    font-family: $font-family-sans-serif;
-    font-size: 1.2em;
-    text-align: center;
+  font-family: $font-family-sans-serif;
+  font-size: 1.2em;
+  margin: 0;
+  text-align: center;
 }
 
 .homepage-cta-btn {
-    display: block;
-    margin-top: 2em;
-    text-align: center;
+  display: block;
+  margin-top: 2em;
+  text-align: center;
 }
 
 .cta-gold {
-    background-color: $ucf-gold;
+  background-color: $ucf-gold;
 }
 
 .cta-grey {
-    background-color: $cta-grey;
+  background-color: $cta-grey;
 }
 
 .cta-gold,
 .cta-grey {
-    color: $ucf-col-default;
+  color: $ucf-col-default;
 
-    .homepage-cta-btn {
-        @extend .btn-ucf-inverse;
-    }
+  .homepage-cta-btn {
+    @extend .btn-secondary;
+  }
 }
 
 .cta-black {
-    background-color: $ucf-col-default;
-    color: $ucf-col-highlight;
+  background-color: $ucf-col-default;
+  color: $ucf-col-highlight;
 
-    .homepage-cta-btn {
-        @extend .btn-ucf;
-    }
+  .homepage-cta-btn {
+    @extend .btn-primary;
+  }
 }
 
 .cta-red {
-    color: $ucf-col-highlight;
+  color: $ucf-col-highlight;
 
-    .homepage-cta-btn {
-        @extend .btn-default;
-    }
+  .homepage-cta-btn {
+    @extend .btn-default;
+  }
 }
