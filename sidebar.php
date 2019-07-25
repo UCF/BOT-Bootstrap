@@ -1,5 +1,5 @@
 <?php disallow_direct_load('sidebar.php');?>
-<aside class="sidebar">
+<aside class="sidebar mb-5">
 	<div class="bg-faded p-3 mb-3">
 		<h3 class="text-uppercase h6 underline-gold">Next Board Meeting</h3>
 		<?php $next_meeting = get_next_meeting(); if ( $next_meeting ) : ?>
