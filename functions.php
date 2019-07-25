@@ -290,13 +290,13 @@ function display_meetings_by_year( $years, $show_videos = true ) {
 	reset( $years );
 	$first_year = ( is_array( $years ) ) ? (int)key( $years ) : null;
 ?>
-	<div class="row">
+	<div class="row mt-5 pt-4">
 		<div class="col-md-8">
-			<h2>Meetings in <span id="meeting-year"><?php echo $first_year; ?></span></h2>
+			<h2 class="h4 text-uppercase mb-4">Meetings in <span id="meeting-year"><?php echo $first_year; ?></span></h2>
 		</div>
 		<div class="col-md-4">
 			<div class="meeting-select">
-				<label class="form-label" for="year_select">Select Year</label>
+				<label class="form-label font-weight-bold" for="year_select">Select Year</label>
 				<select id="year_select" class="form-control dropdown">
 				<?php foreach ( array_keys( $years ) as $year ) :?>
 					<option value="<?php echo $year; ?>"<?php echo ( $first_year === $year ) ? ' selected' : ''; ?>><?php echo $year; ?></option>
@@ -565,7 +565,7 @@ function display_committee_members( $people_group ) {
 
 	ob_start();
 ?>
-	<h2>Committee Members</h2>
+	<h2 class="h4 text-uppercase mb-4 mt-5">Committee Members</h2>
 	<div class="row">
 		<?php if ( $chair ) : $chair = UCF_People_PostType::append_metadata( $chair ); ?>
 		<div class="col-md-4 col-sm-6">
@@ -617,7 +617,7 @@ function display_committee_staff( $people_group ) {
 
 	ob_start();
 ?>
-	<h2>Committee Staff</h2>
+	<h2 class="h4 text-uppercase mb-4 mt-5">Committee Staff</h2>
 <?php
 	foreach( $people as $i=>$person ) : $person = UCF_People_PostType::append_metadata( $person ); ?>
 	<?php if ( $i % 3 === 0 ) : ?><div class="row"><?php endif; ?>

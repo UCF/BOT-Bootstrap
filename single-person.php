@@ -9,7 +9,7 @@
 			<div class="col-md-6 mb-5">
 				<h1 class="mt-0 h2 mb-4"><?php echo $post->post_title; ?></h1>
 				<?php if ( isset( $post->metadata['person_job_title'] ) ) : ?>
-				<p class="lead mb-4"><?php echo $post->metadata['person_job_title']; ?></p>
+				<p class="lead mb-4 font-weight-light"><?php echo $post->metadata['person_job_title']; ?></p>
 				<?php endif; ?>
 				<?php if ( $post->post_content ) : the_content(); ?>
 				<?php else: ?>

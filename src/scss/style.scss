@@ -6,5 +6,8 @@
 @import './ucf-athena-framework/src/scss/framework';
 @import './font-awesome/scss/font-awesome';
 
+// Base styles for typography, tables, forms, and images
+@import 'files';
+
 // Styles for custom components and Bootstrap component overrides
 @import 'components';

@@ -3,7 +3,7 @@
 <?php $cta = get_homepage_cta_object(); ?>
 <div class="container">
 <?php $committees = get_terms( array( 'people_group' ) ); ?>
-	<div class="row page-content" id="<?php echo $post->post_name; ?>">
+	<div class="row page-content mt-5" id="<?php echo $post->post_name; ?>">
 		<div class="col-md-9">
 			<?php the_content();?>
 		</div>
@@ -28,7 +28,7 @@
 			</aside>
 			<?php endif; ?>
 			<aside>
-				<h2>Committees</h2>
+				<h2 class="h5 text-uppercase mb-4">Committees</h2>
 				<ul class="list-gold-arrow">
 				<?php foreach( $committees as $committee ) : ?>
 					<li><a href="<?php echo get_committee_url( $committee ); ?>"><?php echo $committee->name; ?></a></li>
