@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<h3 class="text-uppercase h6">Next Board Meeting</h3>
+				<h3 class="text-uppercase h6 underline-gold">Next Board Meeting</h3>
 				<?php $next_meeting = get_next_meeting(); if ( $next_meeting ) : ?>
 				<div class="row">
 					<div class="col-1">
@@ -22,19 +22,19 @@
 					</div>
 				</div>
 				<?php else: ?>
-				<p class="mb-0">No Upcoming Meetings</p>
+				<p class="mb-0 small">No Upcoming Meetings</p>
 				<?php endif; ?>
 			</div>
 			<div class="col-md-4">
-				<h3 class="text-uppercase h6">Latest Board Minutes</h3>
+				<h3 class="text-uppercase h6 underline-gold">Latest Board Minutes</h3>
 				<?php $minutes = get_latest_meeting_minutes(); if ( $minutes && ! empty( $minutes['file'] ) ) : ?>
 					<a href="<?php echo $minutes['file']; ?>" class="document latest-board-minutes"><?php echo $minutes['name']; ?></a>
 				<?php else : ?>
-					<p class="mb-0">No Minutes Available for Latest Meeting</p>
+					<p class="mb-0 small">No Minutes Available for Latest Meeting</p>
 				<?php endif; ?>
 			</div>
 			<div class="col-md-4">
-				<h3 class="text-uppercase h6">Special Meeting</h3>
+				<h3 class="text-uppercase h6 underline-gold">Special Meeting</h3>
 				<?php $special_meeting = get_next_special_meeting(); if ( $special_meeting ) : ?>
 				<div class="row">
 					<div class="col-1">
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 				<?php else: ?>
-				<p class="mb-0">No Upcoming Special Meetings</p>
+				<p class="mb-0 small">No Upcoming Special Meetings</p>
 				<?php endif; ?>
 			</div>
 		</div>

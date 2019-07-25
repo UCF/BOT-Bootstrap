@@ -1,7 +1,7 @@
 <?php disallow_direct_load('sidebar.php');?>
 <aside class="sidebar">
-	<div class="well">
-		<h3 class="text-uppercase h6">Next Board Meeting</h3>
+	<div class="bg-faded p-3 mb-3">
+		<h3 class="text-uppercase h6 underline-gold">Next Board Meeting</h3>
 		<?php $next_meeting = get_next_meeting(); if ( $next_meeting ) : ?>
 		<div class="row">
 			<div class="col-md-1">
@@ -20,19 +20,19 @@
 			</div>
 		</div>
 		<?php else: ?>
-		<p>No Upcoming Meetings</p>
+		<p class="mb-0 small">No Upcoming Meetings</p>
 		<?php endif; ?>
 	</div>
-	<div class="well">
-		<h3 class="text-uppercase h6">Latest Board Minutes</h3>
+	<div class="bg-faded p-3 mb-3"">
+		<h3 class="text-uppercase h6 underline-gold">Latest Board Minutes</h3>
 		<?php $minutes = get_latest_meeting_minutes(); if ( $minutes && ! empty( $minutes['file'] ) ) : ?>
 			<a href="<?php echo $minutes['file']; ?>" class="document latest-board-minutes"><?php echo $minutes['name']; ?></a>
 		<?php else : ?>
-			<p class="mb-0">No Minutes Available for Latest Meeting</p>
+			<p class="mb-0 small">No Minutes Available for Latest Meeting</p>
 		<?php endif; ?>
 	</div>
-	<div class="well">
-		<h3 class="text-uppercase h6">Special Meeting</h3>
+	<div class="bg-faded p-3 mb-3">
+		<h3 class="text-uppercase h6 underline-gold">Special Meeting</h3>
 		<?php $special_meeting = get_next_special_meeting(); if ( $special_meeting ) : ?>
 		<div class="row">
 			<div class="col-md-1">
@@ -56,11 +56,11 @@
 			</div>
 		</div>
 		<?php else: ?>
-		<p>No Upcoming Special Meetings</p>
+		<p class="mb-0 small">No Upcoming Special Meetings</p>
 		<?php endif; ?>
 	</div>
 	<?php $committees = get_terms( array( 'people_group' ) ); ?>
-	<h2>Committees</h2>
+	<h2 class="h5 text-uppercase mt-5 mb-3">Committees</h2>
 	<ul class="list-gold-arrow">
 	<?php foreach( $committees as $committee ) : ?>
 		<li><a href="<?php echo get_committee_url( $committee ); ?>"><?php echo $committee->name; ?></a></li>

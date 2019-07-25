@@ -1,2 +1,10 @@
+@import 'variables';
+
+// Variable overrides
+@import './ucf-athena-framework/src/scss/variables';
+
 @import './ucf-athena-framework/src/scss/framework';
 @import './font-awesome/scss/font-awesome';
+
+// Styles for custom components and Bootstrap component overrides
+@import 'components';
