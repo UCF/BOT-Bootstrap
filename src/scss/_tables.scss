@@ -2,6 +2,7 @@
 .table {
   @include no-font-smoothing();
   font-family: $font-family-sans-serif;
+  font-size: .8em;
 }
 
 @media only screen and (max-width: 767px) {
@@ -16,14 +17,14 @@
   }
 
   thead tr {
-    position: absolute;
-    width: 1px;
+    border: 0;
+    clip: rect(0, 0, 0, 0);
     height: 1px;
     margin: -1px;
-    padding: 0;
     overflow: hidden;
-    clip: rect(0,0,0,0);
-    border: 0;
+    padding: 0;
+    position: absolute;
+    width: 1px;
   }
 
   tr {
@@ -31,24 +32,24 @@
   }
 
   td {
-    border: none;
+    border: 0;
     border-bottom: 1px solid $cta-grey;
     font-size: 12px;
-    position: relative !important;
     padding-left: 30vw !important;
+    position: relative !important;
     text-align: left;
     white-space: normal;
 
     &:before {
       content: attr(data-title);
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 25vw;
-      padding-right: 10px;
-      white-space: nowrap;
-      text-align: left;
       font-weight: bold;
+      left: 6px;
+      padding-right: 10px;
+      position: absolute;
+      text-align: left;
+      top: 6px;
+      white-space: nowrap;
+      width: 25vw;
     }
   }
 }

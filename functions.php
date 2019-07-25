@@ -15,7 +15,7 @@ function get_header_menu() {
 
 ?>
 	<div class="container">
-		<nav class="navbar navbar-toggleable-md <?php echo $nav_class; ?>">
+		<nav class="navbar navbar-toggleable-md px-0 <?php echo $nav_class; ?>">
 
 			<?php if ( is_home() || is_front_page() ): ?>
 			<h1 class="mt-0">
@@ -297,7 +297,7 @@ function display_meetings_by_year( $years, $show_videos = true ) {
 		<div class="col-md-4">
 			<div class="meeting-select">
 				<label class="form-label font-weight-bold" for="year_select">Select Year</label>
-				<select id="year_select" class="form-control dropdown">
+				<select id="year_select" class="form-control dropdown form-control-sm">
 				<?php foreach ( array_keys( $years ) as $year ) :?>
 					<option value="<?php echo $year; ?>"<?php echo ( $first_year === $year ) ? ' selected' : ''; ?>><?php echo $year; ?></option>
 				<?php endforeach; ?>
