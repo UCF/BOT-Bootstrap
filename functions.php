@@ -501,7 +501,7 @@ function get_next_special_meeting( $committee='None', $args=array() ) {
 }
 
 function get_person_markup( $person, $title=null ) {
-	$img = isset( $person->metadata['thumbnail_url'] ) ? $person->metadata['thumbnail_url'] : get_bloginfo('stylesheet_directory') . '/static/img/no-photo.jpg';
+	$img = isset( $person->metadata['thumbnail_url'] ) ? $person->metadata['thumbnail_url'] : get_bloginfo('stylesheet_directory') . '/static/img/no-photo.png';
 
 	ob_start();
 ?>
