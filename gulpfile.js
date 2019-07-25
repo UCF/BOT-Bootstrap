@@ -1,119 +1,199 @@
-var gulp = require('gulp'),
-    configLocal = require('./gulp-config.json'),
-    merge = require('merge'),
-    sass = require('gulp-sass'),
-    cleanCss = require('gulp-clean-css'),
-    bless = require('gulp-bless'),
-    bower = require('gulp-bower'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    rename = require('gulp-rename'),
-    jshint = require('gulp-jshint'),
-    jshintStylish = require('jshint-stylish'),
-    scsslint = require('gulp-scss-lint'),
-    autoprefixer = require('gulp-autoprefixer'),
-    browserSync = require('browser-sync').create();
-
-var configDefault = {
-      scssPath: './src/scss',
-      cssPath: './static/css',
-      jsPath: './src/js',
-      jsMinPath: './static/js',
-      fontPath: './static/fonts',
-      componentsPath: './src/components',
-      sync: false,
-      syncTarget: 'http://localhost/'
-    },
-    config = merge(configDefault, configLocal);
+const fs           = require('fs');
+const browserSync  = require('browser-sync').create();
+const gulp         = require('gulp');
+const autoprefixer = require('gulp-autoprefixer');
+const cleanCSS     = require('gulp-clean-css');
+const include      = require('gulp-include');
+const eslint       = require('gulp-eslint');
+const isFixed      = require('gulp-eslint-if-fixed');
+const babel        = require('gulp-babel');
+const rename       = require('gulp-rename');
+const sass         = require('gulp-sass');
+const sassLint     = require('gulp-sass-lint');
+const uglify       = require('gulp-uglify');
+const merge        = require('merge');
 
 
-// Run Bower
-gulp.task('bower', function() {
-  bower()
-    .pipe(gulp.dest(config.componentsPath))
-    .on('end', function() {
+let config = {
+  src: {
+    scssPath: './src/scss',
+    jsPath: './src/js'
+  },
+  dist: {
+    cssPath: './static/css',
+    jsPath: './static/js',
+    fontPath: './static/fonts'
+  },
+  devPath: './dev',
+  packagesPath: './node_modules',
+  sync: false,
+  syncTarget: 'http://localhost/'
+};
 
-      // Add Glyphicons to fonts dir
-      gulp.src(config.componentsPath + '/bootstrap-sass-official/assets/fonts/*/*')
-        .pipe(gulp.dest(config.fontPath));
-
-      gulp.src(config.componentsPath + '/font-awesome/fonts/*')
-        .pipe(gulp.dest(config.fontPath + '/font-awesome/'));
-
-      gulp.src(config.componentsPath + '/weather-icons/font/*')
-        .pipe(gulp.dest(config.fontPath + '/weather-icons/'));
-
-    });
-});
-
-// Lint all scss files
-gulp.task('scss-lint', function() {
-  gulp.src(config.scssPath + '/*.scss')
-    .pipe(scsslint());
-});
+/* eslint-disable no-sync */
+if (fs.existsSync('./gulp-config.json')) {
+  const overrides = JSON.parse(fs.readFileSync('./gulp-config.json'));
+  config = merge(config, overrides);
+}
+/* eslint-enable no-sync */
 
 
-// Compile + bless primary scss files
-gulp.task('css-main', function() {
-  gulp.src(config.scssPath + '/style.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(cleanCss({compatibility: 'ie8'}))
-    .pipe(rename('style.min.css'))
+//
+// Helper functions
+//
+
+// Base SCSS linting function
+function lintSCSS(src) {
+  return gulp.src(src)
+    .pipe(sassLint())
+    .pipe(sassLint.format())
+    .pipe(sassLint.failOnError());
+}
+
+// Base SCSS compile function
+function buildCSS(src, dest) {
+  dest = dest || config.dist.cssPath;
+
+  return gulp.src(src)
+    .pipe(sass({
+      includePaths: [config.src.scssPath, config.packagesPath]
+    })
+      .on('error', sass.logError))
+    .pipe(cleanCSS())
     .pipe(autoprefixer({
-      browsers: ['last 2 versions', 'ie >= 8'],
+      // Supported browsers added in package.json ("browserslist")
       cascade: false
     }))
-    .pipe(bless())
-    .pipe(gulp.dest(config.cssPath))
-    .pipe(browserSync.stream());
-});
+    .pipe(rename({
+      extname: '.min.css'
+    }))
+    .pipe(gulp.dest(dest));
+}
 
-// All css-related tasks
-gulp.task('css', ['scss-lint', 'css-main']);
+// Base JS linting function (with eslint). Fixes problems in-place.
+function lintJS(src, dest) {
+  dest = dest || config.src.jsPath;
 
+  return gulp.src(src)
+    .pipe(eslint({
+      fix: true
+    }))
+    .pipe(eslint.format())
+    .pipe(isFixed(dest));
+}
 
-// Run jshint on all js files in jsPath (except already minified files.)
-gulp.task('js-lint', function() {
-  gulp.src([config.jsPath + '/*.js', '!' + config.jsPath + '/*.min.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jshint.reporter('fail'));
-});
+// Base JS compile function
+function buildJS(src, dest) {
+  dest = dest || config.dist.jsPath;
 
-
-// Concat and uglify primary js files.
-gulp.task('js-main', function() {
-  var minified = [
-    config.componentsPath + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
-    config.componentsPath + '/matchHeight/jquery.matchHeight.js',
-    config.jsPath + '/script.js'
-  ];
-
-  gulp.src(minified)
-    .pipe(concat('script.min.js'))
+  return gulp.src(src)
+    .pipe(include({
+      includePaths: [config.packagesPath, config.src.jsPath]
+    }))
+    .on('error', console.log) // eslint-disable-line no-console
+    .pipe(babel())
     .pipe(uglify())
-    .pipe(gulp.dest(config.jsMinPath))
-    .pipe(browserSync.stream());
+    .pipe(rename({
+      extname: '.min.js'
+    }))
+    .pipe(gulp.dest(dest));
+}
+
+// BrowserSync reload function
+function serverReload(done) {
+  if (config.sync) {
+    browserSync.reload();
+  }
+  done();
+}
+
+// BrowserSync serve function
+function serverServe(done) {
+  if (config.sync) {
+    browserSync.init({
+      proxy: {
+        target: config.syncTarget
+      }
+    });
+  }
+  done();
+}
+
+
+//
+// Installation of components/dependencies
+//
+
+// Copy Font Awesome files
+gulp.task('move-components-fontawesome', (done) => {
+  gulp.src(`${config.packagesPath}/font-awesome/fonts/**/*`)
+    .pipe(gulp.dest(`${config.dist.fontPath}/font-awesome`));
+  done();
+});
+
+// Athena Framework web font processing
+gulp.task('move-components-athena-fonts', (done) => {
+  gulp.src([`${config.packagesPath}/ucf-athena-framework/dist/fonts/**/*`])
+    .pipe(gulp.dest(config.dist.fontPath));
+  done();
+});
+
+// Run all component-related tasks
+gulp.task('components', gulp.parallel(
+  'move-components-fontawesome',
+  'move-components-athena-fonts'
+));
+
+
+//
+// CSS
+//
+
+// Lint all theme scss files
+gulp.task('scss-lint-theme', () => {
+  return lintSCSS(`${config.src.scssPath}/*.scss`);
+});
+
+// Compile theme stylesheet
+gulp.task('scss-build-theme', () => {
+  return buildCSS(`${config.src.scssPath}/style.scss`);
+});
+
+// All theme css-related tasks
+gulp.task('css', gulp.series('scss-lint-theme', 'scss-build-theme'));
+
+
+//
+// JavaScript
+//
+
+// Run eslint on js files in src.jsPath
+gulp.task('es-lint-theme', () => {
+  return lintJS([`${config.src.jsPath}/*.js`], config.src.jsPath);
+});
+
+// Concat and uglify js files through babel
+gulp.task('js-build-theme', () => {
+  return buildJS(`${config.src.jsPath}/script.js`, config.dist.jsPath);
 });
 
 // All js-related tasks
-gulp.task('js', ['js-lint', 'js-main']);
+gulp.task('js', gulp.series('es-lint-theme', 'js-build-theme'));
 
 
+//
 // Rerun tasks when files change
-gulp.task('watch', function() {
-  if (config.sync) {
-    browserSync.init({
-        proxy: {
-          target: config.syncTarget
-        }
-    });
-  }
+//
+gulp.task('watch', (done) => {
+  serverServe(done);
 
-  gulp.watch(config.scssPath + '/*.scss', ['css']);
-  gulp.watch(config.jsPath + '/*.js', ['js']).on('change', browserSync.reload);
-  gulp.watch('*.php').on('change', browserSync.reload);
+  gulp.watch(`${config.src.scssPath}/**/*.scss`, gulp.series('css', serverReload));
+  gulp.watch(`${config.src.jsPath}/**/*.js`, gulp.series('js', serverReload));
+  gulp.watch('./**/*.php', gulp.series(serverReload));
 });
 
+
+//
 // Default task
-gulp.task('default', ['bower', 'css', 'js']);
+//
+gulp.task('default', gulp.series('components', 'css', 'js'));

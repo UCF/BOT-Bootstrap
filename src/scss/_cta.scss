@@ -4,9 +4,6 @@
     min-height: 230px;
     padding: 2em 1em;
 
-    @media(max-width: $screen-xs-max) {
-        margin-top: 20px;
-    }
 }
 
 .homepage-cta-title {
@@ -19,9 +16,6 @@
 .homepage-cta-content-wrap {
     min-height: auto;
 
-    @media(min-width: $screen-sm-max) {
-        min-height: 110px;
-    }
 }
 
 .homepage-cta-content {
@@ -64,7 +58,6 @@
 }
 
 .cta-red {
-    background-color: $brand-danger;
     color: $ucf-col-highlight;
 
     .homepage-cta-btn {

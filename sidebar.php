@@ -1,7 +1,7 @@
 <?php disallow_direct_load('sidebar.php');?>
 <aside class="sidebar">
 	<div class="well">
-		<h3>Next Board Meeting</h3>
+		<h3 class="text-uppercase h6">Next Board Meeting</h3>
 		<?php $next_meeting = get_next_meeting(); if ( $next_meeting ) : ?>
 		<div class="row">
 			<div class="col-md-1">
@@ -24,7 +24,7 @@
 		<?php endif; ?>
 	</div>
 	<div class="well">
-		<h3>Latest Board Minutes</h3>
+		<h3 class="text-uppercase h6">Latest Board Minutes</h3>
 		<?php $minutes = get_latest_meeting_minutes(); if ( $minutes && ! empty( $minutes['file'] ) ) : ?>
 			<a href="<?php echo $minutes['file']; ?>" class="document latest-board-minutes"><?php echo $minutes['name']; ?></a>
 		<?php else : ?>
@@ -32,7 +32,7 @@
 		<?php endif; ?>
 	</div>
 	<div class="well">
-		<h3>Special Meeting</h3>
+		<h3 class="text-uppercase h6">Special Meeting</h3>
 		<?php $special_meeting = get_next_special_meeting(); if ( $special_meeting ) : ?>
 		<div class="row">
 			<div class="col-md-1">

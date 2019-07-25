@@ -1,24 +1,24 @@
 var $headerImg;
 
-var headerImages = function ($) {
+const headerImages = function ($) {
   console.log('load');
-  var $window = $(window),
-      mdImage = $headerImg.data('header-md'),
-      smImage = $headerImg.data('header-sm'),
-      breakpoint = 767,
-      resizeTimer = null,
-      debounce = 250;
+  let $window = $(window),
+    mdImage = $headerImg.data('header-md'),
+    smImage = $headerImg.data('header-sm'),
+    breakpoint = 767,
+    resizeTimer = null,
+    debounce = 250;
 
-  var onResize = function() {
+  const onResize = function () {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(onResizeEnd, debounce);
   };
 
-  var onResizeEnd = function() {
+  var onResizeEnd = function () {
     if ($window.width() > breakpoint) {
-      $headerImg.css('background-image', 'url(' + mdImage + ')');
+      $headerImg.css('background-image', `url(${mdImage})`);
     } else {
-      $headerImg.css('background-image', 'url(' + smImage + ')');
+      $headerImg.css('background-image', `url(${smImage})`);
     }
   };
 
@@ -28,23 +28,23 @@ var headerImages = function ($) {
 
 };
 
-var meetingTabs = function($) {
-  var $sel = $('#year_select');
+const meetingTabs = function ($) {
+  const $sel = $('#year_select');
 
-  if ( $sel ) {
-    $sel.change(function(e) {
-      var val = $(e.target).val();
+  if ($sel) {
+    $sel.change((e) => {
+      const val = $(e.target).val();
       $('#meeting-year').text(val);
       $('div[id^=panel_].active').removeClass('active');
-      $('#panel_' + val).addClass('active');
+      $(`#panel_${val}`).addClass('active');
     });
   }
 };
 
-var peopleImages = function($) {
+const peopleImages = function ($) {
   $figures = $('figure.person-figure');
 
-  if ( $figures.length ) {
+  if ($figures.length) {
     $figures.matchHeight();
   }
 };
@@ -52,7 +52,7 @@ var peopleImages = function($) {
 if (jQuery !== 'undefined') {
   var $headerImg = $('.media-header-content');
 
-  jQuery(document).ready(function ($) {
+  jQuery(document).ready(($) => {
     headerImages($);
     meetingTabs($);
     peopleImages($);
