@@ -4,7 +4,7 @@
 	<div class="page-content person-profile">
 		<div class="row">
 			<div class="col-md-3 details">
-				<img class="img-fluid rounded-circle" src="<?php echo isset( $post->metadata['thumbnail_url'] ) ? $post->metadata['thumbnail_url'] : get_bloginfo('stylesheet_directory').'/static/img/no-photo.jpg'?>" />
+				<img class="img-fluid rounded-circle" src="<?php echo isset( $post->metadata['thumbnail_url'] ) ? $post->metadata['thumbnail_url'] : get_bloginfo('stylesheet_directory').'/static/img/no-photo.png'?>" />
 			</div>
 			<div class="col-md-6 mb-5">
 				<h1 class="mt-0 h2 mb-4"><?php echo $post->post_title; ?></h1>
