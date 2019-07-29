@@ -524,7 +524,7 @@ function bootstrap_menus() {
 				$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
 				$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
 				$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-				$attributes .= ($args->has_children) 	    ? ' class="dropdown-toggle text-white" data-toggle="dropdown"' : ' class="text-white"';
+				$attributes .= ($args->has_children) 	    ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
 
 				$item_output = $args->before;
 				$item_output .= '<a'. $attributes .'>';
