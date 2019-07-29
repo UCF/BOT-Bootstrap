@@ -21,7 +21,7 @@ function get_header_menu() {
 			<h1 class="mt-0">
 			<?php endif; ?>
 
-			<a class="navbar-brand font-serif font-weight-light" href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a>
+			<a class="navbar-brand font-serif font-weight-light <?php echo $nav_class; ?>" href="<?php echo bloginfo('url'); ?>"><?php echo bloginfo('name'); ?></a>
 
 			<?php if ( is_home() || is_front_page() ): ?>
 			</h1>
